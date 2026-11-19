@@ -1800,7 +1800,16 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
 </style>
 <script>
 /* 첫 페인트 전에 경량 모드 설정을 적용해 무거운 효과가 한 프레임도 그려지지 않게 한다 */
-(function(){try{if(localStorage.getItem('yshub.v1.lite.on')==='true'){document.documentElement.className+=' lite';}}catch(e){}})();
+(function(){try{
+  if(localStorage.getItem('yshub.v1.lite.on')==='true'){document.documentElement.className+=' lite';}
+  var t = localStorage.getItem('yshub.v1.timeTheme');
+  if(t !== 'sunrise' && t !== 'noon' && t !== 'sunset' && t !== 'night'){
+    var d = new Date();
+    var h = new Date(d.getTime() + d.getTimezoneOffset() * 60000 + 9 * 3600000).getHours();
+    t = (h >= 5 && h <= 8) ? 'sunrise' : (h >= 9 && h <= 16) ? 'noon' : (h >= 17 && h <= 19) ? 'sunset' : 'night';
+  }
+  document.documentElement.setAttribute('data-time', t);
+}catch(e){}})();
 </script>
 </head>
 <body data-screen="intro">
