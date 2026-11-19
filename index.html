@@ -1018,6 +1018,87 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
   .cal-memo .cal-x{opacity:.5}
 }
 /* ============================================================
+   BGM CONTROL — Midnight City
+   ============================================================ */
+.bgm-host{display:flex;align-items:center}
+.bgm-host-intro{position:fixed;top:22px;right:26px;z-index:60}
+body[data-screen="main"] .bgm-host-intro{display:none}
+body[data-screen="intro"] .bgm-host-top{display:none}
+
+.bgm{
+  display:inline-flex;align-items:center;gap:9px;
+  height:34px;padding:0 10px 0 9px;
+  border:1px solid rgba(255,214,176,.14);border-radius:999px;
+  background:linear-gradient(180deg,rgba(30,21,45,.74),rgba(20,15,32,.62));
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 12px 30px -20px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.07);
+  color:rgba(255,236,220,.52);
+  transition:color .25s,border-color .25s,background .25s;
+  flex:0 0 auto;
+}
+.bgm[data-on="1"]{
+  color:rgba(255,236,220,.86);
+  border-color:rgba(255,209,153,.24);
+  background:linear-gradient(180deg,rgba(48,30,40,.72),rgba(26,18,34,.60));
+}
+.bgm-host-top .bgm{
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,214,176,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.bgm-host-top .bgm[data-on="1"]{
+  background:linear-gradient(180deg,rgba(255,209,153,.11),rgba(255,209,153,.045));
+  border-color:rgba(255,209,153,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+.bgm-host-top .bgm:hover{border-color:rgba(255,209,153,.42)}
+.bgm-host-intro .bgm:hover{border-color:rgba(255,209,153,.34)}
+.bgm-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  height:24px;padding:0 2px;margin:0;
+  border:0;border-radius:999px;background:transparent;color:inherit;
+}
+.bgm-btn:focus-visible{outline:2px solid rgba(255,209,153,.7);outline-offset:3px}
+.bgm-eq{display:inline-flex;align-items:flex-end;justify-content:center;gap:2.5px;width:16px;height:15px;flex:0 0 auto}
+.bgm-eq i{
+  display:block;width:2.5px;height:100%;border-radius:2px;background:currentColor;
+  transform:scaleY(.4);transform-origin:50% 100%;opacity:.55;
+  transition:transform .3s,opacity .3s;
+}
+.bgm[data-on="1"] .bgm-eq i{opacity:.95}
+.bgm[data-playing="1"] .bgm-eq i{color:var(--gold);animation:bgmEq 1s ease-in-out infinite alternate}
+.bgm[data-playing="1"] .bgm-eq i:nth-child(2){animation-delay:-.55s;animation-duration:.78s}
+.bgm[data-playing="1"] .bgm-eq i:nth-child(3){animation-delay:-.3s;animation-duration:1.16s}
+.bgm[data-playing="1"] .bgm-eq i:nth-child(4){animation-delay:-.72s;animation-duration:.9s}
+@keyframes bgmEq{0%{transform:scaleY(.35)}100%{transform:scaleY(1)}}
+.bgm-label{font-family:var(--font-latin);font-size:10px;font-weight:600;letter-spacing:.14em;color:inherit}
+.bgm-state{font-family:var(--font-latin);font-size:9px;letter-spacing:.1em;color:rgba(255,236,220,.34);transition:color .25s}
+.bgm[data-on="1"] .bgm-state{color:rgba(255,209,153,.88)}
+.bgm-div{width:1px;height:14px;flex:0 0 auto;background:rgba(255,214,176,.14)}
+.bgm-vol{
+  -webkit-appearance:none;appearance:none;
+  width:74px;height:16px;margin:0;padding:0;
+  background:transparent;cursor:pointer;flex:0 0 auto;
+}
+.bgm-vol::-webkit-slider-runnable-track{
+  height:3px;border-radius:999px;
+  background:linear-gradient(90deg,rgba(255,196,138,.92) 0%,rgba(255,170,110,.92) var(--fill,45%),rgba(255,236,220,.15) var(--fill,45%),rgba(255,236,220,.15) 100%);
+}
+.bgm-vol::-webkit-slider-thumb{
+  -webkit-appearance:none;width:11px;height:11px;margin-top:-4px;border:0;border-radius:50%;
+  background:#FFE7CB;
+  box-shadow:0 0 0 3px rgba(255,209,153,.14),0 2px 6px rgba(0,0,0,.45);
+  transition:box-shadow .2s,transform .2s;
+}
+.bgm-vol:hover::-webkit-slider-thumb,.bgm-vol:focus-visible::-webkit-slider-thumb{
+  box-shadow:0 0 0 4px rgba(255,209,153,.24),0 2px 6px rgba(0,0,0,.45);transform:scale(1.08);
+}
+.bgm-vol::-moz-range-track{height:3px;border-radius:999px;background:rgba(255,236,220,.15)}
+.bgm-vol::-moz-range-progress{height:3px;border-radius:999px;background:rgba(255,180,120,.92)}
+.bgm-vol::-moz-range-thumb{width:11px;height:11px;border:0;border-radius:50%;background:#FFE7CB;box-shadow:0 0 0 3px rgba(255,209,153,.14)}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width:1180px){
@@ -1045,6 +1126,12 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
 }
 @media (max-width:620px){
   body{font-size:14px}
+  .bgm-host-intro{top:14px;right:14px}
+  .bgm{height:32px;padding:0 8px 0 7px;gap:7px}
+  .bgm-state,.bgm-div{display:none}
+  .bgm-host-top .bgm-label{display:none}
+  .bgm-host-top .bgm-vol{width:52px}
+  .bgm-host-intro .bgm-vol{width:56px}
   .intro{padding:76px 20px 130px}
   .intro::before{background:radial-gradient(ellipse 380px 400px at 50% 44%, rgba(12,9,20,.66), rgba(12,9,20,.24) 58%, transparent 80%)}
   .kicker{font-size:10px;letter-spacing:.26em;text-indent:.26em}
@@ -1108,6 +1195,7 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
   .sun{bottom:14%;width:min(78px,19vw)}
 }
 @media (max-width:400px){
+  .bgm-vol{width:44px}
   .deck{padding-left:12px;padding-right:12px}
   .tiles{grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
 }
@@ -1125,6 +1213,20 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
 </style>
 </head>
 <body data-screen="intro">
+
+<!-- ======================= BGM ======================= -->
+<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<div class="bgm-host bgm-host-intro" id="bgmHostIntro">
+  <div class="bgm" id="bgmBar" data-on="1" data-playing="0">
+    <button class="bgm-btn" id="bgmToggle" type="button" aria-pressed="true" aria-label="배경 음악 끄기" title="배경 음악 켜기 / 끄기">
+      <span class="bgm-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="bgm-label" aria-hidden="true">BGM</span>
+      <span class="bgm-state" id="bgmState" aria-hidden="true">ON</span>
+    </button>
+    <span class="bgm-div" aria-hidden="true"></span>
+    <input class="bgm-vol" id="bgmVol" type="range" min="0" max="100" step="1" value="45" aria-label="배경 음악 볼륨" title="볼륨">
+  </div>
+</div>
 
 <!-- ======================= sky stage ======================= -->
 <div class="stage" aria-hidden="true">
@@ -1413,6 +1515,7 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
     </form>
 
     <div class="top-right">
+      <div class="bgm-host bgm-host-top" id="bgmHostTop"></div>
       <div class="topbar-clock">
         <span id="mainClock" class="tnum">--:--:--</span>
         <span id="mainDate">----.--.--</span>
@@ -2851,6 +2954,120 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
     if(mq && mq.addEventListener){
       mq.addEventListener('change', function(){ if(mq.matches){ stop(); } });
     }
+  })();
+
+  /* ---------------- BGM (M83 — Midnight City) ---------------- */
+  (function(){
+    var audio   = $('#bgm');
+    var bar     = $('#bgmBar');
+    var toggle  = $('#bgmToggle');
+    var volEl   = $('#bgmVol');
+    var stateEl = $('#bgmState');
+    var hostIntro = $('#bgmHostIntro');
+    var hostTop   = $('#bgmHostTop');
+    if(!audio || !bar){ return; }
+
+    var DEFAULT_VOL = 0.45;
+    var vol = store.get('bgm.vol', DEFAULT_VOL);
+    vol = (typeof vol === 'number' && isFinite(vol)) ? Math.min(1, Math.max(0, vol)) : DEFAULT_VOL;
+    var on = store.get('bgm.on', true);
+    on = (on === false) ? false : true;
+    var armed = false;
+    var volTimer = null;
+
+    function paint(){
+      var playing = on && !audio.paused;
+      bar.setAttribute('data-on', on ? '1' : '0');
+      bar.setAttribute('data-playing', playing ? '1' : '0');
+      if(toggle){
+        toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+        toggle.setAttribute('aria-label', on ? '배경 음악 끄기' : '배경 음악 켜기');
+      }
+      if(stateEl){ stateEl.textContent = on ? 'ON' : 'OFF'; }
+      if(volEl){
+        var pct = Math.round(vol * 100);
+        if(String(volEl.value) !== String(pct)){ volEl.value = String(pct); }
+        volEl.style.setProperty('--fill', pct + '%');
+      }
+    }
+
+    function playNow(){
+      if(!on){ return; }
+      var pr;
+      try{ pr = audio.play(); }
+      catch(e){ arm(); paint(); return; }
+      if(pr && typeof pr.then === 'function'){
+        pr.then(function(){ disarm(); paint(); }, function(){ arm(); paint(); });
+      }
+    }
+
+    /* autoplay가 막혔을 때만 첫 사용자 제스처에서 재생 */
+    function gesture(ev){
+      if(bar && ev.target && bar.contains(ev.target)){ return; }
+      disarm();
+      if(on && audio.paused){ playNow(); }
+    }
+    function arm(){
+      if(armed){ return; }
+      armed = true;
+      document.addEventListener('pointerdown', gesture, true);
+      document.addEventListener('keydown', gesture, true);
+    }
+    function disarm(){
+      if(!armed){ return; }
+      armed = false;
+      document.removeEventListener('pointerdown', gesture, true);
+      document.removeEventListener('keydown', gesture, true);
+    }
+
+    audio.volume = vol;
+    ['play','playing','pause','ended','volumechange'].forEach(function(ev){
+      audio.addEventListener(ev, paint);
+    });
+    audio.addEventListener('error', paint);
+
+    if(toggle){
+      toggle.addEventListener('click', function(){
+        on = !on;
+        store.set('bgm.on', on);
+        if(on){
+          audio.volume = vol;
+          playNow();
+        }else{
+          disarm();
+          try{ audio.pause(); }catch(e){}
+        }
+        paint();
+      });
+    }
+
+    if(volEl){
+      volEl.addEventListener('input', function(){
+        var n = parseFloat(volEl.value);
+        if(!isFinite(n)){ n = 45; }
+        vol = Math.min(100, Math.max(0, n)) / 100;
+        audio.volume = vol;
+        paint();
+        if(volTimer){ window.clearTimeout(volTimer); }
+        volTimer = window.setTimeout(function(){ store.set('bgm.vol', vol); }, 200);
+      });
+      volEl.addEventListener('change', function(){ store.set('bgm.vol', vol); });
+    }
+
+    /* 인트로 → 메인 전환 시 컨트롤을 상단 바 안으로 옮김 */
+    function mount(screen){
+      var target = (screen === 'main') ? hostTop : hostIntro;
+      if(target && bar.parentNode !== target){ target.appendChild(bar); }
+    }
+    mount(document.body.getAttribute('data-screen'));
+    if('MutationObserver' in window){
+      new MutationObserver(function(){
+        mount(document.body.getAttribute('data-screen'));
+      }).observe(document.body, { attributes: true, attributeFilter: ['data-screen'] });
+    }
+
+    paint();
+    if(on){ playNow(); }
   })();
 
   /* ---------------- init ---------------- */
