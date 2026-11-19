@@ -179,16 +179,16 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
 
 /* ---------- intro: road at the foot of the city ---------- */
 .road{
-  position:absolute;left:0;right:0;bottom:0;height:8.4vh;min-height:58px;
+  position:absolute;left:0;right:0;bottom:0;height:9.4vh;min-height:64px;
   background:linear-gradient(180deg,#0D0918 0%,#0A0712 46%,#0C0917 100%);
-  box-shadow:0 -1px 0 rgba(255,198,152,.13),inset 0 16px 34px -20px rgba(255,172,124,.20);
+  box-shadow:0 -1px 0 rgba(255,198,152,.16),inset 0 18px 36px -20px rgba(255,172,124,.26),inset 0 -40px 50px -40px rgba(255,168,116,.16);
 }
 .road::before{
   content:"";position:absolute;left:0;right:0;top:46%;height:1px;
   background:repeating-linear-gradient(90deg,rgba(255,206,166,.22) 0 16px,transparent 16px 44px);
   opacity:.45;
 }
-.traffic{position:absolute;left:0;right:0;bottom:0;height:8.4vh;min-height:58px;overflow:hidden}
+.traffic{position:absolute;left:0;right:0;bottom:0;height:9.4vh;min-height:64px;overflow:hidden}
 .traffic .lane{position:absolute;left:0;right:0;height:0}
 .lane-up{bottom:66%}
 .lane-dn{bottom:18%}
@@ -202,7 +202,7 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
   will-change:transform;
   animation:carRun var(--dur,42s) linear var(--dl,0s) infinite;
 }
-.lane-dn .car{scale:-1 1}
+.lane-dn .car{scale:-1 1;animation-name:carRunL}
 .car::before{
   content:"";position:absolute;left:26%;right:34%;bottom:82%;height:calc(var(--w,34px) * .17);
   border-radius:2px 3px 0 0;
@@ -222,6 +222,8 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
   filter:blur(.65px);mix-blend-mode:screen;
 }
 @keyframes carRun{from{transform:translate3d(-16vw,0,0)}to{transform:translate3d(116vw,0,0)}}
+/* 반대 차선은 scale:-1 로 좌우가 뒤집히므로, 이동 좌표도 뒤집힌 축에 맞춰 따로 정의한다 */
+@keyframes carRunL{from{transform:translate3d(-102vw,0,0)}to{transform:translate3d(18vw,0,0)}}
 
 /* ============================================================
    INSIDE — high-rise lounge, looking out over the city
@@ -252,7 +254,7 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
   background:linear-gradient(180deg,transparent,rgba(255,150,110,.10) 62%,rgba(255,160,116,.16) 100%);
   filter:blur(10px);
 }
-.in-city{height:60vh;min-height:380px;bottom:11vh;filter:blur(.4px)}
+.in-city{height:60vh;min-height:380px;bottom:11vh;filter:blur(.4px) brightness(1.16) contrast(1.02)}
 .sky-in-far{height:44vh;min-height:280px;bottom:9vh;opacity:.5;filter:blur(1.3px) saturate(1.06)}
 .sky-in-mid{height:60vh;min-height:360px;bottom:5vh;filter:blur(.35px)}
 
@@ -261,16 +263,16 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
 .street::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 46% 88% at 24% 6%,rgba(255,168,112,.20),transparent 70%),
-    radial-gradient(ellipse 40% 80% at 72% 4%,rgba(255,140,100,.16),transparent 72%),
+    radial-gradient(ellipse 46% 88% at 24% 6%,rgba(255,168,112,.28),transparent 70%),
+    radial-gradient(ellipse 40% 80% at 72% 4%,rgba(255,140,100,.22),transparent 72%),
     linear-gradient(180deg,#0B0817 0%,#090612 52%,#0B0816 100%);
   box-shadow:0 -1px 0 rgba(255,196,156,.16),inset 0 26px 44px -24px rgba(255,164,112,.22);
 }
 .trail{
   position:absolute;left:0;bottom:var(--b,50%);width:var(--w,26px);height:var(--h,2px);
   border-radius:2px;filter:blur(.8px);mix-blend-mode:screen;will-change:transform;
-  box-shadow:0 0 10px 1px rgba(255,170,110,.22);
-  background:linear-gradient(90deg,transparent,var(--c,rgba(255,216,166,.88)) 52%,transparent);
+  box-shadow:0 0 14px 2px rgba(255,172,112,.34);
+  background:linear-gradient(90deg,transparent,var(--c,rgba(255,224,178,.98)) 50%,transparent);
   animation:carRun var(--dur,18s) linear var(--dl,0s) infinite;
 }
 .street .lane-rev .trail{animation-direction:reverse}
@@ -523,7 +525,7 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
    ============================================================ */
 .deck{
   width:100%;max-width:1520px;margin:0 auto;
-  padding:22px clamp(14px,2.4vw,32px) clamp(34px,13vh,140px);
+  padding:22px clamp(14px,4vw,58px) clamp(34px,13vh,140px);
   flex:1 1 auto;
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:16px;align-items:start;align-content:start;
@@ -1264,8 +1266,8 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
 
   <div class="road"></div>
   <div class="traffic" aria-hidden="true">
-    <div class="lane lane-up"><i class="car" style="--w:32px;--dur:46s;--dl:-4s;--x:6vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:36px;--dur:46s;--dl:-14s;--x:26vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:30px;--dur:46s;--dl:-26s;--x:47vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:34px;--dur:46s;--dl:-33s;--x:68vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:31px;--dur:46s;--dl:-41s;--x:88vw"><b class="hl"></b><b class="tl"></b></i></div>
-    <div class="lane lane-dn"><i class="car" style="--w:44px;--dur:38s;--dl:-6s;--x:12vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:39px;--dur:38s;--dl:-18s;--x:34vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:46px;--dur:38s;--dl:-27s;--x:57vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:41px;--dur:38s;--dl:-34s;--x:80vw"><b class="hl"></b><b class="tl"></b></i></div>
+    <div class="lane lane-up"><i class="car" style="--w:35px;--dur:46s;--dl:-4s;--x:6vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:39px;--dur:46s;--dl:-14s;--x:26vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:33px;--dur:46s;--dl:-26s;--x:47vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:37px;--dur:46s;--dl:-33s;--x:68vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:34px;--dur:46s;--dl:-41s;--x:88vw"><b class="hl"></b><b class="tl"></b></i></div>
+    <div class="lane lane-dn"><i class="car" style="--w:47px;--dur:38s;--dl:-6s;--x:12vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:42px;--dur:38s;--dl:-18s;--x:34vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:50px;--dur:38s;--dl:-27s;--x:57vw"><b class="hl"></b><b class="tl"></b></i><i class="car" style="--w:44px;--dur:38s;--dl:-34s;--x:80vw"><b class="hl"></b><b class="tl"></b></i></div>
   </div>
   </div><!-- /scene-out -->
 
