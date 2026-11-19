@@ -1622,6 +1622,8 @@ html[data-time="noon"] .vbg .v-vig{background:linear-gradient(180deg,rgba(10,26,
   radial-gradient(720px 560px at 64% 34%, color-mix(in srgb,var(--vb) 16%,transparent), transparent 70%),
   radial-gradient(640px 420px at 14% 64%, color-mix(in srgb,var(--va) 16%,transparent), transparent 72%)}
 .vbg-02 .v-lum{left:22%;bottom:82%;--lum-s:min(54px,7vw);opacity:.42}
+/* 좁은 화면: 카드 아래로 고가 선로가 또렷이 보이도록 배경을 살짝 내린다 */
+@media (max-width:700px){.vbg-02 .v-art{bottom:-4vh}}
 
 /* 03 CAMPUS & SCHEDULE — 한적한 가로등 · 캠퍼스 타운 */
 .view.v-03{--va:#FFC36B;--vb:#A8E6A0}
