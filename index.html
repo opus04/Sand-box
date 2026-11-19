@@ -4081,7 +4081,8 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
 
     function backToHub(){
       if(current === 'hub'){ return; }
-      if(history.state && history.state.view){ history.back(); return; }
+      /* 이전 항목이 섹션일 수 있으므로 history.back() 대신 허브 상태를 새로 쌓는다 */
+      try{ history.pushState({ view: 'hub' }, '', location.pathname + location.search); }catch(e){}
       setView('hub');
     }
 
