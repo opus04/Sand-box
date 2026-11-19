@@ -1792,6 +1792,11 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
 .in-sun{bottom:46%;left:72%;width:min(88px,11vw);opacity:.9}
 @media (max-width:620px){.in-sun{bottom:44%;width:min(64px,15vw)}}
 
+/* 좁은 화면에서는 배경 도시를 조금 더 크게 (좌우는 잘라도 장면이 보이게) */
+@media (max-width:700px){
+  .vbg .v-art{width:auto;height:48vh;min-height:280px;left:50%;transform:translateX(-50%)}
+}
+
 </style>
 <script>
 /* 첫 페인트 전에 경량 모드 설정을 적용해 무거운 효과가 한 프레임도 그려지지 않게 한다 */
