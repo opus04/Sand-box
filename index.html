@@ -124,6 +124,43 @@ button{cursor:pointer}
 }
 
 /* ============================================================
+   SKY MOTION  (slow, low-amplitude — calm by design)
+   ============================================================ */
+.skyline{transform-origin:50% 100%;transform:scale(1.02);will-change:transform}
+
+@keyframes driftA{0%{transform:translate3d(-34px,0,0) scale(1);opacity:.52}50%{opacity:.86}100%{transform:translate3d(38px,-3px,0) scale(1.03);opacity:.62}}
+@keyframes driftB{0%{transform:translate3d(34px,1px,0) scale(1.02);opacity:.7}100%{transform:translate3d(-38px,-2px,0) scale(1);opacity:.5}}
+@keyframes hazeBreath{0%,100%{opacity:.68;transform:scaleX(.985)}50%{opacity:1;transform:scaleX(1.02)}}
+@keyframes fogBreath{0%,100%{opacity:.72;transform:translateY(0)}50%{opacity:.98;transform:translateY(-5px)}}
+@keyframes haloBreath{0%,100%{opacity:.7;transform:translateX(-50%) scale(.965)}50%{opacity:1;transform:translateX(-50%) scale(1.05)}}
+@keyframes sunBreath{0%,100%{filter:brightness(1) saturate(1)}50%{filter:brightness(1.09) saturate(1.05)}}
+@keyframes twinkle{0%,100%{opacity:.32}44%{opacity:.95}62%{opacity:.52}80%{opacity:.78}}
+@keyframes winPulse{0%,100%{opacity:.92}36%{opacity:.24}58%{opacity:.68}78%{opacity:.38}}
+
+@media (prefers-reduced-motion:no-preference){
+  .cl1{animation:driftA 42s ease-in-out infinite alternate}
+  .cl2{animation:driftB 58s ease-in-out infinite alternate}
+  .cl3{animation:driftA 50s ease-in-out infinite alternate-reverse}
+  .hb1{animation:hazeBreath 21s ease-in-out infinite}
+  .hb2{animation:hazeBreath 29s ease-in-out infinite reverse}
+  .fog{animation:fogBreath 26s ease-in-out infinite}
+  .sky-halo{animation:haloBreath 11s ease-in-out infinite}
+  .sun{animation:sunBreath 11s ease-in-out infinite}
+
+  .sky-stars circle{animation:twinkle 8s ease-in-out infinite}
+  .sky-stars circle:nth-child(2n){animation-duration:11.5s;animation-delay:-3.1s}
+  .sky-stars circle:nth-child(3n){animation-duration:6.4s;animation-delay:-1.4s}
+  .sky-stars circle:nth-child(5n){animation-duration:13.5s;animation-delay:-6.2s}
+  .sky-stars circle:nth-child(7n){animation-duration:9.2s;animation-delay:-4.6s}
+
+  .skyline g rect{animation:winPulse 12s ease-in-out infinite}
+  .skyline g rect:nth-child(3n){animation-duration:15.5s;animation-delay:-2.6s}
+  .skyline g rect:nth-child(3n+1){animation-duration:9.4s;animation-delay:-5.1s}
+  .skyline g rect:nth-child(5n){animation-duration:18s;animation-delay:-8.4s}
+  .skyline g rect:nth-child(7n+2){animation-duration:7.8s;animation-delay:-1.7s}
+}
+
+/* ============================================================
    SHARED
    ============================================================ */
 .screen{position:relative;z-index:1}
@@ -666,6 +703,147 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 /* ============================================================
+   MONTHLY CALENDAR
+   ============================================================ */
+.cal{
+  margin:0 0 16px;padding:16px 16px 15px;
+  border:1px solid var(--line-soft);border-radius:var(--r-sm);
+  background:
+    radial-gradient(120% 130% at 0% 0%, rgba(255,209,153,.07), transparent 58%),
+    linear-gradient(160deg,rgba(255,255,255,.028),rgba(12,9,22,.36) 62%);
+}
+.cal-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.cal-head > b{font-family:var(--font-latin);font-size:10.5px;letter-spacing:.18em;color:#F3E3D6;font-weight:600}
+.cal-hint{font-size:10.5px;color:rgba(255,236,220,.38);letter-spacing:.01em}
+.cal-next{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:4px 11px 3px;border-radius:999px;
+  border:1px solid rgba(255,209,153,.26);background:rgba(255,209,153,.07);
+  font-size:10.5px;letter-spacing:.01em;color:rgba(255,236,220,.78);
+  transition:border-color .2s,background .2s,color .2s;
+}
+.cal-next b{font-family:var(--font-latin);font-weight:600;letter-spacing:.07em;color:var(--gold)}
+.cal-next:hover{border-color:rgba(255,209,153,.5);background:rgba(255,209,153,.14);color:#FFF4E8}
+.cal-nav{margin-left:auto;display:flex;align-items:center;gap:6px}
+.cal-month{
+  min-width:106px;text-align:center;
+  font-size:12.5px;font-weight:600;letter-spacing:.03em;color:#FFF4E8;
+  font-variant-numeric:tabular-nums;
+}
+.cal-btn{
+  height:27px;min-width:27px;padding:0 9px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.04);
+  font-size:11px;letter-spacing:.02em;color:rgba(255,236,220,.72);
+  transition:color .18s,border-color .18s,background .18s;
+}
+.cal-btn:hover{color:var(--gold);border-color:rgba(255,209,153,.42);background:rgba(255,209,153,.11)}
+.cal-arrow{font-size:14px;line-height:1;padding:0 7px}
+
+.cal-body{display:grid;grid-template-columns:minmax(0,392px) minmax(0,1fr);gap:18px;align-items:start}
+.cal-grid-wrap{min-width:0}
+.cal-dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-bottom:6px}
+.cal-dow span{text-align:center;font-family:var(--font-latin);font-size:9px;letter-spacing:.1em;color:rgba(255,236,220,.4)}
+.cal-dow span:first-child{color:rgba(255,172,150,.6)}
+.cal-dow span:last-child{color:rgba(180,155,230,.62)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cd{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  height:46px;padding:0;
+  border:1px solid rgba(255,214,176,.10);border-radius:9px;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+  font-size:12px;line-height:1;color:rgba(247,235,222,.86);
+  font-variant-numeric:tabular-nums;
+  transition:border-color .18s,background .18s,color .18s,transform .18s;
+}
+.cd:hover{border-color:rgba(255,209,153,.32);background:rgba(255,209,153,.09);color:#FFF6EA;transform:translateY(-1px)}
+.cd.is-out{color:rgba(236,216,206,.22);background:rgba(255,255,255,.008);border-color:rgba(255,214,176,.035)}
+.cd.is-out:hover{color:rgba(236,216,206,.42)}
+.cd.is-sun{color:rgba(255,184,164,.92)}
+.cd.is-sat{color:rgba(196,176,235,.92)}
+.cd.is-today{border-color:rgba(255,209,153,.5);background:rgba(255,209,153,.08);color:#FFF8EE;font-weight:700}
+.cd.is-sel{
+  border-color:rgba(255,209,153,.78);
+  background:linear-gradient(160deg,rgba(255,209,153,.24),rgba(255,164,110,.12));
+  color:#FFF9F0;font-weight:700;
+  box-shadow:0 0 0 3px rgba(255,209,153,.10),0 10px 22px -18px rgba(255,178,116,.9);
+}
+.cd-num{display:block}
+.cd-dots{display:flex;align-items:center;justify-content:center;gap:3px;height:5px}
+.cd-dots i{display:block;width:4.5px;height:4.5px;border-radius:50%;background:var(--c,var(--gold));box-shadow:0 0 6px color-mix(in srgb,var(--c,var(--gold)) 55%,transparent)}
+.cd-dots i.memo{background:var(--lavender);box-shadow:0 0 6px rgba(180,155,230,.5)}
+.cd.is-out .cd-dots{opacity:.32}
+.cal-legend{display:flex;align-items:center;gap:13px;margin-top:10px;padding-left:2px;font-size:9.5px;letter-spacing:.05em;color:rgba(255,236,220,.34)}
+.cal-legend span{display:inline-flex;align-items:center;gap:5px}
+.cal-legend i{display:block;width:5px;height:5px;border-radius:50%}
+
+.cal-side{
+  min-width:0;display:flex;flex-direction:column;gap:10px;
+  padding:13px 14px 12px;
+  border:1px solid var(--line-soft);border-radius:var(--r-sm);
+  background:rgba(12,9,22,.32);
+}
+.cal-day-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.cal-day-head b{font-size:13px;font-weight:600;letter-spacing:.01em;color:#FFF4E8;font-variant-numeric:tabular-nums}
+.cal-day-dday{margin-left:auto;font-family:var(--font-latin);font-size:10.5px;letter-spacing:.1em;color:rgba(255,209,153,.72)}
+.cal-events{display:flex;flex-direction:column;gap:6px}
+.cal-ev{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 11px;border-radius:9px;
+  border:1px solid color-mix(in srgb,var(--ac) 24%,transparent);
+  border-left:3px solid var(--ac);
+  background:linear-gradient(100deg,color-mix(in srgb,var(--ac) 13%,transparent),rgba(255,255,255,.015) 76%);
+  font-size:12px;line-height:1.35;color:#FBEADE;
+}
+.cal-ev b{flex:0 0 auto;font-family:var(--font-latin);font-size:10px;letter-spacing:.08em;font-weight:600;color:color-mix(in srgb,var(--ac) 88%,#fff)}
+.cal-ev span{min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+.cal-memos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px;max-height:150px;overflow:auto}
+.cal-memo{display:flex;align-items:flex-start;gap:9px;padding:7px 2px;border-bottom:1px solid rgba(255,214,176,.07);animation:fadeIn .28s ease both}
+.cal-memo:last-child{border-bottom:0}
+.cal-memo .cal-dot{flex:0 0 auto;width:4px;height:4px;margin-top:7px;border-radius:50%;background:rgba(255,209,153,.62)}
+.cal-memo .cal-txt{flex:1 1 auto;font-size:12px;line-height:1.5;color:#F2E5DA;word-break:keep-all;overflow-wrap:anywhere}
+.cal-memo .cal-x{
+  flex:0 0 auto;width:20px;height:20px;display:grid;place-items:center;
+  border:0;border-radius:50%;background:transparent;color:rgba(255,236,220,.34);font-size:13px;line-height:1;
+  opacity:0;transition:opacity .16s,color .16s,background .16s;
+}
+.cal-memo:hover .cal-x,.cal-memo .cal-x:focus-visible{opacity:1}
+.cal-memo .cal-x:hover{color:#fff;background:rgba(212,99,63,.55)}
+.cal-empty{font-size:11.5px;color:rgba(255,236,220,.3);padding:5px 2px;letter-spacing:.01em}
+.cal-add{display:flex;gap:6px;padding-top:2px}
+.cal-up{margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,214,176,.09);display:flex;flex-direction:column;gap:2px}
+.cal-up-h{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.cal-up-h b{font-family:var(--font-latin);font-size:9px;letter-spacing:.16em;color:rgba(255,236,220,.42);font-weight:600}
+.cal-up-h span{font-size:10px;letter-spacing:.02em;color:rgba(255,236,220,.3)}
+.cal-uprow{
+  display:flex;align-items:center;gap:9px;width:100%;padding:5px 8px;
+  border:0;border-radius:7px;background:transparent;text-align:left;
+  font-size:11.5px;color:rgba(247,235,222,.8);
+  transition:background .18s,color .18s;
+}
+.cal-uprow:hover{background:rgba(255,209,153,.09);color:#FFF4E8}
+.cal-uprow b{flex:0 0 auto;min-width:40px;font-family:var(--font-latin);font-size:10px;font-weight:600;letter-spacing:.06em;color:color-mix(in srgb,var(--ac,var(--gold)) 90%,#fff)}
+.cal-uprow em{flex:0 0 auto;font-style:normal;font-variant-numeric:tabular-nums;font-size:10.5px;color:rgba(255,236,220,.42)}
+.cal-uprow span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-add input{
+  flex:1 1 auto;min-width:0;
+  background:rgba(12,9,22,.55);border:1px solid var(--line);border-radius:8px;
+  padding:8px 10px;font-size:12px;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.cal-add input:focus{border-color:rgba(255,209,153,.5);box-shadow:0 0 0 3px rgba(255,209,153,.08)}
+.cal-add input::placeholder{color:rgba(255,236,220,.3)}
+.cal-add button{
+  flex:0 0 auto;width:32px;border:0;border-radius:8px;
+  background:rgba(255,209,153,.14);color:#FFE3C2;font-size:15px;line-height:1;
+  transition:background .2s,color .2s;
+}
+.cal-add button:hover{background:linear-gradient(135deg,#F7B27E,#E97C50);color:#2B1510}
+
+@media (hover:none){
+  .cal-memo .cal-x{opacity:.5}
+}
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width:1180px){
@@ -681,8 +859,15 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
   .top-right{gap:12px;margin-left:auto}
   .brand-text span{display:none}
   .tasks{grid-template-columns:1fr}
+  .cal-body{grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:14px}
+  .cal-month{min-width:96px}
   .deck{padding-top:16px;gap:12px}
   .sky-far{height:26vh}
+}
+@media (max-width:700px){
+  .cal-body{grid-template-columns:1fr;gap:12px}
+  .cal-grid-wrap{width:100%;max-width:420px;margin:0 auto}
+  .cal-side{padding:12px}
 }
 @media (max-width:620px){
   body{font-size:14px}
@@ -733,6 +918,14 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
   .foot{font-size:9px;letter-spacing:.05em}
   table.tt{min-width:560px}
   .tt-swipe{display:block}
+  .cal{margin:0 0 13px;padding:13px 12px 12px}
+  .cal-head{gap:8px;margin-bottom:11px}
+  .cal-hint{display:none}
+  .cal-month{min-width:88px;font-size:12px}
+  .cal-grid,.cal-dow{gap:3px}
+  .cd{height:42px;border-radius:8px;font-size:11.5px}
+  .cal-day-head b{font-size:12px}
+  .cal-memos{max-height:none}
   .deck-hint{margin-top:10px}
   .dh-txt{font-size:11px}
   .sky-far{height:22vh;min-height:132px}
@@ -1089,9 +1282,9 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
         <button class="p-head" type="button" aria-expanded="false" aria-controls="body-campus" aria-label="CAMPUS &amp; SCHEDULE 섹션 펼치기">
           <span class="p-top">
             <span class="p-title"><span class="num">03</span>CAMPUS &amp; SCHEDULE</span>
-            <span class="p-sub">학교 · 시간표</span>
+            <span class="p-sub">학교 · 시간표 · 달력</span>
             <span class="p-line" aria-hidden="true"></span>
-            <span class="p-tag">주간</span>
+            <span class="p-tag">주간·월간</span>
             <span class="p-toggle" aria-hidden="true"><span class="p-caret">▸</span><span class="p-toggle-txt">펼치기</span></span>
           </span>
           <span class="p-preview" aria-hidden="true">
@@ -1100,11 +1293,53 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
             <span class="pv">Drive</span>
             <span class="pv">Teams</span>
             <span class="pv">주간 시간표 7교시</span>
+            <span class="pv">월간 달력</span>
             <span class="pv-hint">눌러서 펼치기</span>
           </span>
         </button>
       </h2>
       <div class="p-body" id="body-campus" role="region" aria-labelledby="h-campus" aria-hidden="true" inert>
+        <div class="cal" id="calendar" aria-labelledby="calTitle">
+          <div class="cal-head">
+            <b id="calTitle">MONTHLY CALENDAR</b>
+            <span class="cal-hint">D-DAY · 메모 한눈에</span>
+            <button class="cal-next" id="calNextDday" type="button" hidden>
+              <span>다음</span><b id="calNextLabel">D-</b><span id="calNextTitle"></span>
+            </button>
+            <div class="cal-nav">
+              <button class="cal-btn" id="calToday" type="button">오늘</button>
+              <button class="cal-btn cal-arrow" id="calPrev" type="button" aria-label="이전 달 보기">‹</button>
+              <span class="cal-month" id="calMonth" aria-live="polite">----년 --월</span>
+              <button class="cal-btn cal-arrow" id="calNext" type="button" aria-label="다음 달 보기">›</button>
+            </div>
+          </div>
+          <div class="cal-body">
+            <div class="cal-grid-wrap">
+              <div class="cal-dow" aria-hidden="true">
+                <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+              </div>
+              <div class="cal-grid" id="calGrid" role="grid" aria-label="월간 달력"></div>
+              <div class="cal-legend" aria-hidden="true">
+                <span><i style="background:var(--gold)"></i>D-DAY</span>
+                <span><i style="background:var(--lavender)"></i>메모</span>
+              </div>
+            </div>
+            <div class="cal-side">
+              <div class="cal-day-head">
+                <b id="calDayTitle">----.--.--</b>
+                <span class="cal-day-dday" id="calDayDday"></span>
+              </div>
+              <div class="cal-events" id="calDayEvents"></div>
+              <ul class="cal-memos" id="calMemos" aria-label="선택한 날짜의 메모"></ul>
+              <form class="cal-add" id="calForm" autocomplete="off">
+                <input id="calMemoInput" type="text" maxlength="80" placeholder="이 날 메모 추가 후 Enter" aria-label="이 날 메모">
+                <button type="submit" aria-label="메모 추가">+</button>
+              </form>
+              <div class="cal-up" id="calUpcoming" aria-label="다가오는 D-DAY"></div>
+            </div>
+          </div>
+        </div>
+
         <div class="campus">
           <div class="linkcol">
             <a class="tile h" href="https://www.konyang.ac.kr" target="_blank" rel="noopener noreferrer" style="--ac:var(--gold)">
@@ -1302,7 +1537,7 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
       to.classList.add('entering');
       document.body.setAttribute('data-screen', target);
       window.scrollTo(0, 0);
-      if(target === 'main'){ collapseAllPanels(); }
+      if(target === 'main'){ resetPanelsForEntry(); }
 
       setTimeout(function(){
         to.classList.remove('entering');
@@ -1389,6 +1624,19 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
 
   function collapseAllPanels(){
     panelEls.forEach(function(panel){ setPanel(panel, false, false); });
+    syncIdle();
+  }
+
+  /* 진입 시: 모든 섹션은 접고, 03 CAMPUS & SCHEDULE 은 항상 펼친 상태로 */
+  var ENTRY_PANEL_NAME = 'CAMPUS & SCHEDULE';
+  function resetPanelsForEntry(){
+    collapseAllPanels();
+    for(var i = 0; i < panelEls.length; i++){
+      if(panelEls[i].getAttribute('data-name') === ENTRY_PANEL_NAME){
+        setPanel(panelEls[i], true, false);
+        break;
+      }
+    }
     syncIdle();
   }
 
@@ -1571,6 +1819,7 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
       stripNext.textContent = '예정된 일정이 없습니다';
     }
     updateSectionCounters();
+    refreshCalendar();
   }
 
   function escapeHtml(s){
@@ -1896,9 +2145,385 @@ td.tt-cell.filled:focus{box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.5px rgba
     markSaved();
   });
 
+  /* ---------------- MONTHLY CALENDAR ---------------- */
+  var CAL_KEY = 'calMemos';
+  var calMemos = store.get(CAL_KEY, {});
+  if(!calMemos || typeof calMemos !== 'object' || Array.isArray(calMemos)){ calMemos = {}; }
+
+  var calGrid = $('#calGrid');
+  var calMonthEl = $('#calMonth');
+  var calDayTitle = $('#calDayTitle');
+  var calDayDday = $('#calDayDday');
+  var calDayEvents = $('#calDayEvents');
+  var calDayMemos = $('#calMemos');
+  var calNextBtn = $('#calNextDday');
+  var calNextLabel = $('#calNextLabel');
+  var calNextTitle = $('#calNextTitle');
+  var calForm = $('#calForm');
+  var calInput = $('#calMemoInput');
+  var calUpcoming = $('#calUpcoming');
+
+  var todayDate = startOfDay(new Date());
+  var calView = { y: todayDate.getFullYear(), m: todayDate.getMonth() };
+  var calSel = ymdOf(todayDate);
+
+  function ymdOf(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+  function dateOfYmd(s){
+    var p = String(s || '').split('-');
+    if(p.length !== 3){ return new Date(NaN); }
+    return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  }
+
+  function ddaysOn(dateStr){
+    return ddays.filter(function(d){ return d.date === dateStr; });
+  }
+
+  function dayDiff(dateStr){
+    var t = dateOfYmd(dateStr);
+    if(isNaN(t.getTime())){ return 0; }
+    return Math.round((startOfDay(t) - startOfDay(new Date())) / 86400000);
+  }
+
+  function relLabel(n){ return n > 0 ? 'D-' + n : (n === 0 ? 'D-DAY' : 'D+' + Math.abs(n)); }
+
+  function accentOf(id){
+    var idx = 0;
+    for(var i = 0; i < ddays.length; i++){ if(ddays[i].id === id){ idx = i; break; } }
+    return DD_ACCENTS[idx % DD_ACCENTS.length];
+  }
+
+  function renderCalendar(){
+    if(!calGrid){ return; }
+    calMonthEl.textContent = calView.y + '년 ' + (calView.m + 1) + '월';
+
+    var first = new Date(calView.y, calView.m, 1);
+    var start = new Date(calView.y, calView.m, 1 - first.getDay());
+    var todayKey = ymdOf(new Date());
+    var frag = document.createDocumentFragment();
+    var daysInMonth = new Date(calView.y, calView.m + 1, 0).getDate();
+    var cellCount = Math.ceil((first.getDay() + daysInMonth) / 7) * 7;
+
+    for(var i = 0; i < cellCount; i++){
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      var key = ymdOf(d);
+      var evs = ddaysOn(key);
+      var memos = Array.isArray(calMemos[key]) ? calMemos[key] : [];
+
+      var cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'cd';
+      cell.setAttribute('data-date', key);
+      cell.setAttribute('role', 'gridcell');
+      if(d.getMonth() !== calView.m){ cell.classList.add('is-out'); }
+      if(d.getDay() === 0){ cell.classList.add('is-sun'); }
+      if(d.getDay() === 6){ cell.classList.add('is-sat'); }
+      if(key === todayKey){ cell.classList.add('is-today'); }
+      if(key === calSel){ cell.classList.add('is-sel'); }
+      cell.setAttribute('aria-selected', key === calSel ? 'true' : 'false');
+
+      var num = document.createElement('span');
+      num.className = 'cd-num';
+      num.textContent = String(d.getDate());
+      cell.appendChild(num);
+
+      var dots = document.createElement('span');
+      dots.className = 'cd-dots';
+      evs.slice(0, 3).forEach(function(ev){
+        var dot = document.createElement('i');
+        dot.style.setProperty('--c', accentOf(ev.id));
+        dots.appendChild(dot);
+      });
+      if(memos.length){
+        var md = document.createElement('i');
+        md.className = 'memo';
+        dots.appendChild(md);
+      }
+      cell.appendChild(dots);
+
+      var label = d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + WEEK_KR[d.getDay()] + '요일';
+      if(evs.length){
+        label += ', D-DAY ' + evs.map(function(ev){ return ev.title; }).join(', ');
+      }
+      if(memos.length){ label += ', 메모 ' + memos.length + '개'; }
+      cell.setAttribute('aria-label', label);
+
+      frag.appendChild(cell);
+    }
+
+    calGrid.innerHTML = '';
+    calGrid.appendChild(frag);
+    renderCalNext();
+  }
+
+  function renderCalNext(){
+    if(!calNextBtn){ return; }
+    var next = null;
+    ddays.forEach(function(item){
+      if(!ddayOf(item.date)){ return; }
+      var n = dayDiff(item.date);
+      if(n >= 0 && (!next || n < next.n)){ next = { n: n, title: item.title, date: item.date }; }
+    });
+    if(next){
+      calNextBtn.hidden = false;
+      calNextBtn.setAttribute('data-date', next.date);
+      calNextLabel.textContent = relLabel(next.n);
+      calNextTitle.textContent = next.title;
+      calNextBtn.setAttribute('aria-label', '다음 D-DAY ' + next.title + ' ' + relLabel(next.n) + ', 달력에서 보기');
+    }else{
+      calNextBtn.hidden = true;
+    }
+  }
+
+  function renderDayPanel(){
+    if(!calDayTitle){ return; }
+    var d = dateOfYmd(calSel);
+    if(isNaN(d.getTime())){ d = new Date(); }
+    calDayTitle.textContent = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate()) + ' (' + WEEK_KR[d.getDay()] + ')';
+
+    var n = dayDiff(calSel);
+    calDayDday.textContent = relLabel(n);
+    calDayDday.style.color = n === 0 ? 'var(--gold)' : (n > 0 ? 'rgba(255,209,153,.72)' : 'rgba(236,216,206,.36)');
+
+    calDayEvents.innerHTML = '';
+    var evs = ddaysOn(calSel);
+    if(!evs.length){
+      var noEv = document.createElement('div');
+      noEv.className = 'cal-empty';
+      noEv.textContent = '이 날 등록된 D-DAY가 없습니다';
+      calDayEvents.appendChild(noEv);
+    }
+    evs.forEach(function(ev){
+      var row = document.createElement('div');
+      row.className = 'cal-ev';
+      row.style.setProperty('--ac', accentOf(ev.id));
+      var b = document.createElement('b');
+      b.textContent = relLabel(dayDiff(ev.date));
+      var s = document.createElement('span');
+      s.textContent = ev.title;
+      row.appendChild(b);
+      row.appendChild(s);
+      calDayEvents.appendChild(row);
+    });
+
+    calDayMemos.innerHTML = '';
+    var list = Array.isArray(calMemos[calSel]) ? calMemos[calSel] : [];
+    if(!list.length){
+      var noMemo = document.createElement('li');
+      noMemo.className = 'cal-empty';
+      noMemo.textContent = '이 날 메모가 없습니다 — 아래에 추가해 보세요';
+      calDayMemos.appendChild(noMemo);
+    }
+    list.forEach(function(m){
+      var li = document.createElement('li');
+      li.className = 'cal-memo';
+      li.setAttribute('data-id', m.id);
+
+      var dot = document.createElement('i');
+      dot.className = 'cal-dot';
+      dot.setAttribute('aria-hidden', 'true');
+
+      var txt = document.createElement('span');
+      txt.className = 'cal-txt';
+      txt.textContent = m.text;
+
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'cal-x';
+      x.setAttribute('aria-label', m.text + ' 메모 삭제');
+      x.textContent = '×';
+
+      li.appendChild(dot);
+      li.appendChild(txt);
+      li.appendChild(x);
+      calDayMemos.appendChild(li);
+    });
+
+    renderUpcoming();
+  }
+
+  function renderUpcoming(){
+    if(!calUpcoming){ return; }
+    var list = ddays
+      .filter(function(d){ return !!ddayOf(d.date); })
+      .map(function(d){ return { id: d.id, title: d.title, date: d.date, n: dayDiff(d.date) }; })
+      .filter(function(d){ return d.n >= 0; })
+      .sort(function(a, b){ return a.n - b.n; })
+      .slice(0, 3);
+
+    calUpcoming.innerHTML = '';
+    if(!list.length){ calUpcoming.hidden = true; return; }
+    calUpcoming.hidden = false;
+
+    var head = document.createElement('div');
+    head.className = 'cal-up-h';
+    var hb = document.createElement('b');
+    hb.textContent = 'UPCOMING';
+    var hs = document.createElement('span');
+    hs.textContent = '다가오는 D-DAY';
+    head.appendChild(hb);
+    head.appendChild(hs);
+    calUpcoming.appendChild(head);
+
+    list.forEach(function(item){
+      var d = dateOfYmd(item.date);
+      var row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'cal-uprow';
+      row.setAttribute('data-date', item.date);
+      row.style.setProperty('--ac', accentOf(item.id));
+      var b = document.createElement('b');
+      b.textContent = relLabel(item.n);
+      var em = document.createElement('em');
+      em.textContent = pad(d.getMonth() + 1) + '.' + pad(d.getDate());
+      var sp = document.createElement('span');
+      sp.textContent = item.title;
+      row.appendChild(b);
+      row.appendChild(em);
+      row.appendChild(sp);
+      row.setAttribute('aria-label', item.date + ' ' + item.title + ' 달력에서 보기');
+      calUpcoming.appendChild(row);
+    });
+  }
+
+  function refreshCalendar(){
+    if(!calGrid){ return; }
+    renderCalendar();
+    renderDayPanel();
+  }
+
+  function selectCalDate(dateStr){
+    if(!dateStr || !dateOfYmd(dateStr) || isNaN(dateOfYmd(dateStr).getTime())){ return; }
+    calSel = dateStr;
+    var d = dateOfYmd(dateStr);
+    if(d.getFullYear() !== calView.y || d.getMonth() !== calView.m){
+      calView = { y: d.getFullYear(), m: d.getMonth() };
+    }
+    refreshCalendar();
+  }
+
+  function shiftMonth(delta){
+    var base = new Date(calView.y, calView.m + delta, 1);
+    calView = { y: base.getFullYear(), m: base.getMonth() };
+    var now = new Date();
+    var inThisMonth = base.getFullYear() === now.getFullYear() && base.getMonth() === now.getMonth();
+    calSel = inThisMonth ? ymdOf(now) : ymdOf(new Date(calView.y, calView.m, 1));
+    refreshCalendar();
+  }
+
+  if(calGrid){
+    calGrid.addEventListener('click', function(e){
+      var cell = e.target.closest ? e.target.closest('.cd') : null;
+      if(!cell){ return; }
+      selectCalDate(cell.getAttribute('data-date'));
+    });
+  }
+
+  $('#calPrev').addEventListener('click', function(){ shiftMonth(-1); });
+  $('#calNext').addEventListener('click', function(){ shiftMonth(1); });
+  $('#calToday').addEventListener('click', function(){
+    var now = new Date();
+    todayDate = startOfDay(now);
+    calView = { y: now.getFullYear(), m: now.getMonth() };
+    selectCalDate(ymdOf(now));
+  });
+
+  if(calNextBtn){
+    calNextBtn.addEventListener('click', function(){
+      var ds = calNextBtn.getAttribute('data-date');
+      if(ds){ selectCalDate(ds); }
+    });
+  }
+
+  if(calUpcoming){
+    calUpcoming.addEventListener('click', function(e){
+      var row = e.target.closest ? e.target.closest('.cal-uprow') : null;
+      if(!row){ return; }
+      selectCalDate(row.getAttribute('data-date'));
+    });
+  }
+
+  calForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var text = calInput.value.trim();
+    if(!text){ calInput.focus(); return; }
+    if(!Array.isArray(calMemos[calSel])){ calMemos[calSel] = []; }
+    calMemos[calSel].push({ id: 'c' + Date.now(), text: text });
+    store.set(CAL_KEY, calMemos);
+    calInput.value = '';
+    refreshCalendar();
+    markSaved();
+    calInput.focus();
+  });
+
+  calDayMemos.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.cal-x') : null;
+    if(!btn){ return; }
+    var li = btn.closest('.cal-memo');
+    var id = li ? li.getAttribute('data-id') : null;
+    if(!id){ return; }
+    var list = Array.isArray(calMemos[calSel]) ? calMemos[calSel] : [];
+    calMemos[calSel] = list.filter(function(m){ return m.id !== id; });
+    if(!calMemos[calSel].length){ delete calMemos[calSel]; }
+    store.set(CAL_KEY, calMemos);
+    refreshCalendar();
+    markSaved();
+  });
+
+  /* ---------------- SKY PARALLAX ---------------- */
+  (function skyParallax(){
+    var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var fine = window.matchMedia ? window.matchMedia('(hover: hover) and (pointer: fine)') : null;
+    var layers = [
+      { el: $('.sky-far'), x: 3.5, y: 1.5 },
+      { el: $('.sky-mid'), x: 7, y: 3 },
+      { el: $('.sky-near'), x: 11, y: 4.5 }
+    ].filter(function(l){ return !!l.el; });
+    if(!layers.length){ return; }
+
+    var tx = 0, ty = 0, cx = 0, cy = 0, frame = null;
+
+    function paint(){
+      for(var i = 0; i < layers.length; i++){
+        var l = layers[i];
+        l.el.style.transform = 'translate3d(' + (cx * l.x).toFixed(2) + 'px,' + (cy * l.y).toFixed(2) + 'px,0) scale(1.02)';
+      }
+    }
+
+    function step(){
+      cx += (tx - cx) * 0.055;
+      cy += (ty - cy) * 0.055;
+      if(Math.abs(tx - cx) < 0.0015 && Math.abs(ty - cy) < 0.0015){
+        cx = tx; cy = ty; paint(); frame = null; return;
+      }
+      paint();
+      frame = window.requestAnimationFrame(step);
+    }
+
+    function kick(){ if(frame === null){ frame = window.requestAnimationFrame(step); } }
+
+    function stop(){ tx = 0; ty = 0; kick(); }
+
+    if(fine && !fine.matches){ return; }
+
+    window.addEventListener('mousemove', function(e){
+      if(mq && mq.matches){ return; }
+      var w = window.innerWidth || 1, h = window.innerHeight || 1;
+      tx = Math.max(-1, Math.min(1, (e.clientX / w - 0.5) * 2));
+      ty = Math.max(-1, Math.min(1, (e.clientY / h - 0.5) * 2));
+      kick();
+    }, { passive: true });
+    window.addEventListener('mouseleave', stop);
+    window.addEventListener('blur', stop);
+    if(mq && mq.addEventListener){
+      mq.addEventListener('change', function(){ if(mq.matches){ stop(); } });
+    }
+  })();
+
   /* ---------------- init ---------------- */
   buildTimetable();
   applyTimetable();
+  refreshCalendar();
   renderDdays();
   renderTodos();
   tick();
