@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f19">
+<meta name="description" content="비 오는 밤, 카페 창가에서 쓰는 작은 허브. 시계와 오늘의 운세, 검색, 메모, 빗소리.">
+<title>비 오는 밤의 창가</title>
+<style>
+  :root{
+    --serif: "Noto Serif KR", "Noto Serif CJK KR", "Nanum Myeongjo", "Apple SD Gothic Neo", Georgia, "Times New Roman", serif;
+    --sans: "Pretendard", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    --cream: #f7ebdb;
+    --muted: #d3bda6;
+    --amber: #f2b273;
+    --amber-deep: #c9823f;
+    --line: rgba(255, 200, 150, .17);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    min-height:100vh;min-height:100dvh;
+    font-family:var(--sans);color:var(--cream);
+    background:
+      radial-gradient(80% 34% at 50% 60%, rgba(255,168,92,.10), transparent 70%),
+      linear-gradient(180deg, #241609 0%, #1b100a 30%, #150d08 62%, #100906 100%);
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* ================= window scene ================= */
+  .scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#070b13}
+  .sky{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 62% at 50% 4%, #22304a 0%, #16203400 55%),
+      radial-gradient(90% 50% at 18% 34%, rgba(255,150,80,.16), transparent 68%),
+      radial-gradient(70% 44% at 84% 30%, rgba(255,170,100,.10), transparent 70%),
+      linear-gradient(180deg,#0b1322 0%,#101a2c 42%,#16202f 72%,#0c1420 100%);}
+  .haze{position:absolute;inset:0;
+    background:radial-gradient(58% 40% at 50% 88%, rgba(255,158,84,.22), rgba(255,158,84,.06) 48%, transparent 74%);
+    filter:blur(10px);mix-blend-mode:screen}
+  #skyline{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #rain{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .bokeh{position:absolute;inset:0;overflow:hidden;mix-blend-mode:screen}
+  .bokeh i{position:absolute;display:block;border-radius:50%;
+    filter:blur(var(--blur,12px));opacity:var(--op,.5);
+    animation:sway var(--dur,14s) ease-in-out var(--delay,0s) infinite alternate;
+    will-change:transform,opacity}
+  @keyframes sway{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(var(--dx,6px),var(--dy,-8px),0) scale(1.08)}}
+  .mist{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(64% 30% at 50% 72%, rgba(140,175,215,.10), transparent 70%),
+      radial-gradient(50% 26% at 12% 84%, rgba(255,176,104,.16), transparent 72%),
+      radial-gradient(46% 24% at 90% 82%, rgba(255,186,120,.12), transparent 74%);
+    mix-blend-mode:screen}
+  .aviation{animation:avi 3.4s ease-in-out infinite}
+  @keyframes avi{0%,100%{opacity:.25}46%,54%{opacity:1}}
+  .drops{position:absolute;inset:0;overflow:hidden}
+  .sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+    background:
+      linear-gradient(118deg, rgba(190,215,255,.05) 0%, rgba(190,215,255,0) 26%, rgba(255,220,180,.045) 52%, rgba(190,215,255,0) 74%);}
+  .drop{position:absolute;top:-12%;left:var(--x);
+    width:var(--s,8px);height:calc(var(--s,8px) * 1.18);
+    border-radius:52% 52% 48% 48% / 46% 46% 54% 54%;
+    background:
+      radial-gradient(circle at 42% 82%, rgba(255,255,255,.55), rgba(220,238,255,.12) 34%, rgba(160,195,235,.02) 62%, rgba(140,175,220,0) 78%),
+      radial-gradient(circle at 66% 30%, rgba(255,255,255,.22), rgba(200,225,255,.05) 40%, rgba(140,175,220,0) 66%);
+    box-shadow:inset 0 -1px 1.5px rgba(255,255,255,.55), inset 0 1.5px 2px rgba(60,95,140,.45), 0 1px 4px rgba(0,0,0,.25);
+    animation:slide var(--d,16s) linear var(--delay,0s) infinite;
+    will-change:transform}
+  .drop::after{content:"";position:absolute;left:46%;bottom:74%;
+    width:1.6px;height:calc(var(--s,10px) * 7);
+    border-radius:2px;
+    background:linear-gradient(to top, rgba(205,225,255,.30), rgba(205,225,255,0));
+    animation:trail var(--d,16s) linear var(--delay,0s) infinite;transform-origin:bottom center}
+  @keyframes slide{
+    0%{transform:translate(0,-16vh) scaleY(.86)}
+    12%{transform:translate(0,2vh) scaleY(1)}
+    34%{transform:translate(calc(var(--wob,7px) * .5), 26vh)}
+    37%{transform:translate(calc(var(--wob,7px) * .5), 26vh) scaleY(.93)}
+    42%{transform:translate(calc(var(--wob,7px) * .95), 28vh) scaleY(1.05)}
+    72%{transform:translate(var(--wob,7px), 64vh)}
+    100%{transform:translate(calc(var(--wob,7px) * 1.15), 120vh)}
+  }
+  @keyframes trail{0%,10%{opacity:0}20%{opacity:.75}84%{opacity:.4}100%{opacity:0}}
+
+  /* ================= frame ================= */
+  .frame{position:fixed;inset:0;z-index:6;pointer-events:none}
+  .frame .bar{position:absolute;
+    background:linear-gradient(90deg,#241609 0%,#402a18 16%,#6b4527 46%,#3f2818 76%,#201309 100%);
+    box-shadow:0 0 24px rgba(0,0,0,.6), inset 0 0 16px rgba(0,0,0,.4)}
+  .frame .bar::after{content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(92deg, rgba(255,210,160,.05) 0 2px, transparent 2px 9px)}
+  .frame .top{left:0;right:0;top:0;height:12px}
+  .frame .left{top:0;bottom:0;left:0;width:12px}
+  .frame .right{top:0;bottom:0;right:0;width:12px}
+  .frame .mull{position:absolute;top:0;bottom:44vh;width:10px;
+    background:linear-gradient(90deg,#251608,#563a22 38%,#7b5330 52%,#3a2413);
+    box-shadow:0 0 18px rgba(0,0,0,.55), inset 0 0 8px rgba(0,0,0,.45);opacity:.9}
+  .frame .mull.v1{left:23%}
+  .frame .mull.v2{right:23%}
+  .frame .mull.h1{top:auto;bottom:calc(44vh - 11px);left:0;right:0;height:11px;width:auto;opacity:1}
+  .sill{position:fixed;left:0;right:0;z-index:7;bottom:44vh;height:13px;pointer-events:none;
+    background:linear-gradient(180deg,#8f6136 0%,#5d3a21 38%,#2a1a10 100%);
+    box-shadow:0 10px 30px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,214,170,.45)}
+
+  /* ================= pendant lamps ================= */
+  .lamps{position:fixed;inset:0;z-index:5;pointer-events:none}
+  .lamp{position:absolute;top:0;width:2px}
+  .lamp::before{content:"";position:absolute;left:0;top:0;width:100%;height:var(--drop,96px);
+    background:linear-gradient(180deg,rgba(18,12,8,.95),rgba(96,66,42,.85))}
+  .lamp .shade{position:absolute;left:50%;top:var(--drop,96px);transform:translateX(-50%);
+    width:72px;height:38px;border-radius:50% 50% 44% 44% / 20% 20% 80% 80%;
+    background:linear-gradient(180deg,#3a2718 0%,#6b4526 34%,#c99253 86%,#f8d29a 100%);
+    box-shadow:0 10px 32px rgba(0,0,0,.6), inset 0 -6px 12px rgba(255,208,152,.45)}
+  .lamp .bulb{position:absolute;left:50%;top:calc(var(--drop,96px) + 32px);transform:translateX(-50%);
+    width:14px;height:11px;border-radius:50%;
+    background:radial-gradient(circle,#ffdfae 0%,#ffb46a 55%,rgba(255,160,80,0) 74%);
+    box-shadow:0 0 30px 12px rgba(255,176,96,.28), 0 0 86px 42px rgba(255,150,70,.13)}
+  .lamp--l{left:12%}
+  .lamp--r{right:12%}
+
+  /* ================= table ================= */
+  .table{position:fixed;left:0;right:0;bottom:0;height:44vh;z-index:7;pointer-events:none;
+    background:
+      radial-gradient(70% 90% at 50% -6%, rgba(255,182,108,.22), rgba(255,166,92,.06) 46%, transparent 68%),
+      radial-gradient(40% 60% at 82% 10%, rgba(255,180,110,.10), transparent 70%),
+      linear-gradient(180deg,#48301d 0%,#33200f 14%,#22150c 44%,#180f09 74%,#110a06 100%);
+    box-shadow:inset 0 30px 60px -30px rgba(0,0,0,.95)}
+  .table::before{content:"";position:absolute;inset:0;opacity:.4;
+    background:
+      repeating-linear-gradient(87deg, rgba(255,205,160,.05) 0 1px, transparent 1px 9px),
+      repeating-linear-gradient(3deg, rgba(0,0,0,.22) 0 2px, transparent 2px 34px)}
+  .table::after{content:"";position:absolute;left:0;right:0;top:0;height:96px;
+    background:
+      linear-gradient(90deg,transparent,rgba(255,218,175,.55) 50%,transparent) top/100% 1px no-repeat,
+      radial-gradient(46% 100% at 50% 0%, rgba(255,196,132,.16), transparent 72%)}
+
+  /* coffee cup */
+    .cup{position:fixed;left:max(2px, calc(50% - 712px));bottom:calc(44vh - 120px);z-index:8;width:176px;pointer-events:none;
+    filter:drop-shadow(0 22px 24px rgba(0,0,0,.6))}
+  .cup svg{display:block;width:100%;height:auto;overflow:visible}
+  .steam path{stroke:rgba(255,238,216,.62);stroke-width:2;fill:none;stroke-linecap:round;
+    animation:steam 6s ease-in-out infinite}
+  .steam path:nth-child(2){animation-delay:1.4s;opacity:.75}
+  .steam path:nth-child(3){animation-delay:2.9s;opacity:.55}
+  @keyframes steam{
+    0%{transform:translateY(8px) scaleY(.9);opacity:0}
+    30%{opacity:.6}
+    72%{opacity:.3}
+    100%{transform:translateY(-22px) scaleY(1.06);opacity:0}
+  }
+
+  /* candle */
+  .candle{position:fixed;right:max(6px, calc(50% - 700px));bottom:calc(44vh - 96px);z-index:8;width:104px;pointer-events:none;
+    filter:drop-shadow(0 16px 18px rgba(0,0,0,.6))}
+  .candle svg{display:block;width:100%;height:auto;overflow:visible}
+  .flame{transform-origin:50% 82%;animation:flicker 3.2s ease-in-out infinite}
+  @keyframes flicker{0%,100%{transform:scale(1) rotate(0)}35%{transform:scale(1.06,.96) rotate(1.4deg)}62%{transform:scale(.95,1.05) rotate(-1.2deg)}80%{transform:scale(1.03,.98) rotate(.6deg)}}
+
+  /* ================= top pills ================= */
+  .brand{position:fixed;top:26px;left:26px;z-index:12;display:flex;align-items:center;gap:9px;
+    font-family:var(--serif);font-size:13px;letter-spacing:.2em;color:rgba(247,235,219,.92);
+    text-shadow:0 2px 16px rgba(0,0,0,.8)}
+  .brand .dot{width:5px;height:5px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px 2px rgba(242,178,115,.65)}
+  .sound{position:fixed;top:19px;right:23px;z-index:14;display:inline-flex;align-items:center;gap:10px;
+    padding:9px 14px;border-radius:999px;
+    background:rgba(24,15,10,.6);border:1px solid rgba(255,196,140,.2);
+    color:var(--cream);font-family:var(--sans);font-size:12.5px;
+    backdrop-filter:blur(12px) saturate(120%);cursor:pointer;
+    transition:background .25s,border-color .25s,transform .2s;
+    box-shadow:0 12px 28px -16px rgba(0,0,0,.95)}
+  .sound:hover{background:rgba(46,29,18,.72);border-color:rgba(255,196,140,.42)}
+  .sound:active{transform:scale(.98)}
+  .sound svg{width:16px;height:16px;flex:none;opacity:.85}
+  .sw{position:relative;width:34px;height:19px;border-radius:999px;background:rgba(255,235,215,.13);
+    border:1px solid rgba(255,220,180,.22);transition:background .25s,border-color .25s;flex:none}
+  .sw::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;
+    background:#e6d2bb;transition:transform .25s cubic-bezier(.4,.1,.2,1),background .25s}
+  .sound[aria-pressed="true"] .sw{background:rgba(242,178,115,.34);border-color:rgba(242,178,115,.72)}
+  .sound[aria-pressed="true"] .sw::after{transform:translateX(15px);background:#ffd6a5}
+  .sound .eq{display:inline-flex;align-items:flex-end;gap:2px;height:11px;opacity:0;transition:opacity .3s}
+  .sound .eq i{width:2px;background:var(--amber);border-radius:2px;height:4px;animation:eq 1.1s ease-in-out infinite}
+  .sound .eq i:nth-child(2){animation-delay:.18s}
+  .sound .eq i:nth-child(3){animation-delay:.36s}
+  .sound[aria-pressed="true"] .eq{opacity:.9}
+  @keyframes eq{0%,100%{height:3px}50%{height:10px}}
+
+  /* ================= content ================= */
+  main{position:relative;z-index:10;padding:0 20px 34px}
+  .hero{position:relative;display:flex;flex-direction:column;align-items:center;gap:9px;
+    padding-top:30px;text-align:center;isolation:isolate}
+  .hero::before{content:"";position:absolute;left:50%;top:-60px;transform:translateX(-50%);
+    width:min(900px,100vw);height:360px;z-index:-1;
+    background:radial-gradient(48% 58% at 50% 46%, rgba(5,9,17,.66), rgba(5,9,17,.30) 56%, transparent 78%);
+    filter:blur(4px)}
+  .fortune{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+    max-width:min(760px,94vw);padding:8px 17px;border-radius:999px;
+    background:rgba(18,12,9,.52);border:1px solid rgba(255,196,140,.24);
+    backdrop-filter:blur(10px) saturate(115%);
+    box-shadow:0 14px 30px -22px rgba(0,0,0,.95)}
+  .f-label{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.18em;
+    color:#f6c088;font-weight:700;white-space:nowrap}
+  .f-label svg{width:11px;height:11px}
+  #fortuneText{margin:0;font-size:13.5px;line-height:1.5;color:#f0dfca;transition:opacity .5s}
+  .clock{display:flex;align-items:baseline;justify-content:center;gap:7px;
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(56px,8.2vw,96px);line-height:1;letter-spacing:-.015em;color:#fdf4e8;
+    font-variant-numeric:tabular-nums;
+    text-shadow:0 6px 34px rgba(0,0,0,.7),0 0 60px rgba(255,170,96,.16)}
+  .clock .sec{font-size:.3em;color:#f0b072;letter-spacing:.03em;transform:translateY(-.58em);opacity:.92}
+  .clock .colon{opacity:.45;animation:blink 5s steps(1,end) infinite}
+  @keyframes blink{0%,93%{opacity:.45}97%{opacity:.16}}
+  .date{font-size:clamp(12px,1.25vw,14.5px);letter-spacing:.22em;color:#d9c6b0;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+
+  .deck{width:min(1040px,100%);min-width:0;
+    margin-left:auto;margin-right:auto;
+    margin-top:max(18px, calc(56vh - 188px));
+    display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch}
+  .card{position:relative;min-width:0;border-radius:22px;padding:19px 20px;
+    background:linear-gradient(158deg, rgba(62,40,26,.70), rgba(27,17,11,.86));
+    border:1px solid var(--line);
+    box-shadow:0 28px 48px -28px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,222,182,.11);
+    backdrop-filter:blur(15px) saturate(118%)}
+  .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(80% 100% at 0% 0%, rgba(255,190,120,.10), transparent 58%)}
+  .card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}
+  .card-h h2{margin:0;font-family:var(--serif);font-weight:400;font-size:15px;letter-spacing:.07em;color:#f8ead8}
+
+  .seg{display:inline-flex;gap:3px;padding:3px;border-radius:12px;
+    background:rgba(0,0,0,.34);border:1px solid rgba(255,200,150,.1);margin-bottom:12px}
+  .seg-btn{appearance:none;border:0;background:transparent;color:#ccb29a;cursor:pointer;
+    font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 15px;border-radius:9px;
+    transition:color .2s,background .25s,box-shadow .25s}
+  .seg-btn:hover{color:#f5e3ce}
+  .seg-btn.active{color:#2a1608;background:linear-gradient(180deg,#f2bd80,#cf8b46);
+    box-shadow:0 6px 14px -8px rgba(242,178,115,.95), inset 0 1px 0 rgba(255,255,255,.35)}
+  .search-form{display:flex;align-items:center;gap:8px;
+    background:rgba(8,5,3,.44);border:1px solid rgba(255,205,155,.17);border-radius:15px;
+    padding:5px 5px 5px 14px;transition:border-color .25s,box-shadow .25s,background .25s}
+  .search-form:focus-within{border-color:rgba(242,178,115,.62);box-shadow:0 0 0 3px rgba(242,178,115,.13);background:rgba(8,5,3,.58)}
+  .search-form svg{width:17px;height:17px;flex:none;opacity:.5}
+  .search-form input{flex:1;min-width:0;background:none;border:0;outline:none;
+    font-family:var(--sans);font-size:14.5px;color:#fdf3e6;padding:10px 0}
+  .search-form input::placeholder{color:rgba(230,206,180,.42)}
+  .search-form input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .go{appearance:none;border:0;cursor:pointer;flex:none;display:inline-flex;align-items:center;gap:6px;
+    padding:9px 14px;border-radius:11px;
+    background:linear-gradient(180deg,#f2bd80,#c9823f);color:#2a1608;
+    font-family:var(--sans);font-weight:700;font-size:12.5px;
+    box-shadow:0 8px 18px -10px rgba(242,178,115,.95), inset 0 1px 0 rgba(255,255,255,.35);
+    transition:transform .15s,filter .2s}
+  .go:hover{filter:brightness(1.07)}
+  .go:active{transform:translateY(1px)}
+  .go .k{font-weight:600;opacity:.6;font-size:11px}
+
+  .shortcuts{margin-top:15px}
+  .shortcuts .lbl{font-size:10.5px;letter-spacing:.18em;color:rgba(216,190,164,.55);margin-bottom:8px}
+  .chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+  .chip{display:flex;flex-direction:column;align-items:center;gap:6px;
+    padding:10px 4px 9px;border-radius:14px;text-decoration:none;
+    background:rgba(255,225,190,.055);border:1px solid rgba(255,214,170,.12);
+    color:#f1e0cb;font-size:11px;letter-spacing:.01em;
+    transition:transform .2s,background .25s,border-color .25s,box-shadow .25s}
+  .chip:hover{background:rgba(255,196,130,.15);border-color:rgba(255,196,130,.42);transform:translateY(-3px);
+    box-shadow:0 14px 22px -16px rgba(0,0,0,.95)}
+  .chip:active{transform:translateY(-1px)}
+  .chip .ico{width:22px;height:22px;display:grid;place-items:center;border-radius:8px;background:rgba(0,0,0,.32)}
+  .chip .ico svg{width:15px;height:15px}
+  .chip[data-brand="youtube"] .ico{color:#ff6b6b}
+  .chip[data-brand="prime"] .ico{color:#6fbcff}
+  .chip[data-brand="amazon"] .ico{color:#ffb454}
+  .chip[data-brand="github"] .ico{color:#eae0d4}
+  .chip[data-brand="opgg"] .ico{color:#e79a4a}
+
+  .tip{margin:11px 0 0;font-size:10.5px;letter-spacing:.04em;color:rgba(220,196,168,.5)}
+  .tip kbd{font-family:var(--sans);font-size:10px;padding:1px 5px;border-radius:4px;
+    border:1px solid rgba(255,210,168,.22);background:rgba(0,0,0,.28);color:rgba(240,220,198,.7)}
+  .memo-card{display:flex;flex-direction:column}
+  .memo-card .status{font-size:10.5px;letter-spacing:.06em;color:rgba(220,196,168,.55);
+    display:inline-flex;align-items:center;gap:6px;transition:color .3s}
+  .memo-card .status .led{width:5px;height:5px;border-radius:50%;background:#8f7a63;transition:background .3s,box-shadow .3s}
+  .memo-card .status.saved .led{background:#9ed08a;box-shadow:0 0 8px rgba(158,208,138,.75)}
+  #memo{flex:1;width:100%;min-height:152px;resize:none;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 27px, rgba(255,220,180,.07) 27px 28px) 0 6px,
+      rgba(8,5,3,.36);
+    border:1px solid rgba(255,205,155,.15);border-radius:14px;
+    padding:12px 14px;color:#f9eddd;
+    font-family:var(--sans);font-size:13.5px;line-height:28px;
+    outline:none;transition:border-color .25s,box-shadow .25s;background-attachment:local}
+  #memo::placeholder{color:rgba(226,201,175,.38)}
+  #memo:focus{border-color:rgba(242,178,115,.58);box-shadow:0 0 0 3px rgba(242,178,115,.12)}
+  .memo-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;min-height:20px}
+  .memo-foot .count{font-size:10.5px;letter-spacing:.05em;color:rgba(216,190,164,.45)}
+  .clear-btn{appearance:none;background:none;border:0;cursor:pointer;
+    font-family:var(--sans);font-size:11px;letter-spacing:.06em;color:rgba(230,196,164,.55);
+    padding:4px 6px;border-radius:7px;transition:color .2s,background .2s}
+  .clear-btn:hover{color:#f2b273;background:rgba(242,178,115,.1)}
+  .clear-btn.arming{color:#ffb4a2}
+
+  .foot{width:min(1040px,100%);margin:14px auto 0;text-align:center;
+    font-size:10.5px;letter-spacing:.05em;color:rgba(220,196,170,.55);line-height:1.7}
+  .foot b{color:rgba(242,196,150,.68);font-weight:500}
+
+  .grain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+  .vignette{position:fixed;inset:0;z-index:9;pointer-events:none;
+    box-shadow:inset 0 0 170px 34px rgba(0,0,0,.6), inset 0 0 44px rgba(0,0,0,.38)}
+  :focus-visible{outline:2px solid rgba(242,178,115,.9);outline-offset:3px;border-radius:8px}
+
+  /* ================= responsive ================= */
+  @media (max-width: 1399px) and (min-width: 1200px){
+    .deck{width:min(940px,100%)}
+    .cup{width:118px;left:6px;bottom:calc(44vh - 88px)}
+    .candle{width:82px;right:6px;bottom:calc(44vh - 74px)}
+  }
+  @media (max-width: 1199px){
+    .cup,.candle{display:none}
+  }
+  @media (max-width: 900px){
+    .cup{display:none}
+    .deck{grid-template-columns:1fr;gap:12px;margin-top:max(14px, calc(42vh - 150px))}
+    .table{height:58vh}
+    .frame .mull{bottom:58vh;width:8px}
+    .frame .mull.v1{left:12%}
+    .frame .mull.v2{right:12%}
+    .frame .mull.h1{bottom:calc(58vh - 9px);height:9px}
+    .sill{bottom:58vh;height:10px}
+    .hero{padding-top:38px;gap:7px}
+    main{padding:0 13px 10px}
+    .card{padding:14px 13px;border-radius:19px}
+    #memo{min-height:112px}
+    .shortcuts{margin-top:12px}
+    .chip{padding:9px 2px 8px}
+    .tip{display:none}
+    .sound{top:13px;right:13px;padding:8px 12px;font-size:12px;gap:7px}
+    .brand{top:17px;left:15px;font-size:11.5px;letter-spacing:.13em}
+    .lamp--l{left:5%}
+    .lamp--r{right:5%}
+    .lamp .shade{width:52px;height:29px}
+    .lamp .bulb{width:11px;height:9px}
+    .foot{margin-top:4px;line-height:1.45}
+  }
+  @media (min-width: 601px) and (max-width: 900px){
+    .deck{width:min(680px,100%)}
+    #memo{min-height:150px}
+  }
+  @media (max-width: 430px){
+    .clock{gap:5px}
+    .fortune{padding:8px 13px;gap:7px;border-radius:18px}
+    #fortuneText{font-size:12.5px;line-height:1.45}
+    .chips{gap:6px}
+    .chip{padding:9px 2px 8px;font-size:9.5px;gap:5px}
+    .chip .ico{width:19px;height:19px}
+    .go .k{display:none}
+    .go{padding:9px 13px}
+    .card-h h2{font-size:14px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    .drop{animation:none;top:38%}
+    .drop::after{display:none}
+    .bokeh i{animation:none}
+    .steam path{animation:none;opacity:.32}
+    .sound .eq i{animation:none;height:6px}
+    .flame{animation:none}
+  }
+</style>
+</head>
+<body>
+<h1 class="sr-only">비 오는 밤의 창가 — 나만의 작은 허브</h1>
+
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div>
+  <svg id="skyline" preserveAspectRatio="none"></svg>
+  <canvas id="rain"></canvas>
+  <div class="haze"></div>
+  <div class="bokeh" id="bokeh"></div>
+  <div class="mist"></div>
+  <div class="sheen"></div>
+  <div class="drops" id="drops"></div>
+</div>
+
+<div class="frame" aria-hidden="true">
+  <span class="bar top"></span><span class="bar left"></span><span class="bar right"></span>
+  <span class="mull v1"></span><span class="mull v2"></span><span class="mull h1"></span>
+  <span class="sill"></span>
+</div>
+
+<div class="lamps" aria-hidden="true">
+  <span class="lamp lamp--l" style="--drop:96px"></span>
+  <span class="lamp lamp--r" style="--drop:80px"></span>
+</div>
+
+<div class="table" aria-hidden="true"></div>
+
+<div class="brand" aria-hidden="true"><span class="dot"></span>비 오는 밤의 창가</div>
+
+<button class="sound" id="soundBtn" type="button" aria-pressed="false" aria-label="빗소리 켜기">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+    <path d="M4 14a4 4 0 0 1 1.2-7.8A5 5 0 0 1 15 5.4 4 4 0 0 1 19.8 13"/>
+    <path d="M7 17.5 6 20M12 17.5 11 20M17 17.5 16 20"/>
+  </svg>
+  <span id="soundLabel">빗소리</span>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="sw" aria-hidden="true"></span>
+</button>
+
+<div class="cup" aria-hidden="true">
+  <svg viewBox="0 0 200 176">
+    <defs>
+      <linearGradient id="porcelain" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fffaf2"/><stop offset="50%" stop-color="#f2e4d2"/><stop offset="100%" stop-color="#c2ab93"/>
+      </linearGradient>
+      <linearGradient id="coffeeg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8b5731"/><stop offset="55%" stop-color="#59321a"/><stop offset="100%" stop-color="#391e10"/>
+      </linearGradient>
+      <radialGradient id="saucerg" cx="50%" cy="42%" r="60%">
+        <stop offset="0%" stop-color="#fcf3e5"/><stop offset="100%" stop-color="#b0967d"/>
+      </radialGradient>
+      <filter id="soft2"><feGaussianBlur stdDeviation="6"/></filter>
+    </defs>
+    <ellipse cx="100" cy="156" rx="88" ry="13" fill="rgba(255,183,110,.18)" filter="url(#soft2)"/>
+    <ellipse cx="100" cy="150" rx="72" ry="14" fill="#6d523c" opacity=".55"/>
+    <ellipse cx="100" cy="146" rx="70" ry="13" fill="url(#saucerg)"/>
+    <ellipse cx="100" cy="144" rx="47" ry="8" fill="#d9c4aa" opacity=".8"/>
+    <ellipse cx="100" cy="143" rx="43" ry="6.6" fill="#f7edde"/>
+    <path d="M147 100c23 0 27 31 4 35" fill="none" stroke="url(#porcelain)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M147 100c15 0 18 22 3 25" fill="none" stroke="#b9a086" stroke-width="1.8" opacity=".5"/>
+    <path d="M54 74h92l-8 55c-1.5 10-9.8 17.2-19.8 17.2H82.8C72.8 146.2 64.5 139 63 129L54 74z" fill="url(#porcelain)"/>
+    <path d="M54 74h92l-1.6 11H55.6L54 74z" fill="#fffbf4"/>
+    <path d="M73 88c-2 19-1 39 4 54" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+    <path d="M127 92c3 17 2 34-2 48" fill="none" stroke="rgba(110,84,62,.2)" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="100" cy="76" rx="45" ry="9.6" fill="#341b0e"/>
+    <ellipse cx="100" cy="75.2" rx="43" ry="8.4" fill="url(#coffeeg)"/>
+    <ellipse cx="85" cy="73.4" rx="12" ry="3.2" fill="rgba(255,214,166,.3)"/>
+    <ellipse cx="100" cy="74" rx="46" ry="10" fill="none" stroke="rgba(255,251,242,.92)" stroke-width="2.2"/>
+    <g transform="rotate(-13 160 142)" opacity=".95">
+      <rect x="152" y="120" width="4" height="36" rx="2" fill="#cbb59c"/>
+      <ellipse cx="154" cy="120" rx="7.5" ry="10" fill="#e4d1ba"/>
+      <ellipse cx="154" cy="119" rx="5" ry="7" fill="#f8eee2"/>
+    </g>
+    <g class="steam">
+      <path d="M86 62c-6-8 4-13 0-21s3-12 4-16"/>
+      <path d="M101 59c-5-7 4-11 0-19s3-11 4-15"/>
+      <path d="M116 62c-5-7 4-11 0-19s3-10 3-14"/>
+    </g>
+  </svg>
+</div>
+
+<div class="candle" aria-hidden="true">
+  <svg viewBox="0 0 110 150">
+    <defs>
+      <radialGradient id="flameGlow"><stop offset="0%" stop-color="rgba(255,196,120,.85)"/><stop offset="45%" stop-color="rgba(255,160,80,.28)"/><stop offset="100%" stop-color="rgba(255,150,70,0)"/></radialGradient>
+      <linearGradient id="waxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f4e2c8"/><stop offset="100%" stop-color="#d3b691"/></linearGradient>
+      <linearGradient id="jar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,235,210,.30)"/><stop offset="100%" stop-color="rgba(255,220,180,.12)"/></linearGradient>
+    </defs>
+    <circle cx="55" cy="46" r="52" fill="url(#flameGlow)"/>
+    <rect x="26" y="66" width="58" height="72" rx="10" fill="url(#jar)" stroke="rgba(255,226,190,.35)" stroke-width="1.2"/>
+    <rect x="32" y="92" width="46" height="42" rx="6" fill="url(#waxg)" opacity=".92"/>
+    <ellipse cx="55" cy="92" rx="23" ry="4" fill="#fff5e6" opacity=".85"/>
+    <rect x="53.4" y="72" width="3.2" height="20" fill="#3a2617"/>
+    <g class="flame">
+      <path d="M55 46c7 10 9 16 4 22-5 5-14 2-14-6 0-7 6-11 10-16z" fill="#ffd79a"/>
+      <path d="M55 56c3 5 4 9 1 12-3 3-7 1-7-4 0-4 4-6 6-8z" fill="#fff6e2"/>
+    </g>
+  </svg>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="fortune" title="매일 자정에 새로운 문장으로 바뀝니다">
+      <span class="f-label">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 6.3L21 10l-5.3 4.1L17.6 21 12 17.2 6.4 21l1.9-6.9L3 10l6.8-1.7z"/></svg>
+        오늘의 운세
+      </span>
+      <p id="fortuneText">창밖의 빗소리가 오늘의 복잡한 생각을 조용히 씻어 줄 거예요.</p>
+    </div>
+    <div class="clock" role="timer" aria-label="현재 시각">
+      <span id="hh">22</span><span class="colon">:</span><span id="mm">20</span><span class="sec" id="ss">33</span>
+    </div>
+    <div class="date"><span id="dateText">2026년 11월 19일 목요일</span></div>
+  </header>
+
+  <div class="deck">
+    <section class="card search-card" aria-labelledby="searchTitle">
+      <h2 id="searchTitle" class="sr-only">검색</h2>
+      <div class="seg" role="group" aria-label="검색 엔진 선택">
+        <button class="seg-btn active" type="button" data-engine="google" aria-pressed="true">Google</button>
+        <button class="seg-btn" type="button" data-engine="youtube" aria-pressed="false">YouTube</button>
+      </div>
+
+      <form class="search-form" id="searchForm" role="search" autocomplete="off">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/>
+        </svg>
+        <label class="sr-only" for="q">검색어</label>
+        <input id="q" type="search" name="q" placeholder="Google에서 검색" enterkeyhint="search" autocomplete="off" spellcheck="false">
+        <button class="go" type="submit"><span class="k">Enter</span> 검색</button>
+      </form>
+
+      <div class="shortcuts">
+        <div class="lbl">자주 가는 곳</div>
+        <div class="chips">
+          <a class="chip" data-brand="youtube" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10 15.2V8.8l5.4 3.2z"/></svg></span>
+            YouTube
+          </a>
+          <a class="chip" data-brand="prime" href="https://www.primevideo.com" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M3.6 9.8c2.7 4 5.6 6 8.4 6s5.7-2 8.4-6"/><path d="M17.6 13c1.3.6 2.4.9 3.2.9"/><path d="M4.2 6.2c2.5-1.5 5.1-2.3 7.8-2.3s5.3.8 7.8 2.3" opacity=".5"/></svg></span>
+            Prime
+          </a>
+          <a class="chip" data-brand="amazon" href="https://www.amazon.com" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 8.2c.4-2 2-3.3 3.9-3.3 2.1 0 3.6 1.2 3.6 3.1 0 2.5-2.5 2.8-4 3.5"/><path d="M4.4 18.2c4.7 2.1 10.3 2.1 15 0"/><path d="M16.9 17.3l2.1 1-1.2 1.9"/></svg></span>
+            Amazon
+          </a>
+          <a class="chip" data-brand="github" href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>
+            GitHub
+          </a>
+          <a class="chip" data-brand="opgg" href="https://www.op.gg" target="_blank" rel="noopener noreferrer">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="4.2"/><circle cx="17" cy="15" r="4.2"/><path d="M12.2 12.2 13.8 13.8" opacity=".65"/></svg></span>
+            OP.GG
+          </a>
+        </div>
+      </div>
+      <p class="tip"><kbd>/</kbd> 키를 누르면 검색창에 바로 입력 · Enter로 새 탭에서 열려요</p>
+    </section>
+
+    <section class="card memo-card" aria-labelledby="memoTitle">
+      <div class="card-h">
+        <h2 id="memoTitle">창가 메모</h2>
+        <span class="status" id="memoStatus"><span class="led" aria-hidden="true"></span><span id="memoStatusText">자동 저장</span></span>
+      </div>
+      <label class="sr-only" for="memo">오늘의 메모</label>
+      <textarea id="memo" maxlength="1200" placeholder="오늘 떠오른 생각, 내일 할 일을 적어 두세요."></textarea>
+      <div class="memo-foot">
+        <span class="count" id="memoCount">0자</span>
+        <button class="clear-btn" id="clearMemo" type="button">지우기</button>
+      </div>
+    </section>
+  </div>
+
+  <p class="foot">빗소리는 이 기기에서만 만들어지고, 메모는 <b>이 브라우저에만</b> 저장됩니다 · 운세는 매일 자정에 바뀌어요</p>
+</main>
+
+<div class="vignette" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<script>
+(function () {
+  "use strict";
+  var TZ = "Asia/Seoul";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- clock · date · fortune ---------------- */
+  var FORTUNES = [
+    "창밖의 빗소리가 오늘의 복잡한 생각을 조용히 씻어 줄 거예요.",
+    "미뤄 둔 연락 하나가 따뜻한 소식으로 돌아옵니다.",
+    "따뜻한 한 잔처럼, 작은 여유가 큰 힘이 되는 하루.",
+    "느린 걸음이어도 괜찮아요. 오늘은 방향이 맞습니다.",
+    "오후에 반가운 말 한마디를 듣게 될 것 같아요.",
+    "지금 고민하던 일, 생각보다 가볍게 풀립니다.",
+    "오늘의 우산은 조금 큰 게 좋겠어요. 좋은 일도 함께 들어옵니다.",
+    "마음에 오래 담아 두었던 것을 오늘은 꺼내 보세요.",
+    "집중이 잘 되는 날이에요. 미뤄 둔 일 하나를 끝내기 좋습니다.",
+    "낯선 길에서도 예쁜 것을 발견하는 하루가 되겠네요.",
+    "당신의 다정함이 누군가의 하루를 밝혀 줍니다.",
+    "오늘은 조금 일찍 잠자리에 들면 내일이 더 가벼워져요.",
+    "작은 지출이 큰 만족으로 돌아오는 날입니다.",
+    "고마운 마음을 표현하기 좋은 날이에요.",
+    "기다리던 답이 조용히 도착합니다.",
+    "오늘의 커피는 유난히 맛있을 거예요.",
+    "마음먹은 일, 오늘 시작하면 흐름이 붙습니다.",
+    "비 온 뒤의 공기처럼 생각이 맑아지는 하루.",
+    "누군가에게 건넨 친절이 오늘 당신에게 돌아옵니다.",
+    "잠깐의 멍때림이 좋은 아이디어를 데려옵니다.",
+    "오늘은 평소보다 운이 두 걸음 앞서 있어요.",
+    "서두르지 않아도 늦지 않습니다. 오늘은 그런 날.",
+    "오래 미뤄 둔 정리 하나, 오늘은 잘 풀립니다.",
+    "따뜻한 말 한마디가 관계를 부드럽게 만듭니다.",
+    "오늘 밤의 음악은 유난히 마음에 닿을 거예요.",
+    "작은 계획이 반듯하게 맞아떨어지는 하루입니다.",
+    "몸을 조금 움직이면 기분이 한결 가벼워져요.",
+    "마음속 소원 하나가 조금씩 가까워지고 있어요.",
+    "오늘은 웃음이 자주 나는 하루가 되겠네요.",
+    "당신의 속도로 가도 충분히 잘하고 있습니다."
+  ];
+  var hhEl = document.getElementById("hh");
+  var mmEl = document.getElementById("mm");
+  var ssEl = document.getElementById("ss");
+  var dateEl = document.getElementById("dateText");
+  var fortuneEl = document.getElementById("fortuneText");
+  var lastSeed = "";
+
+  function hashSeed(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function kstParts(now) {
+    var p = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now);
+    var o = {};
+    for (var i = 0; i < p.length; i++) { if (p[i].type !== "literal") o[p[i].type] = p[i].value; }
+    return o;
+  }
+  function setFortune(seed) {
+    if (seed === lastSeed) return;
+    lastSeed = seed;
+    var idx = hashSeed(seed) % FORTUNES.length;
+    fortuneEl.style.opacity = "0";
+    window.setTimeout(function () {
+      fortuneEl.textContent = FORTUNES[idx];
+      fortuneEl.style.opacity = "1";
+    }, reduceMotion ? 0 : 220);
+  }
+  function tick() {
+    var now = new Date();
+    var t = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(now);
+    var s = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, second: "2-digit" }).format(now);
+    var parts = t.split(":");
+    hhEl.textContent = parts[0];
+    mmEl.textContent = parts[1];
+    ssEl.textContent = s;
+    dateEl.textContent = new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(now);
+    var k = kstParts(now);
+    setFortune(k.year + "-" + k.month + "-" + k.day);
+    window.setTimeout(tick, 1000 - now.getMilliseconds() + 12);
+  }
+  tick();
+
+  /* ---------------- city skyline (viewport-relative) ---------------- */
+  var skyline = document.getElementById("skyline");
+  var tableEl = document.querySelector(".table");
+  var bokehWrap = document.getElementById("bokeh");
+  var seed = 20261119;
+  function rnd() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+
+  function buildScene() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var sillY = tableEl.getBoundingClientRect().top;
+    if (!sillY || sillY <= 0) sillY = vh * 0.56;
+    var streetY = sillY - Math.max(24, vh * 0.032);
+    var streetH = Math.max(18, vh * 0.045);
+    seed = 20261119;
+    var out = [];
+    var uid = "g" + vw + "x" + Math.round(vh);
+    out.push('<defs>' +
+      '<linearGradient id="hz' + uid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="rgba(255,160,88,0)"/><stop offset="100%" stop-color="rgba(255,156,84,.36)"/></linearGradient>' +
+      '<linearGradient id="fg' + uid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="rgba(24,38,56,0)"/><stop offset="55%" stop-color="rgba(40,58,80,.5)"/><stop offset="100%" stop-color="rgba(66,88,110,.6)"/></linearGradient>' +
+      '<filter id="bl' + uid + '" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.7"/></filter>' +
+      '<filter id="gl' + uid + '" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4"/></filter>' +
+      '<radialGradient id="lp' + uid + '"><stop offset="0%" stop-color="rgba(255,216,156,.95)"/>' +
+      '<stop offset="34%" stop-color="rgba(255,172,94,.36)"/><stop offset="100%" stop-color="rgba(255,150,70,0)"/></radialGradient>' +
+      '<radialGradient id="shop' + uid + '"><stop offset="0%" stop-color="rgba(255,190,120,.55)"/>' +
+      '<stop offset="55%" stop-color="rgba(255,160,86,.18)"/><stop offset="100%" stop-color="rgba(255,150,70,0)"/></radialGradient>' +
+      '<linearGradient id="st' + uid + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="#0d151f"/><stop offset="55%" stop-color="#080e16"/><stop offset="100%" stop-color="#04070c"/></linearGradient>' +
+      '<linearGradient id="b0' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a3d55"/><stop offset="38%" stop-color="#1b2a3d"/><stop offset="100%" stop-color="#131e2c"/></linearGradient>' +
+      '<linearGradient id="b1' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1b283a"/><stop offset="40%" stop-color="#101b29"/><stop offset="100%" stop-color="#0a1220"/></linearGradient>' +
+      '<linearGradient id="b2' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e1622"/><stop offset="45%" stop-color="#060c15"/><stop offset="100%" stop-color="#03060b"/></linearGradient>' +
+      '</defs>');
+
+    // warm horizon glow behind the buildings
+    out.push('<rect x="0" y="' + (streetY - vh * 0.34) + '" width="' + vw + '" height="' + (vh * 0.36) +
+      '" fill="url(#hz' + uid + ')"/>');
+
+    var layers = [
+      { n: Math.round(vw / 52), minH: vh * .05, maxH: vh * .14, minW: 18, maxW: 48, fill: "#1b2a3d", lit: .14, op: .8, blur: true, base: streetY - 6, win: [255, 202, 142] },
+      { n: Math.round(vw / 66), minH: vh * .075, maxH: vh * .19, minW: 28, maxW: 72, fill: "#101b29", lit: .22, op: 1, blur: false, base: streetY + 1, win: [255, 192, 124] },
+      { n: Math.round(vw / 120), minH: vh * .11, maxH: vh * .26, minW: 46, maxW: 120, fill: "#060c15", lit: .17, op: 1, blur: false, base: streetY + 8, win: [255, 184, 114] }
+    ];
+
+    layers.forEach(function (L, li) {
+      var parts = [];
+      var x = -40 - rnd() * 60;
+      for (var i = 0; i < L.n; i++) {
+        var w = L.minW + rnd() * (L.maxW - L.minW);
+        var h = L.minH + rnd() * (L.maxH - L.minH);
+        if (rnd() < .18) h *= 1.75;
+        if (rnd() < .18) h *= .62;
+        var bx = x, by = L.base - h;
+        parts.push('<rect x="' + bx.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + w.toFixed(1) +
+          '" height="' + (h + streetH + 40).toFixed(1) + '" fill="url(#b' + li + uid + ')" opacity="' + L.op + '"/>' +
+          '<rect x="' + bx.toFixed(1) + '" y="' + by.toFixed(1) + '" width="' + w.toFixed(1) + '" height="1.1" fill="rgba(214,230,250,' + (li === 0 ? '.22' : '.14') + ')"/>');
+        if (rnd() > .55) {
+          parts.push('<rect x="' + (bx + w * .26).toFixed(1) + '" y="' + (by - vh * .013).toFixed(1) + '" width="' +
+            (w * .24).toFixed(1) + '" height="' + (vh * .013).toFixed(1) + '" fill="' + L.fill + '"/>');
+        }
+        if (rnd() > .74) {
+          parts.push('<rect x="' + (bx + w * .62).toFixed(1) + '" y="' + (by - vh * .05).toFixed(1) + '" width="1.6" height="' + (vh * .05).toFixed(1) + '" fill="#1b2739"' + (L.blur ? ' opacity=".8"' : '') + '/>');
+        }
+        var cols = Math.max(2, Math.round(w / 12));
+        var rows = Math.max(3, Math.round(h / 16));
+        for (var c = 0; c < cols; c++) {
+          for (var r = 0; r < rows; r++) {
+            if (rnd() > L.lit) continue;
+            var wx = bx + 4 + c * (w - 7) / cols;
+            var wy = by + 6 + r * (h - 9) / rows;
+            var a = (0.28 + rnd() * 0.6) * (li === 0 ? .65 : 1);
+            parts.push('<rect x="' + wx.toFixed(1) + '" y="' + wy.toFixed(1) + '" width="3.1" height="5" rx=".7" fill="rgba(' +
+              L.win[0] + ',' + L.win[1] + ',' + L.win[2] + ',' + a.toFixed(2) + ')"/>');
+          }
+        }
+        x += w + 3 + rnd() * 15;
+      }
+      out.push(L.blur ? '<g filter="url(#bl' + uid + ')">' + parts.join("") + '</g>' : parts.join(""));
+    });
+
+    // street level
+    out.push('<rect x="0" y="' + streetY.toFixed(1) + '" width="' + vw + '" height="' + (sillY - streetY + 30).toFixed(1) +
+      '" fill="url(#st' + uid + ')"/>');
+    out.push('<rect x="0" y="' + (streetY - 1).toFixed(1) + '" width="' + vw + '" height="1.3" fill="rgba(255,176,108,.20)"/>');
+
+    // hazy fog at the base of the city
+    out.push('<rect x="0" y="' + (streetY - vh * 0.115).toFixed(1) + '" width="' + vw + '" height="' + (vh * 0.15).toFixed(1) +
+      '" fill="url(#fg' + uid + ')" opacity=".38"/>');
+
+    // lit shopfronts at street level
+    [[vw * .055, vh * .052], [vw * .905, vh * .06], [vw * .30, vh * .04]].forEach(function (sp) {
+      out.push('<ellipse cx="' + sp[0].toFixed(1) + '" cy="' + (streetY - 2).toFixed(1) + '" rx="' + (sp[1] * 1.9).toFixed(1) +
+        '" ry="' + sp[1].toFixed(1) + '" fill="url(#shop' + uid + ')"/>');
+    });
+
+    // neon signs
+    var signs = [
+      { x: vw < 700 ? vw * .16 : vw * .045, y: streetY - Math.max(vh * (vw < 700 ? .13 : .105), vw < 700 ? 92 : 0), w: 56, h: 23, c: "255,168,94", t: "카페", r: -1 },
+      { x: vw < 700 ? vw * .70 : vw * .895, y: streetY - vh * .135, w: 64, h: 22, c: "126,208,222", t: "OPEN", r: 1 }
+    ];
+    if (vw >= 700) {
+      signs.push({ x: vw * .185, y: streetY - vh * .072, w: 46, h: 20, c: "255,140,162", t: "書", r: 0 });
+    }
+    signs.forEach(function (s) {
+      out.push('<g opacity=".95" transform="rotate(' + s.r + ' ' + (s.x + s.w / 2) + ' ' + (s.y + s.h / 2) + ')">' +
+        '<rect x="' + (s.x - 6) + '" y="' + (s.y - 6) + '" width="' + (s.w + 12) + '" height="' + (s.h + 12) + '" rx="8" fill="rgba(' + s.c + ',.30)" filter="url(#gl' + uid + ')"/>' +
+        '<rect x="' + s.x + '" y="' + s.y + '" width="' + s.w + '" height="' + s.h + '" rx="4" fill="rgba(' + s.c + ',.16)" stroke="rgba(' + s.c + ',.8)" stroke-width="1.1"/>' +
+        '<text x="' + (s.x + s.w / 2) + '" y="' + (s.y + s.h / 2 + 4.4) + '" text-anchor="middle" font-size="12" letter-spacing="1.3" fill="rgba(' + s.c + ',.98)" font-family="sans-serif">' + s.t + '</text>' +
+        '</g>');
+    });
+
+    // distant antennas with slow red lights
+    [[vw * .33, vh * .16], [vw * .715, vh * .2]].forEach(function (p) {
+      out.push('<rect x="' + p[0].toFixed(1) + '" y="' + (streetY - vh * .22 - p[1]).toFixed(1) + '" width="1.4" height="' + (vh * .1).toFixed(1) + '" fill="#16202e" opacity=".9"/>' +
+        '<circle class="aviation" cx="' + p[0].toFixed(1) + '" cy="' + (streetY - vh * .22 - p[1]).toFixed(1) + '" r="1.8" fill="rgba(255,110,96,.9)"/>');
+    });
+
+    // street lamps
+    var lampX = vw < 700 ? [vw * .07, vw * .93] : [vw * .048, vw * .128, vw * .868, vw * .948];
+    lampX.forEach(function (lx) {
+      var poleTop = streetY - vh * .155;
+      var armX = lx + 20;
+      out.push(
+        '<rect x="' + lx.toFixed(1) + '" y="' + poleTop.toFixed(1) + '" width="2.2" height="' + (sillY - poleTop + 6).toFixed(1) + '" fill="#0a121d"/>' +
+        '<path d="M' + lx.toFixed(1) + ' ' + (poleTop + 2).toFixed(1) + ' q0 -12 20 -12" stroke="#0a121d" stroke-width="2.2" fill="none"/>' +
+        '<circle cx="' + armX.toFixed(1) + '" cy="' + (poleTop - 10).toFixed(1) + '" r="' + Math.max(30, vh * .07).toFixed(1) + '" fill="url(#lp' + uid + ')" opacity=".55"/>' +
+        '<circle cx="' + armX.toFixed(1) + '" cy="' + (poleTop - 10).toFixed(1) + '" r="' + Math.max(12, vh * .024).toFixed(1) + '" fill="url(#lp' + uid + ')"/>' +
+        '<rect x="' + (armX - 5.5).toFixed(1) + '" y="' + (poleTop - 13).toFixed(1) + '" width="12" height="5" rx="2.2" fill="#ffd7a0"/>' +
+        '<ellipse cx="' + armX.toFixed(1) + '" cy="' + (streetY + 7).toFixed(1) + '" rx="' + Math.max(14, vh * .026).toFixed(1) + '" ry="3.8" fill="rgba(255,186,116,.22)"/>'
+      );
+    });
+
+    skyline.setAttribute("viewBox", "0 0 " + vw + " " + vh);
+    skyline.innerHTML = out.join("");
+
+    // bokeh near the street line
+    bokehWrap.innerHTML = "";
+    var palette = ["255,178,98", "255,198,128", "255,152,96", "255,206,150", "150,200,225", "255,150,170"];
+    var count = vw < 640 ? 8 : 14;
+    for (var b = 0; b < count; b++) {
+      var el = document.createElement("i");
+      var size = 24 + Math.random() * (vw < 640 ? 46 : 86);
+      var px = Math.random() * vw;
+      var py = streetY - 8 - Math.random() * vh * 0.22;
+      el.style.left = px.toFixed(0) + "px";
+      el.style.top = py.toFixed(0) + "px";
+      el.style.width = size.toFixed(0) + "px";
+      el.style.height = (size * (0.8 + Math.random() * 0.5)).toFixed(0) + "px";
+      var col = palette[Math.floor(Math.random() * (Math.random() > .2 ? 4 : 6))];
+      el.style.background = "radial-gradient(circle, rgba(" + col + ",.95) 0%, rgba(" + col + ",.4) 46%, rgba(" + col + ",0) 72%)";
+      el.style.setProperty("--op", (0.13 + Math.random() * 0.18).toFixed(2));
+      el.style.setProperty("--blur", (7 + Math.random() * 12).toFixed(0) + "px");
+      el.style.setProperty("--dur", (10 + Math.random() * 9).toFixed(1) + "s");
+      el.style.setProperty("--delay", (-Math.random() * 8).toFixed(1) + "s");
+      el.style.setProperty("--dx", (Math.random() * 14 - 7).toFixed(1) + "px");
+      el.style.setProperty("--dy", (-8 - Math.random() * 10).toFixed(1) + "px");
+      bokehWrap.appendChild(el);
+    }
+  }
+  buildScene();
+
+  /* ---------------- glass droplets ---------------- */
+  var dropsWrap = document.getElementById("drops");
+  var dSeed = 9241;
+  function drnd() { dSeed = (dSeed * 1103515245 + 12345) % 2147483648; return dSeed / 2147483648; }
+  for (var i = 0; i < 26; i++) {
+    var dEl = document.createElement("span");
+    dEl.className = "drop";
+    var size = (3.4 + drnd() * 7).toFixed(1);
+    dEl.style.setProperty("--x", (2 + drnd() * 94).toFixed(2) + "%");
+    dEl.style.setProperty("--s", size + "px");
+    dEl.style.setProperty("--d", (12 + drnd() * 16).toFixed(1) + "s");
+    dEl.style.setProperty("--delay", (-drnd() * 26).toFixed(1) + "s");
+    dEl.style.setProperty("--wob", (4 + drnd() * 10).toFixed(1) + "px");
+    dEl.style.top = (6 + drnd() * 42).toFixed(1) + "%";
+    dropsWrap.appendChild(dEl);
+  }
+
+  /* ---------------- rain canvas ---------------- */
+  var canvas = document.getElementById("rain");
+  var ctx2 = canvas.getContext("2d");
+  var W = 0, H = 0, DPR = 1, rainDrops = [], raf = null, last = 0;
+  var SLOPE = 0.27;
+
+  function rainBottom() {
+    var t = tableEl ? tableEl.getBoundingClientRect().top : window.innerHeight * 0.56;
+    return Math.max(200, t + 8);
+  }
+  function makeDrops() {
+    rainDrops = [];
+    var count = Math.round(Math.min(260, Math.max(70, W / 5.4)));
+    for (var i = 0; i < count; i++) {
+      var depth = Math.random();
+      rainDrops.push({
+        x: Math.random() * (W + 200) - 100,
+        y: Math.random() * H,
+        len: 12 + depth * 42,
+        sp: 520 + depth * 780,
+        w: 0.5 + depth * 1.15,
+        a: 0.10 + depth * 0.26
+      });
+    }
+  }
+  function resizeCanvas() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx2.setTransform(DPR, 0, 0, DPR, 0, 0);
+    makeDrops();
+    if (reduceMotion) drawStatic();
+  }
+  function drawStatic() {
+    var bottom = rainBottom();
+    ctx2.clearRect(0, 0, W, H);
+    ctx2.lineCap = "round";
+    ctx2.save();
+    ctx2.beginPath(); ctx2.rect(0, 0, W, bottom); ctx2.clip();
+    for (var i = 0; i < rainDrops.length; i++) {
+      var d = rainDrops[i];
+      var y = d.y % bottom;
+      ctx2.strokeStyle = "rgba(198,220,255," + (d.a * 0.8).toFixed(3) + ")";
+      ctx2.lineWidth = d.w;
+      ctx2.beginPath();
+      ctx2.moveTo(d.x, y);
+      ctx2.lineTo(d.x - d.len * SLOPE, y - d.len);
+      ctx2.stroke();
+    }
+    ctx2.restore();
+  }
+  function frame(ts) {
+    if (!last) last = ts;
+    var dt = Math.min(0.05, (ts - last) / 1000);
+    last = ts;
+    var bottom = rainBottom();
+    if (H !== window.innerHeight || W !== window.innerWidth) resizeCanvas();
+    ctx2.clearRect(0, 0, W, bottom + 4);
+    ctx2.lineCap = "round";
+    for (var i = 0; i < rainDrops.length; i++) {
+      var d = rainDrops[i];
+      d.y += d.sp * dt;
+      d.x += d.sp * SLOPE * dt;
+      if (d.y - d.len > bottom) {
+        d.y = -d.len - Math.random() * 140;
+        d.x = Math.random() * (W + 200) - 100;
+      }
+      if (d.x > W + 100) d.x = -100;
+      if (d.y < bottom) {
+        ctx2.strokeStyle = "rgba(198,220,255," + d.a.toFixed(3) + ")";
+        ctx2.lineWidth = d.w;
+        ctx2.beginPath();
+        ctx2.moveTo(d.x, d.y);
+        ctx2.lineTo(d.x - d.len * SLOPE, d.y - d.len);
+        ctx2.stroke();
+      }
+    }
+    raf = window.requestAnimationFrame(frame);
+  }
+  resizeCanvas();
+  var rt;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(rt);
+    rt = window.setTimeout(function () {
+      resizeCanvas();
+      buildScene();
+    }, 160);
+  });
+  if (!reduceMotion) {
+    raf = window.requestAnimationFrame(frame);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        if (raf) { window.cancelAnimationFrame(raf); raf = null; last = 0; }
+      } else if (!raf) {
+        raf = window.requestAnimationFrame(frame);
+      }
+    });
+  }
+
+
+  /* ---------------- search ---------------- */
+  var ENGINES = {
+    google: { base: "https://www.google.com/search?q=", ph: "Google에서 검색", label: "Google" },
+    youtube: { base: "https://www.youtube.com/results?search_query=", ph: "YouTube에서 검색", label: "YouTube" }
+  };
+  var engine = "google";
+  var form = document.getElementById("searchForm");
+  var input = document.getElementById("q");
+  var segBtns = document.querySelectorAll(".seg-btn");
+
+  function setEngine(name) {
+    if (!ENGINES[name]) return;
+    engine = name;
+    for (var i = 0; i < segBtns.length; i++) {
+      var on = segBtns[i].getAttribute("data-engine") === name;
+      segBtns[i].classList.toggle("active", on);
+      segBtns[i].setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    input.placeholder = ENGINES[name].ph;
+    input.setAttribute("aria-label", ENGINES[name].label + " 검색어");
+    try { window.localStorage.setItem("rainyCafe.engine", name); } catch (e) {}
+  }
+  Array.prototype.forEach.call(segBtns, function (b) {
+    b.addEventListener("click", function () { setEngine(b.getAttribute("data-engine")); input.focus(); });
+  });
+  try {
+    var savedEngine = window.localStorage.getItem("rainyCafe.engine");
+    if (savedEngine && ENGINES[savedEngine]) setEngine(savedEngine);
+  } catch (e) {}
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var term = input.value.trim();
+    if (!term) { input.focus(); return; }
+    var url = ENGINES[engine].base + encodeURIComponent(term);
+    var w = window.open(url, "_blank");
+    if (w) { try { w.opener = null; } catch (err) {} } else { window.location.href = url; }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== input && document.activeElement !== memo) {
+      e.preventDefault();
+      input.focus();
+    }
+  });
+
+  /* ---------------- memo ---------------- */
+  var memo = document.getElementById("memo");
+  var statusEl = document.getElementById("memoStatus");
+  var statusText = document.getElementById("memoStatusText");
+  var countEl = document.getElementById("memoCount");
+  var clearBtn = document.getElementById("clearMemo");
+  var MEMO_KEY = "rainyCafe.memo.v1";
+  var saveTimer = null, armTimer = null, armed = false;
+
+  function nowLabel() {
+    return new Intl.DateTimeFormat("ko-KR", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date());
+  }
+  function paintCount() { countEl.textContent = memo.value.length + "자"; }
+  function markSaved() { statusEl.classList.add("saved"); statusText.textContent = "저장됨 · " + nowLabel(); }
+  function markTyping() { statusEl.classList.remove("saved"); statusText.textContent = "저장 중…"; }
+  function saveMemo() {
+    try { window.localStorage.setItem(MEMO_KEY, memo.value); markSaved(); }
+    catch (e) { statusEl.classList.remove("saved"); statusText.textContent = "저장할 수 없어요"; }
+  }
+  memo.addEventListener("input", function () {
+    paintCount(); markTyping();
+    window.clearTimeout(saveTimer);
+    saveTimer = window.setTimeout(saveMemo, 320);
+    disarm();
+  });
+  function loadMemo() {
+    try {
+      var v = window.localStorage.getItem(MEMO_KEY);
+      if (v) {
+        memo.value = v; paintCount();
+        statusText.textContent = "불러옴 · " + nowLabel();
+        statusEl.classList.add("saved");
+      }
+    } catch (e) {}
+  }
+  function disarm() {
+    armed = false;
+    clearBtn.classList.remove("arming");
+    clearBtn.textContent = "지우기";
+    window.clearTimeout(armTimer);
+  }
+  clearBtn.addEventListener("click", function () {
+    if (!memo.value) { memo.focus(); return; }
+    if (!armed) {
+      armed = true;
+      clearBtn.classList.add("arming");
+      clearBtn.textContent = "한 번 더 누르면 지워요";
+      armTimer = window.setTimeout(disarm, 3500);
+      return;
+    }
+    memo.value = ""; paintCount();
+    window.clearTimeout(saveTimer);
+    saveMemo(); disarm(); memo.focus();
+  });
+  loadMemo();
+  window.addEventListener("beforeunload", function () {
+    if (saveTimer) { window.clearTimeout(saveTimer); saveMemo(); }
+  });
+
+  /* ---------------- rain sound ---------------- */
+  var soundBtn = document.getElementById("soundBtn");
+  var soundLabel = document.getElementById("soundLabel");
+  var audio = { ctx: null, master: null, buf: null, nodes: [], timer: null, playing: false };
+
+  function makePinkNoise(ac) {
+    var len = Math.floor(ac.sampleRate * 5);
+    var buf = ac.createBuffer(2, len, ac.sampleRate);
+    for (var ch = 0; ch < 2; ch++) {
+      var data = buf.getChannelData(ch);
+      var b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (var i = 0; i < len; i++) {
+        var white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        var pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+        b6 = white * 0.115926;
+        data[i] = pink * 0.075;
+      }
+    }
+    return buf;
+  }
+  function buildRain() {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    if (!audio.ctx) {
+      var ac = new AC();
+      audio.ctx = ac;
+      audio.buf = makePinkNoise(ac);
+      audio.master = ac.createGain();
+      audio.master.gain.value = 0;
+      audio.master.connect(ac.destination);
+
+      var src = ac.createBufferSource();
+      src.buffer = audio.buf; src.loop = true;
+      var hp = ac.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 220; hp.Q.value = 0.4;
+      var lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1500; lp.Q.value = 0.6;
+      var body = ac.createGain(); body.gain.value = 0.85;
+      src.connect(hp); hp.connect(lp); lp.connect(body); body.connect(audio.master);
+
+      var src2 = ac.createBufferSource();
+      src2.buffer = audio.buf; src2.loop = true; src2.playbackRate.value = 1.13;
+      var bp = ac.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 2900; bp.Q.value = 0.5;
+      var hiss = ac.createGain(); hiss.gain.value = 0.16;
+      src2.connect(bp); bp.connect(hiss); hiss.connect(audio.master);
+
+      var lfo = ac.createOscillator(); lfo.type = "sine"; lfo.frequency.value = 0.06;
+      var lfoGain = ac.createGain(); lfoGain.gain.value = 0.045;
+      lfo.connect(lfoGain); lfoGain.connect(audio.master.gain);
+      lfo.start();
+      src.start(); src2.start();
+      audio.nodes = [src, src2, lfo];
+    }
+    return true;
+  }
+  function drip() {
+    var ac = audio.ctx;
+    if (!ac || !audio.playing) return;
+    var t0 = ac.currentTime + 0.02;
+    var len = Math.floor(ac.sampleRate * 0.09);
+    var buf = ac.createBuffer(1, len, ac.sampleRate);
+    var data = buf.getChannelData(0);
+    for (var i = 0; i < len; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2);
+    }
+    var s = ac.createBufferSource(); s.buffer = buf;
+    var f = ac.createBiquadFilter();
+    f.type = "bandpass";
+    f.frequency.value = 1100 + Math.random() * 2300;
+    f.Q.value = 3.5 + Math.random() * 4;
+    var g = ac.createGain(); g.gain.value = 0.05 + Math.random() * 0.06;
+    s.connect(f); f.connect(g); g.connect(audio.master);
+    s.start(t0); s.stop(t0 + 0.12);
+    audio.timer = window.setTimeout(drip, 1400 + Math.random() * 3200);
+  }
+  function setSound(on) {
+    soundBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    soundLabel.textContent = on ? "빗소리 켜짐" : "빗소리";
+    soundBtn.setAttribute("aria-label", on ? "빗소리 끄기" : "빗소리 켜기");
+    audio.playing = on;
+    var ac = audio.ctx;
+    if (!ac || !audio.master) return;
+    var now = ac.currentTime;
+    audio.master.gain.cancelScheduledValues(now);
+    audio.master.gain.setValueAtTime(Math.max(0.0001, audio.master.gain.value), now);
+    if (on) audio.master.gain.linearRampToValueAtTime(0.17, now + 0.9);
+    else audio.master.gain.linearRampToValueAtTime(0.0001, now + 0.7);
+  }
+  soundBtn.addEventListener("click", function () {
+    if (audio.playing) {
+      setSound(false);
+      window.clearTimeout(audio.timer);
+      return;
+    }
+    if (!buildRain()) { soundLabel.textContent = "소리 지원 안 됨"; return; }
+    var ac = audio.ctx;
+    var go = function () {
+      setSound(true);
+      window.clearTimeout(audio.timer);
+      audio.timer = window.setTimeout(drip, 900);
+    };
+    if (ac.state === "suspended") ac.resume().then(go).catch(function () { setSound(true); });
+    else go();
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (!audio.ctx) return;
+    if (document.hidden && audio.playing) audio.ctx.suspend().catch(function () {});
+    else if (!document.hidden && audio.playing) audio.ctx.resume().catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>
