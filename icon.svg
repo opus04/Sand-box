@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="노을진 시티">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#131124"/>
+      <stop offset="0.30" stop-color="#281739"/>
+      <stop offset="0.52" stop-color="#4E2440"/>
+      <stop offset="0.70" stop-color="#8B3C3B"/>
+      <stop offset="0.86" stop-color="#C4653E"/>
+      <stop offset="1" stop-color="#E88C50"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.45" r="0.52">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.34" stop-color="#FFF4D6"/>
+      <stop offset="0.66" stop-color="#FFCB8C"/>
+      <stop offset="1" stop-color="#FFA468"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFC68B" stop-opacity="0.55"/>
+      <stop offset="0.55" stop-color="#FF9C68" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FF9C68" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="city" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B1A32"/>
+      <stop offset="0.55" stop-color="#170F22"/>
+      <stop offset="1" stop-color="#0B0712"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#sky)"/>
+  <circle cx="262" cy="296" r="160" fill="url(#glow)"/>
+  <circle cx="262" cy="296" r="78" fill="url(#sun)"/>
+  <g fill="url(#city)">
+    <path d="M28 512V378h74v-30h56v30h-14v134z"/>
+    <path d="M196 512V300h72v-48h58v48h14v212z"/>
+    <path d="M382 512V352h48v-26h54v26h6v160z"/>
+  </g>
+  <g fill="url(#city)" opacity="0.92">
+    <path d="M0 512v-70h28v70zM158 512v-58h38v58zM340 512v-84h42v84zM490 512v-62h22v62z"/>
+  </g>
+  <g fill="#FFD9A2">
+    <rect x="52" y="404" width="11" height="14" rx="1.6" opacity="0.85"/>
+    <rect x="82" y="430" width="9" height="12" rx="1.6" opacity="0.5"/>
+    <rect x="212" y="318" width="11" height="14" rx="1.6" opacity="0.9"/>
+    <rect x="242" y="352" width="9" height="12" rx="1.6" opacity="0.5"/>
+    <rect x="212" y="392" width="9" height="12" rx="1.6" opacity="0.62"/>
+    <rect x="290" y="378" width="11" height="14" rx="1.6" opacity="0.8"/>
+    <rect x="404" y="382" width="11" height="14" rx="1.6" opacity="0.75"/>
+    <rect x="436" y="412" width="9" height="12" rx="1.6" opacity="0.48"/>
+  </g>
+</svg>
