@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>layout probe</title>
+<style>
+  html,body{margin:0;background:#0a0a0c;color:#ddd;font:12px/1.4 monospace}
+  .row{display:flex;gap:8px;align-items:flex-start}
+  iframe{border:0;background:#000;display:block}
+  #out{position:fixed;left:0;bottom:0;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.82);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
+</style>
+</head>
+<body>
+<div class="row">
+  <iframe id="f1440" src="index.html?probe=1440" width="1440" height="900" title="1440probe"></iframe>
+  <iframe id="f390" src="index.html?probe=390" width="390" height="844" title="390probe"></iframe>
+</div>
+<pre id="out">loading</pre>
+<script>
+var results = {};
+function probe(id){
+  var f = document.getElementById(id);
+  var doc = f.contentDocument, win = f.contentWindow, de = doc.documentElement;
+  try{
+    var hl = doc.getElementById('lmHl');
+    var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
+    var lm = doc.getElementById('lmPanel');
+    var list = doc.getElementById('lmList');
+    var live = doc.getElementById('gmLive');
+    var r = function(el){ var b = el.getBoundingClientRect(); return {top:Math.round(b.top), left:Math.round(b.left), w:Math.round(b.width), h:Math.round(b.height)}; };
+    results[id] = {
+      innerWidth: win.innerWidth,
+      overflowX: de.scrollWidth - de.clientWidth,
+      docScrollWidth: de.scrollWidth,
+      docClientWidth: de.clientWidth,
+      hlHidden: hl ? hl.hidden : 'missing',
+      hlBox: hl ? r(hl) : null,
+      hlScrollW: hl ? hl.scrollWidth : null,
+      hlClientW: hl ? hl.clientWidth : null,
+      listTop: list ? Math.round(list.getBoundingClientRect().top) : null,
+      lmScrollW: lm ? lm.scrollWidth : null,
+      lmClientW: lm ? lm.clientWidth : null,
+      previewBox: pv ? r(pv) : null,
+      previewScrollW: pv ? pv.scrollWidth : null,
+      previewClientW: pv ? pv.clientWidth : null,
+      liveHidden: live ? live.hidden : 'missing',
+      rows: doc.querySelectorAll('#lmList .lm-row').length,
+      state: lm ? lm.getAttribute('data-lm') : null,
+      hlText: hl ? hl.innerText.replace(/\s+/g,' ').slice(0,90) : null
+    };
+  }catch(e){ results[id] = {error:String(e)}; }
+  document.getElementById('out').textContent = JSON.stringify(results);
+}
+function boot(id){
+  var f = document.getElementById(id), doc = f.contentDocument;
+  var btn = doc.getElementById('enterBtn');
+  if(btn){ btn.click(); }
+  setTimeout(function(){
+    var head = doc.querySelector('.panel[data-name="GAMING"] .p-head');
+    if(head){ head.click(); }
+    setTimeout(function(){ probe(id); }, 1400);
+  }, 800);
+}
+document.getElementById('f1440').onload = function(){ boot('f1440'); };
+document.getElementById('f390').onload = function(){ boot('f390'); };
+</script>
+</body>
+</html>
