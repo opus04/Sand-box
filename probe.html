@@ -20,6 +20,7 @@
   var q = new URLSearchParams(location.search);
   var w = parseInt(q.get('w') || '1440', 10);
   var sec = parseInt(q.get('sec') || '1', 10);
+  var theme = q.get('theme') || '';
   var h = w <= 700 ? 844 : 900;
   var wrap = document.getElementById('wrap');
   var rep = document.getElementById('report');
@@ -44,6 +45,10 @@
     setTimeout(function(){
       var enter = d.getElementById('enterBtn');
       if(enter){ enter.click(); }
+      if(theme){
+        var tb = d.querySelector('[data-theme-set="' + theme + '"]');
+        if(tb){ tb.click(); }
+      }
       setTimeout(function(){
         var panels = d.querySelectorAll('.panel');
         if(panels[sec-1]){ panels[sec-1].click(); }
