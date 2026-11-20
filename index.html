@@ -4678,7 +4678,7 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
         var kp = kpOf(m);
         if(kp != null){ kpSum += kp; kpN++; }
         var sec = durSec(m);
-        if(sec && typeof m.cs === 'number'){ csSum += m.cs / (sec / 60); csN++; }
+        if(sec && m.cs != null && m.cs !== '' && !isNaN(m.cs)){ csSum += Number(m.cs) / (sec / 60); csN++; }
       });
       var total = list.length;
       var wr = total ? Math.round(w / total * 100) : 0;
@@ -4705,7 +4705,7 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
       if(!ratio && k != null && a != null && d != null){
         ratio = (d > 0) ? ((k + a) / d).toFixed(2) + ':1' : 'Perfect';
       }
-      var cs = (typeof m.cs === 'number') ? m.cs : null;
+      var cs = (m.cs != null && m.cs !== '' && !isNaN(m.cs)) ? Number(m.cs) : null;
       var cspm = (cs != null && sec) ? (cs / (sec / 60)).toFixed(1) : null;
       var dmg = (me && me.damageToChampions != null) ? kfmt(me.damageToChampions) : null;
       var sub = [queueTxt(m), POS[String(m.position || '').toUpperCase()] || ''].filter(Boolean).join(' · ');
