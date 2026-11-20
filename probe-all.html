@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>probe-all</title>
+<style>
+  html,body{margin:0;background:#0b0b0f;color:#eee;font:12px/1.5 ui-monospace,Menlo,monospace}
+  iframe{border:0;display:block}
+  #report{position:fixed;right:8px;bottom:8px;width:660px;max-height:80vh;overflow:auto;background:rgba(0,0,0,.9);
+          border:1px solid #3a3a46;border-radius:8px;padding:10px 12px;white-space:pre-wrap;z-index:9;font-size:11px}
+</style>
+</head>
+<body>
+<div id="wrap"></div>
+<pre id="report">running…</pre>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var w = parseInt(q.get('w') || '1440', 10);
+  var h = w <= 700 ? 844 : 900;
+  var report = document.getElementById('report');
+  var lines = [];
+
+  var fr = document.createElement('iframe');
+  fr.width = w; fr.height = h; fr.src = 'index.html?probe=' + Date.now();
+  document.getElementById('wrap').appendChild(fr);
+
+  function say(s){ lines.push(s); report.textContent = lines.join('\n'); }
+
+  fr.addEventListener('load', function(){
+    var d = fr.contentDocument, win = fr.contentWindow;
+    var errs = [];
+    win.addEventListener('error', function(e){ errs.push('ERR ' + e.message); });
+    win.addEventListener('unhandledrejection', function(e){ errs.push('REJ ' + e.reason); });
+
+    setTimeout(function(){
+      var enter = d.getElementById('enterBtn');
+      if(enter){ enter.click(); }
+      var n = 1;
+
+      function step(){
+        var closer = d.querySelector('[data-hub]');
+        if(n > 1 && closer){ closer.click(); }
+        setTimeout(function(){
+          var panels = d.querySelectorAll('.panel');
+          if(panels[n-1]){ panels[n-1].click(); }
+          setTimeout(function(){
+            var de = d.documentElement;
+            var vbg = Array.prototype.filter.call(d.querySelectorAll('.vbg'), function(v){
+              return win.getComputedStyle(v).display !== 'none';
+            })[0];
+            var art = vbg ? vbg.querySelector('.v-art') : null;
+            var fx  = vbg ? vbg.querySelector('.v-fx') : null;
+            var ab = art ? art.getBoundingClientRect() : null;
+            var fb = fx ? fx.getBoundingClientRect() : null;
+            var animated = 0;
+            d.querySelectorAll('.v-fx *').forEach(function(el){
+              var cs = win.getComputedStyle(el);
+              if(cs.animationName && cs.animationName !== 'none'){ animated++; }
+            });
+            var sample = '';
+            var probe = d.querySelector('.fx0' + n + (n === 1 ? '-cars-a' : n === 2 ? '-train' : n === 3 ? '-lamp' : n === 4 ? '-plane' : '-str'));
+            if(probe){
+              var cs2 = win.getComputedStyle(probe);
+              sample = (cs2.animationName || 'none') + '/' + cs2.animationDuration + ' op=' + cs2.opacity;
+            }
+            var aligned = (ab && fb) ?
+              (Math.abs(ab.left-fb.left) < 1.5 && Math.abs(ab.width-fb.width) < 1.5 && Math.abs(ab.top-fb.top) < 1.5) : false;
+            say('sec-0' + n +
+                ' | view=' + d.body.getAttribute('data-view') +
+                ' | overflowX=' + (de.scrollWidth > de.clientWidth ? 'YES ' + (de.scrollWidth - de.clientWidth) : '0') +
+                ' (scroll ' + de.scrollWidth + '/client ' + de.clientWidth + ')' +
+                ' | fxLayers=' + d.querySelectorAll('.v-fx').length +
+                ' | animated=' + animated +
+                ' | aligned=' + (aligned ? 'YES' : 'NO') +
+                ' | probe=' + sample);
+            n++;
+            if(n <= 5){ step(); } else { finish(); }
+          }, 750);
+        }, 450);
+      }
+
+      function finish(){
+        var htmlEl = d.querySelector('html');
+        var fx1 = d.querySelector('.vbg-01 .v-fx');
+        htmlEl.classList.add('lite');
+        var liteDisp = win.getComputedStyle(fx1).display;
+        var liteAnim = win.getComputedStyle(d.querySelector('.fx01-cars-a')).animationName;
+        htmlEl.classList.remove('lite');
+        say('lite mode → .v-fx display=' + liteDisp + ', cars animationName=' + liteAnim);
+        say('errors=' + errs.length + (errs.length ? ' :: ' + errs.join(' | ') : ''));
+        say('viewport=' + win.innerWidth + 'x' + win.innerHeight + ' devicePixelRatio=' + win.devicePixelRatio);
+        document.title = 'probe done ' + w;
+      }
+
+      step();
+    }, 900);
+  });
+})();
+</script>
+</body>
+</html>
