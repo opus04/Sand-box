@@ -610,6 +610,26 @@ body[data-screen="main"] .scene-in{opacity:1;visibility:visible}
 .pv::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--sec,var(--gold));box-shadow:0 0 9px color-mix(in srgb,var(--sec,var(--gold)) 62%,transparent)}
 .pv b{font-weight:600;color:#FFF6EC}
 .pv-hint{margin-left:auto;font-size:10.5px;letter-spacing:.02em;color:rgba(255,236,220,.44)}
+/* 02 GAMING — 최신 판 AI 분석 미리보기 (matches.json 연동) */
+.pv-live{
+  --pl:#63A6FF;
+  flex:0 0 100%;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%;
+  font-size:11px;letter-spacing:.01em;color:rgba(240,224,214,.82);
+}
+.pv-live[hidden]{display:none}
+.pv-live[data-res="lose"]{--pl:#FF7C6B}
+.pv-live::before{
+  content:"";flex:0 0 auto;width:5px;height:5px;border-radius:50%;
+  background:var(--pl);box-shadow:0 0 8px color-mix(in srgb,var(--pl) 62%,transparent);
+}
+.pv-live .pv-live-ai{
+  flex:0 0 auto;padding:1px 4px;border-radius:4px;
+  font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+  color:#D8FFF5;border:1px solid rgba(59,240,196,.3);background:rgba(59,240,196,.1);
+}
+.pv-live b{font-weight:600;color:#FFF6EC;white-space:nowrap}
+.pv-live-txt{min-width:0;flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:620px){.pv-live{font-size:10px;gap:5px}.pv-live .pv-live-ai{display:none}}
 
 /* collapsible body */
 .p-body{position:relative;overflow:hidden;height:0;opacity:0;transition:height .44s cubic-bezier(.24,.72,.2,1),opacity .3s ease}
@@ -1807,6 +1827,73 @@ html.lite .lm{background:linear-gradient(158deg,rgba(46,36,68,.66),rgba(16,12,27
 }
 .lm-chip b{font-weight:600;color:#FFEFE2}
 
+/* ---------- 하이라이트: 방금 끝난 판 AI 분석 ---------- */
+.lm-hl{
+  --hl:var(--lm-win);
+  position:relative;margin:0 0 10px;padding:12px 13px 11px;border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--hl) 30%,transparent);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb,var(--hl) 17%,transparent), transparent 62%),
+    linear-gradient(150deg, color-mix(in srgb,var(--hl) 9%,rgba(255,255,255,.03)), rgba(255,255,255,.02));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 18px 40px -34px rgba(0,0,0,.95);
+  overflow:hidden;
+}
+.lm-hl[hidden]{display:none}
+.lm-hl::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--hl),color-mix(in srgb,var(--hl) 18%,transparent) 88%);
+}
+.lm-hl[data-res="lose"]{--hl:var(--lm-lose)}
+.lm-hl[data-res="win"]{--hl:var(--lm-win)}
+.lm-hl-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.lm-hl-badge{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 8px 3px;border-radius:999px;
+  font-size:9.5px;font-weight:600;letter-spacing:.06em;color:#FFF3E4;
+  border:1px solid rgba(255,209,153,.36);
+  background:linear-gradient(135deg,rgba(255,209,153,.22),rgba(239,138,98,.11));
+  white-space:nowrap;
+}
+.lm-hl-badge i{font-style:normal;font-size:9px;line-height:1;color:rgba(255,226,180,.95)}
+.lm-hl-res{
+  display:inline-flex;align-items:center;padding:2px 7px 3px;border-radius:6px;
+  font-size:10px;font-weight:700;letter-spacing:.02em;
+  color:color-mix(in srgb,var(--hl) 28%,#fff);
+  border:1px solid color-mix(in srgb,var(--hl) 55%,transparent);
+  background:color-mix(in srgb,var(--hl) 20%,transparent);
+}
+.lm-hl-when{
+  margin-left:auto;font-family:var(--font-latin);font-size:9px;letter-spacing:.02em;
+  color:rgba(240,224,214,.46);font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.lm-hl-main{display:flex;align-items:flex-end;gap:6px 10px;flex-wrap:wrap;margin:7px 0 0;min-width:0}
+.lm-hl-champ{
+  display:flex;flex-direction:column;gap:1px;min-width:0;max-width:100%;
+  font-size:15.5px;font-weight:700;line-height:1.2;letter-spacing:.01em;color:#FFF6EC;
+}
+.lm-hl-champ em{
+  font-style:normal;font-size:9.5px;font-weight:500;letter-spacing:.02em;
+  color:rgba(236,216,206,.56);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lm-hl-stats{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-left:auto;min-width:0}
+.lm-hl-st{
+  display:inline-flex;align-items:baseline;gap:4px;padding:2px 8px 3px;border-radius:7px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.lm-hl-st b{font-family:var(--font-latin);font-size:11.5px;font-weight:600;color:#FFF3E6}
+.lm-hl-st em{font-style:normal;font-size:8.5px;letter-spacing:.04em;color:rgba(236,216,206,.46)}
+.lm-hl-fb{display:flex;align-items:flex-start;gap:6px;margin:8px 0 0;font-size:11px;line-height:1.62;color:rgba(255,242,232,.82)}
+.lm-hl-fb b{
+  flex:0 0 auto;margin-top:2px;padding:1px 4px;border-radius:4px;
+  font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+  color:#D8FFF5;border:1px solid rgba(59,240,196,.3);background:rgba(59,240,196,.1);
+}
+.lm-hl-fb span{min-width:0;overflow-wrap:anywhere}
+.lm-hl-na{color:rgba(236,216,206,.5)}
+.lm-hl-foot{display:flex;justify-content:flex-end;margin:6px 0 0}
+.lm-hl-link{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;letter-spacing:.02em;color:rgba(240,224,214,.5)}
+.lm-hl-link:hover{color:#FFE9CF}
+
 /* ---------- 전적 목록 ---------- */
 .lm-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
 .lm-row{
@@ -1913,6 +2000,11 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
   .lm-stats .lm-st{flex:1 1 0}
   .lm-stats .lm-st em{font-size:8px}
   .lm-fb{padding:0 9px 8px}
+  .lm-hl{padding:11px 11px 10px}
+  .lm-hl-champ{font-size:14.5px}
+  .lm-hl-stats{margin-left:0;width:100%}
+  .lm-hl-when{margin-left:auto}
+  .lm-hl-fb{font-size:10.5px}
   .lm-detail{padding:8px 9px 10px}
   .lm-dl{grid-template-columns:40px minmax(0,1fr)}
   .lm-name{font-size:13.5px}
@@ -2433,6 +2525,7 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
             <span class="p-toggle" aria-hidden="true"><span class="p-caret">▸</span><span class="p-toggle-txt">펼치기</span></span>
           </span>
           <span class="p-preview" aria-hidden="true">
+            <span class="pv-live" id="gmLive" hidden></span>
             <span class="pv">데바데</span>
             <span class="pv">헬다이버 2</span>
             <span class="pv">림월드</span>
@@ -2509,6 +2602,7 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
           </div>
           <div class="lm-prog" aria-hidden="true"><i id="lmProg"></i></div>
           <div class="lm-strip" id="lmStrip"></div>
+          <article class="lm-hl" id="lmHl" data-res="win" hidden></article>
           <ol class="lm-list" id="lmList">
             <li class="lm-skel" aria-hidden="true"></li>
             <li class="lm-skel" aria-hidden="true"></li>
@@ -4526,6 +4620,8 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
       prog: document.getElementById('lmProg'),
       refresh: document.getElementById('lmRefresh'),
       strip: document.getElementById('lmStrip'),
+      hl: document.getElementById('lmHl'),
+      hubLive: document.getElementById('gmLive'),
       list: document.getElementById('lmList'),
       more: document.getElementById('lmMore'),
       src: document.getElementById('lmSrc'),
@@ -4636,6 +4732,79 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
     }
     function announce(msg){
       if(el.status){ el.status.textContent = msg; }
+    }
+
+    /* ---------------- 최신 판 AI 분석 하이라이트 (허브 미리보기 동기화) ---------------- */
+    function latestInfo(){
+      var m = (data && data.matches && data.matches.length) ? data.matches[0] : null;
+      if(!m){ return null; }
+      var win = String(m.result || '').toUpperCase() === 'WIN';
+      var me = meOf(m);
+      var vis = (me && me.visionScore != null && !isNaN(me.visionScore)) ? Number(me.visionScore) : null;
+      var k = m.kills, d = m.deaths, a = m.assists;
+      var line = (k == null ? '—' : k) + '/' + (d == null ? '—' : d) + '/' + (a == null ? '—' : a);
+      var ratio = m.kda;
+      if(!ratio && k != null && a != null && d != null){
+        ratio = (d > 0) ? ((k + a) / d).toFixed(2) + ':1' : 'Perfect';
+      }
+      var sub = [queueTxt(m), POS[String(m.position || '').toUpperCase()] || ''].filter(Boolean).join(' · ');
+      var sec = durSec(m);
+      var dur = (typeof m.durationLabel === 'string' && m.durationLabel) ? m.durationLabel : (sec ? mmss(sec * 1000) : '');
+      var when = [relTime(m.startedAt), dur].filter(function(x){ return x && x !== '—'; }).join(' · ');
+      return {
+        m: m, win: win, me: me, vis: vis, line: line, ratio: ratio, sub: sub,
+        dur: dur, when: when, fb: feedbackOf(m), champ: String(m.champion || '알 수 없음')
+      };
+    }
+
+    function renderHighlight(){
+      var info = latestInfo();
+      var res = info ? (info.win ? 'win' : 'lose') : '';
+
+      if(el.hl){
+        if(!info){
+          el.hl.hidden = true;
+          el.hl.innerHTML = '';
+        }else{
+          var h = '<div class="lm-hl-top">';
+          h += '<span class="lm-hl-badge"><i aria-hidden="true">✦</i>방금 끝난 판 AI 분석</span>';
+          h += '<span class="lm-hl-res">' + (info.win ? '승리' : '패배') + '</span>';
+          if(info.when){ h += '<span class="lm-hl-when">' + esc(info.when) + '</span>'; }
+          h += '</div>';
+          h += '<div class="lm-hl-main">';
+          h += '<span class="lm-hl-champ">' + esc(info.champ) + (info.sub ? '<em>' + esc(info.sub) + '</em>' : '') + '</span>';
+          h += '<span class="lm-hl-stats">';
+          h += '<span class="lm-hl-st"><b>' + esc(info.line) + '</b><em>' + esc(info.ratio ? info.ratio + ' KDA' : 'KDA') + '</em></span>';
+          if(info.vis != null){ h += '<span class="lm-hl-st"><b>' + esc(info.vis) + '</b><em>시야 점수</em></span>'; }
+          if(info.m.opScore != null){ h += '<span class="lm-hl-st"><b>' + esc(Number(info.m.opScore).toFixed(2)) + '</b><em>OP 스코어</em></span>'; }
+          h += '</span></div>';
+          if(info.fb){
+            h += '<p class="lm-hl-fb"><b>AI</b><span>' + esc(info.fb) + '</span></p>';
+          }else{
+            h += '<p class="lm-hl-fb lm-hl-na"><b>AI</b><span>이 판은 아직 AI 분석이 없습니다. 새 판이 마무리되면 여기에 정리됩니다.</span></p>';
+          }
+          if(info.m.url){
+            h += '<div class="lm-hl-foot"><a class="lm-hl-link" href="' + esc(info.m.url) + '" target="_blank" rel="noopener noreferrer">이 판 자세히 보기 ↗</a></div>';
+          }
+          el.hl.setAttribute('data-res', res);
+          el.hl.innerHTML = h;
+          el.hl.hidden = false;
+        }
+      }
+
+      if(el.hubLive){
+        if(!info){
+          el.hubLive.hidden = true;
+          el.hubLive.innerHTML = '';
+        }else{
+          var tail = info.fb || (info.line + (info.vis != null ? ' · 시야 ' + info.vis : ''));
+          el.hubLive.setAttribute('data-res', res);
+          el.hubLive.innerHTML = '<span class="pv-live-ai" aria-hidden="true">AI</span>' +
+            '<b>' + esc(info.champ + ' ' + (info.win ? '승' : '패') + ' (' + info.line + ')') + '</b>' +
+            '<span class="pv-live-txt"> · ' + esc(tail) + '</span>';
+          el.hubLive.hidden = false;
+        }
+      }
     }
 
     /* ---------------- 렌더 ---------------- */
@@ -4794,6 +4963,7 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
     function renderAll(){
       renderHead();
       renderStrip(((data && data.matches) || []).slice(0, MAX));
+      renderHighlight();
       renderList();
       panel.setAttribute('data-lm', failed ? 'stale' : 'ready');
     }
@@ -4801,6 +4971,8 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
     function renderError(){
       el.list.innerHTML = '<li class="lm-note"><b>전적을 불러오지 못했어요</b>matches.json 응답을 받지 못했습니다. ‘새로고침’을 눌러 다시 시도해 주세요.</li>';
       el.strip.innerHTML = '';
+      if(el.hl){ el.hl.hidden = true; el.hl.innerHTML = ''; }
+      if(el.hubLive){ el.hubLive.hidden = true; el.hubLive.innerHTML = ''; }
       if(el.more){ el.more.hidden = true; }
       el.rank.innerHTML = '<span class="lm-tier is-unranked">솔로랭크 확인 불가</span>';
     }
