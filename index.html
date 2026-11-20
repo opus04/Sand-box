@@ -1680,6 +1680,8 @@ html[data-time="noon"] .vbg .v-vig{background:linear-gradient(180deg,rgba(10,26,
    ============================================================ */
 .vbg .v-fx{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;display:block;pointer-events:none}
 .v-fx .mv{will-change:transform}
+/* 02 는 좁은 화면에서 아트를 4vh 내리는데, 이 규칙이 위 v-art 규칙보다 뒤에 와야 v-fx 가 같은 위치를 유지한다 */
+@media (max-width:700px){.vbg-02 .v-art,.vbg-02 .v-fx{bottom:-4vh}}
 
 @keyframes fxCarA{from{transform:translate3d(-280px,0,0)}to{transform:translate3d(1900px,0,0)}}
 @keyframes fxCarB{from{transform:translate3d(1900px,0,0)}to{transform:translate3d(-280px,0,0)}}
