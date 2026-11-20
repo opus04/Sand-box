@@ -4,7 +4,7 @@
   "platform": "League of Legends",
   "source": "OP.GG 공개 전적",
   "sourceUrl": "https://op.gg/lol/summoners/kr/%EB%8B%AD%EC%9D%B8%EB%8D%B0%EC%9A%94-%EA%BC%AC%EA%BC%AC%EB%8C%81%EA%BC%AC%EA%BC%AC",
-  "updatedAt": "2026-11-21T02:10:53+09:00",
+  "updatedAt": "2026-11-21T02:42:09+09:00",
   "profile": {
     "riotId": "닭인데요#꼬꼬댁꼬꼬",
     "puuid": "cM39xEhM9OuWE3DanwpmtstbTeSi4IcEYFTX4ctJSceWzNxLxjplHTbB39x35PHAQb0HppSHEBpuWQ",
@@ -23,6 +23,397 @@
   },
   "matches": [
     {
+      "matchId": "m_eaDVNbCj8kA9OfF0sCYDBLLc05FjQ9_RMoJK6WOWM=",
+      "startedAt": "2026-11-21T02:37:18+09:00",
+      "queue": "FLEXRANKED",
+      "champion": "Pantheon",
+      "result": "WIN",
+      "kills": 1,
+      "deaths": 2,
+      "assists": 9,
+      "kda": "5.00:1",
+      "cs": 14,
+      "opScore": 5.72,
+      "opScoreRank": 5,
+      "startTimeMs": 1795196238000,
+      "queueName": "Ranked Flex",
+      "map": "SUMMONERS_RIFT",
+      "patch": "16.23",
+      "durationSeconds": 1392,
+      "position": "SUPPORT",
+      "url": "https://op.gg/lol/summoners/kr/%EB%8B%AD%EC%9D%B8%EB%8D%B0%EC%9A%94-%EA%BC%AC%EA%BC%AC%EB%8C%81%EA%BC%AC%EA%BC%AC/matches/m_eaDVNbCj8kA9OfF0sCYDBLLc05FjQ9_RMoJK6WOWM%3D/1795196238000",
+      "build": {
+        "items": [
+          {
+            "id": 3877,
+            "name": "Bloodsong"
+          },
+          {
+            "id": 3009,
+            "name": "Boots of Swiftness"
+          },
+          {
+            "id": 3179,
+            "name": "Umbral Glaive"
+          },
+          {
+            "id": 3133,
+            "name": "Caulfield's Warhammer"
+          },
+          {
+            "id": 1036,
+            "name": "Long Sword"
+          },
+          {
+            "id": 0,
+            "name": ""
+          },
+          {
+            "id": 3364,
+            "name": "Oracle Lens"
+          },
+          {
+            "id": 2055,
+            "name": "Control Ward"
+          }
+        ],
+        "runes": [
+          {
+            "id": 8005,
+            "name": "Press the Attack"
+          },
+          {
+            "id": 8400,
+            "name": "Resolve"
+          }
+        ],
+        "spells": [
+          {
+            "id": 7,
+            "name": "Heal"
+          },
+          {
+            "id": 4,
+            "name": "Flash"
+          }
+        ]
+      },
+      "team": "BLUE",
+      "participants": [
+        {
+          "team": "BLUE",
+          "position": "TOP",
+          "champion": "Sylas",
+          "summoner": "꽃이피고지듯#내껀데요",
+          "level": 16,
+          "kills": 8,
+          "deaths": 4,
+          "assists": 10,
+          "cs": 142,
+          "gold": 10184,
+          "damageToChampions": 27320,
+          "damageTaken": 38166,
+          "visionScore": 19,
+          "wardsPlaced": 9,
+          "wardsKilled": 0,
+          "multiKill": 2,
+          "opScore": 8.337,
+          "opScoreRank": 3,
+          "result": "WIN",
+          "items": [
+            1056,
+            6657,
+            2420,
+            3158,
+            4633,
+            1028
+          ],
+          "trinketItem": 3340
+        },
+        {
+          "team": "BLUE",
+          "position": "JUNGLE",
+          "champion": "Nunu & Willump",
+          "summoner": "청 아#2004",
+          "level": 14,
+          "kills": 10,
+          "deaths": 2,
+          "assists": 8,
+          "cs": 128,
+          "gold": 11015,
+          "damageToChampions": 11852,
+          "damageTaken": 23018,
+          "visionScore": 16,
+          "wardsPlaced": 5,
+          "wardsKilled": 2,
+          "multiKill": 2,
+          "opScore": 8.806,
+          "opScoreRank": 2,
+          "result": "WIN",
+          "items": [
+            3742,
+            6653,
+            3047,
+            3076,
+            1029,
+            0
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "BLUE",
+          "position": "MID",
+          "champion": "Jayce",
+          "summoner": "다 봉#봉봉봉봉",
+          "level": 14,
+          "kills": 5,
+          "deaths": 3,
+          "assists": 7,
+          "cs": 179,
+          "gold": 9681,
+          "damageToChampions": 22091,
+          "damageTaken": 17785,
+          "visionScore": 13,
+          "wardsPlaced": 5,
+          "wardsKilled": 2,
+          "multiKill": 1,
+          "opScore": 6.707,
+          "opScoreRank": 4,
+          "result": "WIN",
+          "items": [
+            2020,
+            3142,
+            1036,
+            3042,
+            1036,
+            3171
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "BLUE",
+          "position": "ADC",
+          "champion": "Jinx",
+          "summoner": "Destiny#KOR",
+          "level": 13,
+          "kills": 9,
+          "deaths": 3,
+          "assists": 11,
+          "cs": 208,
+          "gold": 14341,
+          "damageToChampions": 34404,
+          "damageTaken": 12578,
+          "visionScore": 14,
+          "wardsPlaced": 4,
+          "wardsKilled": 4,
+          "multiKill": 1,
+          "opScore": 10,
+          "opScoreRank": 1,
+          "result": "WIN",
+          "items": [
+            3035,
+            3031,
+            2523,
+            1018,
+            3085,
+            1086
+          ],
+          "trinketItem": 3363
+        },
+        {
+          "team": "BLUE",
+          "position": "SUPPORT",
+          "champion": "Pantheon",
+          "summoner": "닭인데요#꼬꼬댁꼬꼬",
+          "level": 11,
+          "kills": 1,
+          "deaths": 2,
+          "assists": 9,
+          "cs": 14,
+          "gold": 7091,
+          "damageToChampions": 8875,
+          "damageTaken": 13331,
+          "visionScore": 64,
+          "wardsPlaced": 30,
+          "wardsKilled": 3,
+          "multiKill": 1,
+          "opScore": 5.72,
+          "opScoreRank": 5,
+          "result": "WIN",
+          "items": [
+            3877,
+            3009,
+            3179,
+            3133,
+            1036,
+            0
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "RED",
+          "position": "TOP",
+          "champion": "Sion",
+          "summoner": "Arsenal#2526",
+          "level": 15,
+          "kills": 2,
+          "deaths": 8,
+          "assists": 6,
+          "cs": 157,
+          "gold": 8948,
+          "damageToChampions": 20253,
+          "damageTaken": 38744,
+          "visionScore": 14,
+          "wardsPlaced": 6,
+          "wardsKilled": 0,
+          "multiKill": 1,
+          "opScore": 3.96,
+          "opScoreRank": 7,
+          "result": "LOSE",
+          "items": [
+            1054,
+            3076,
+            6664,
+            3047,
+            2502,
+            1031
+          ],
+          "trinketItem": 3340
+        },
+        {
+          "team": "RED",
+          "position": "JUNGLE",
+          "champion": "Talon",
+          "summoner": "점박이는 살아있다#공룡왕",
+          "level": 13,
+          "kills": 7,
+          "deaths": 8,
+          "assists": 2,
+          "cs": 145,
+          "gold": 12207,
+          "damageToChampions": 17727,
+          "damageTaken": 21493,
+          "visionScore": 12,
+          "wardsPlaced": 2,
+          "wardsKilled": 2,
+          "multiKill": 2,
+          "opScore": 4.28,
+          "opScoreRank": 6,
+          "result": "LOSE",
+          "items": [
+            6699,
+            6697,
+            3009,
+            2520,
+            3133,
+            1036
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "RED",
+          "position": "MID",
+          "champion": "Yone",
+          "summoner": "전농 승부사#KR1",
+          "level": 14,
+          "kills": 3,
+          "deaths": 5,
+          "assists": 1,
+          "cs": 186,
+          "gold": 9227,
+          "damageToChampions": 22959,
+          "damageTaken": 23495,
+          "visionScore": 23,
+          "wardsPlaced": 7,
+          "wardsKilled": 3,
+          "multiKill": 1,
+          "opScore": 3.745,
+          "opScoreRank": 8,
+          "result": "LOSE",
+          "items": [
+            1086,
+            2055,
+            6673,
+            3123,
+            3153,
+            3172
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "RED",
+          "position": "ADC",
+          "champion": "Ezreal",
+          "summoner": "한손에보오겸#KR1",
+          "level": 12,
+          "kills": 2,
+          "deaths": 6,
+          "assists": 3,
+          "cs": 172,
+          "gold": 9360,
+          "damageToChampions": 13693,
+          "damageTaken": 19485,
+          "visionScore": 9,
+          "wardsPlaced": 6,
+          "wardsKilled": 0,
+          "multiKill": 2,
+          "opScore": 3.356,
+          "opScoreRank": 9,
+          "result": "LOSE",
+          "items": [
+            1055,
+            3078,
+            3042,
+            2021,
+            0,
+            0
+          ],
+          "trinketItem": 3363
+        },
+        {
+          "team": "RED",
+          "position": "SUPPORT",
+          "champion": "Alistar",
+          "summoner": "심청이메타#KR1",
+          "level": 10,
+          "kills": 0,
+          "deaths": 6,
+          "assists": 6,
+          "cs": 12,
+          "gold": 5460,
+          "damageToChampions": 4184,
+          "damageTaken": 19861,
+          "visionScore": 35,
+          "wardsPlaced": 15,
+          "wardsKilled": 1,
+          "multiKill": 0,
+          "opScore": 2.831,
+          "opScoreRank": 10,
+          "result": "LOSE",
+          "items": [
+            3869,
+            3190,
+            3009,
+            3067,
+            1029,
+            1033
+          ],
+          "trinketItem": 3364
+        }
+      ],
+      "teamKills": {
+        "blue": 33,
+        "red": 14
+      },
+      "killParticipation": 30,
+      "teamGold": {
+        "blue": 52312,
+        "red": 45202
+      },
+      "durationLabel": "23:12",
+      "feedback": "단 2데스만 내주며 그림자 검과 시야 점수 64점(양 팀 1위)으로 맵 장악을 깔끔하게 해낸 승리 판이에요. 상체와 징크스가 23분 만에 경기를 끝내는 데 든든한 발판이 되었고, 궁극기 로밍 합류로 킬관여(30%)만 조금 더 높이면 완벽해요."
+    },
+    {
       "matchId": "m_eaDVNbCj-rQJyRn2Fl_ghKHQPSawNm8K_kIbyXD4I=",
       "startedAt": "2026-11-21T02:09:22+09:00",
       "queue": "FLEXRANKED",
@@ -33,7 +424,7 @@
       "assists": 15,
       "kda": "1.29:1",
       "cs": 39,
-      "opScore": 3.645,
+      "opScore": 3.6,
       "opScoreRank": 9,
       "startTimeMs": 1795194562000,
       "queueName": "Ranked Flex",
