@@ -9,62 +9,99 @@
   html,body{margin:0;background:#0a0a0c;color:#ddd;font:12px/1.4 monospace}
   .row{display:flex;gap:8px;align-items:flex-start}
   iframe{border:0;background:#000;display:block}
-  #out{position:fixed;left:0;bottom:0;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.82);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
+  #out{position:fixed;left:0;bottom:0;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.85);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
 </style>
 </head>
 <body>
 <div class="row">
-  <iframe id="f1440" src="index.html?probe=1440" width="1440" height="900" title="1440probe"></iframe>
-  <iframe id="f390" src="index.html?probe=390" width="390" height="844" title="390probe"></iframe>
+  <iframe id="f1440" width="1440" height="900" title="probe1440"></iframe>
+  <iframe id="f390" width="390" height="844" title="probe390"></iframe>
 </div>
 <pre id="out">loading</pre>
 <script>
 var results = {};
+var HOOK = '<script>window.__err=[];' +
+  'window.addEventListener("error",function(e){var t=e.target;' +
+  'if(t&&t.tagName&&(t.src||t.href)){window.__err.push("resource: "+t.tagName+" "+(t.src||t.href));}' +
+  'else{window.__err.push("error: "+(e.message||"")+" @ "+((e.filename||"").split("/").pop())+":"+e.lineno);}},true);' +
+  'window.addEventListener("unhandledrejection",function(e){window.__err.push("rejection: "+((e.reason&&e.reason.message)||e.reason));});' +
+  '(function(){var ce=console.error,cw=console.warn;' +
+  'console.error=function(){window.__err.push("console.error: "+Array.prototype.slice.call(arguments).join(" "));ce.apply(console,arguments);};' +
+  'console.warn=function(){window.__err.push("console.warn: "+Array.prototype.slice.call(arguments).join(" "));cw.apply(console,arguments);};})();' +
+  '<\/script>';
+
+function box(el){ if(!el) return null; var b=el.getBoundingClientRect(); return {top:Math.round(b.top), left:Math.round(b.left), w:Math.round(b.width), h:Math.round(b.height)}; }
+
 function probe(id){
   var f = document.getElementById(id);
   var doc = f.contentDocument, win = f.contentWindow, de = doc.documentElement;
+  var res = {};
   try{
-    var hl = doc.getElementById('lmHl');
-    var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
     var lm = doc.getElementById('lmPanel');
+    var hl = doc.getElementById('lmHl');
     var list = doc.getElementById('lmList');
+    var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
     var live = doc.getElementById('gmLive');
-    var r = function(el){ var b = el.getBoundingClientRect(); return {top:Math.round(b.top), left:Math.round(b.left), w:Math.round(b.width), h:Math.round(b.height)}; };
-    results[id] = {
-      innerWidth: win.innerWidth,
-      overflowX: de.scrollWidth - de.clientWidth,
-      docScrollWidth: de.scrollWidth,
-      docClientWidth: de.clientWidth,
-      hlHidden: hl ? hl.hidden : 'missing',
-      hlBox: hl ? r(hl) : null,
-      hlScrollW: hl ? hl.scrollWidth : null,
-      hlClientW: hl ? hl.clientWidth : null,
-      listTop: list ? Math.round(list.getBoundingClientRect().top) : null,
-      lmScrollW: lm ? lm.scrollWidth : null,
-      lmClientW: lm ? lm.clientWidth : null,
-      previewBox: pv ? r(pv) : null,
-      previewScrollW: pv ? pv.scrollWidth : null,
-      previewClientW: pv ? pv.clientWidth : null,
-      liveHidden: live ? live.hidden : 'missing',
-      rows: doc.querySelectorAll('#lmList .lm-row').length,
-      state: lm ? lm.getAttribute('data-lm') : null,
-      hlText: hl ? hl.innerText.replace(/\s+/g,' ').slice(0,90) : null
-    };
-  }catch(e){ results[id] = {error:String(e)}; }
-  document.getElementById('out').textContent = JSON.stringify(results);
+    res.w = win.innerWidth;
+    res.errors = win.__err || 'hook missing';
+    res.overflowX = de.scrollWidth - de.clientWidth;
+    res.docScrollW = de.scrollWidth;
+    res.docClientW = de.clientWidth;
+    res.hub_overall_overflowX = results[id + '_hub'] ? results[id + '_hub'].overflowX : null;
+    res.hub = results[id + '_hub'] || null;
+    res.hlHidden = hl ? hl.hidden : 'missing';
+    res.hlBox = box(hl);
+    res.hlScrollW = hl ? hl.scrollWidth : null;
+    res.hlClientW = hl ? hl.clientWidth : null;
+    res.listTop = list ? Math.round(list.getBoundingClientRect().top + win.scrollY) : null;
+    res.hlTopAbs = hl ? Math.round(hl.getBoundingClientRect().top + win.scrollY) : null;
+    res.lmScrollW = lm ? lm.scrollWidth : null;
+    res.lmClientW = lm ? lm.clientWidth : null;
+    res.preview = pv ? {sw: pv.scrollWidth, cw: pv.clientWidth, h: Math.round(pv.getBoundingClientRect().height)} : null;
+    res.rows = doc.querySelectorAll('#lmList .lm-row').length;
+    res.state = lm ? lm.getAttribute('data-lm') : null;
+    res.hlText = hl ? hl.innerText.replace(/\s+/g, ' ').slice(0, 120) : null;
+  }catch(e){ res.error = String(e); }
+  results[id] = res;
+  document.getElementById('out').textContent = JSON.stringify(results, null, 1);
 }
+
+function hubProbe(id){
+  var f = document.getElementById(id);
+  var doc = f.contentDocument, win = f.contentWindow, de = doc.documentElement;
+  var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
+  var live = doc.getElementById('gmLive');
+  var panel = doc.querySelector('.panel[data-name="GAMING"]');
+  results[id + '_hub'] = {
+    overflowX: de.scrollWidth - de.clientWidth,
+    preview: pv ? {sw: pv.scrollWidth, cw: pv.clientWidth, h: Math.round(pv.getBoundingClientRect().height)} : null,
+    panelH: panel ? Math.round(panel.getBoundingClientRect().height) : null,
+    live: live ? {hidden: live.hidden, sw: live.scrollWidth, cw: live.clientWidth, h: Math.round(live.getBoundingClientRect().height), text: live.innerText.replace(/\s+/g, ' ').slice(0, 90)} : 'missing'
+  };
+}
+
 function boot(id){
   var f = document.getElementById(id), doc = f.contentDocument;
   var btn = doc.getElementById('enterBtn');
   if(btn){ btn.click(); }
   setTimeout(function(){
+    try{ hubProbe(id); }catch(e){ results[id + '_hub'] = {error:String(e)}; }
     var head = doc.querySelector('.panel[data-name="GAMING"] .p-head');
     if(head){ head.click(); }
-    setTimeout(function(){ probe(id); }, 1400);
-  }, 800);
+    setTimeout(function(){ probe(id); }, 1500);
+  }, 900);
 }
-document.getElementById('f1440').onload = function(){ boot('f1440'); };
-document.getElementById('f390').onload = function(){ boot('f390'); };
+
+fetch('index.html', {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(html){
+  var page = html.replace('<head>', '<head>' + HOOK);
+  ['f1440', 'f390'].forEach(function(id){
+    var f = document.getElementById(id);
+    f.srcdoc = page;
+    f.onload = function(){ boot(id); };
+  });
+}).catch(function(e){
+  document.getElementById('out').textContent = 'fetch failed: ' + e;
+});
 </script>
 </body>
 </html>
