@@ -7,19 +7,17 @@
 <title>layout probe</title>
 <style>
   html,body{margin:0;background:#0a0a0c;color:#ddd;font:12px/1.4 monospace}
-  .row{display:flex;gap:8px;align-items:flex-start}
   iframe{border:0;background:#000;display:block}
-  body{overflow-x:hidden}
-  #out{margin:8px 0 0;padding:6px 8px;background:rgba(0,0,0,.85);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
+  #out{margin:8px 0 0;padding:6px 8px;background:rgba(0,0,0,.9);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
 </style>
 </head>
 <body>
-<div class="row">
-  <iframe id="f1440" width="1440" height="900" title="probe1440"></iframe>
-  <iframe id="f390" width="390" height="844" title="probe390"></iframe>
-</div>
+<iframe id="f" title="probe"></iframe>
 <pre id="out">loading</pre>
 <script>
+var q = new URLSearchParams(location.search);
+var W = parseInt(q.get('w') || '1440', 10);
+var H = W <= 500 ? 844 : 900;
 var results = {};
 var HOOK = '<script>window.__err=[];' +
   'window.addEventListener("error",function(e){var t=e.target;' +
@@ -31,58 +29,42 @@ var HOOK = '<script>window.__err=[];' +
   'console.warn=function(){window.__err.push("console.warn: "+Array.prototype.slice.call(arguments).join(" "));cw.apply(console,arguments);};})();' +
   '<\/script>';
 
-function box(el){ if(!el) return null; var b=el.getBoundingClientRect(); return {top:Math.round(b.top), left:Math.round(b.left), w:Math.round(b.width), h:Math.round(b.height)}; }
+function box(el){ if(!el) return null; var b = el.getBoundingClientRect(); return {top: Math.round(b.top), left: Math.round(b.left), w: Math.round(b.width), h: Math.round(b.height)}; }
 
-function probe(id){
-  var f = document.getElementById(id);
+var f = document.getElementById('f');
+f.width = W; f.height = H;
+
+function measure(){
   var doc = f.contentDocument, win = f.contentWindow, de = doc.documentElement;
-  var res = {};
-  try{
-    var lm = doc.getElementById('lmPanel');
-    var hl = doc.getElementById('lmHl');
-    var list = doc.getElementById('lmList');
-    var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
-    var live = doc.getElementById('gmLive');
-    res.w = win.innerWidth;
-    res.errors = win.__err || 'hook missing';
-    res.overflowX = de.scrollWidth - de.clientWidth;
-    res.docScrollW = de.scrollWidth;
-    res.docClientW = de.clientWidth;
-    res.hub_overall_overflowX = results[id + '_hub'] ? results[id + '_hub'].overflowX : null;
-    res.hub = results[id + '_hub'] || null;
-    res.hlHidden = hl ? hl.hidden : 'missing';
-    res.hlBox = box(hl);
-    res.hlScrollW = hl ? hl.scrollWidth : null;
-    res.hlClientW = hl ? hl.clientWidth : null;
-    res.listTop = list ? Math.round(list.getBoundingClientRect().top + win.scrollY) : null;
-    res.hlTopAbs = hl ? Math.round(hl.getBoundingClientRect().top + win.scrollY) : null;
-    res.lmScrollW = lm ? lm.scrollWidth : null;
-    res.lmClientW = lm ? lm.clientWidth : null;
-    res.preview = pv ? {sw: pv.scrollWidth, cw: pv.clientWidth, h: Math.round(pv.getBoundingClientRect().height)} : null;
-    res.rows = doc.querySelectorAll('#lmList .lm-row').length;
-    res.state = lm ? lm.getAttribute('data-lm') : null;
-    res.hlText = hl ? hl.innerText.replace(/\s+/g, ' ').slice(0, 120) : null;
-    res.time = de.getAttribute('data-time');
-    var tile = doc.querySelector('.tile');
-    res.tileStyle = tile ? (function(){ var cs = win.getComputedStyle(tile); return {opacity: cs.opacity, bg: cs.backgroundColor, filter: cs.filter}; })() : null;
-    var view = doc.getElementById('v02');
-    res.viewStyle = view ? (function(){ var cs = win.getComputedStyle(view); return {opacity: cs.opacity, transform: cs.transform, overflowY: cs.overflowY}; })() : null;
-  }catch(e){ res.error = String(e); }
-  results[id] = res;
+  var lm = doc.getElementById('lmPanel'), hl = doc.getElementById('lmHl'), list = doc.getElementById('lmList');
+  var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview'), live = doc.getElementById('gmLive');
+  var view = doc.getElementById('v02');
+  results = {
+    w: win.innerWidth, h: win.innerHeight,
+    errors: win.__err || 'hook missing',
+    time: de.getAttribute('data-time'),
+    overflowX_sectionView: de.scrollWidth - de.clientWidth,
+    docScrollW: de.scrollWidth, docClientW: de.clientWidth,
+    hub: results.hub || null,
+    hlHidden: hl ? hl.hidden : 'missing',
+    hlBox: box(hl), hlScrollW: hl ? hl.scrollWidth : null, hlClientW: hl ? hl.clientWidth : null,
+    listTopAbs: list ? Math.round(list.getBoundingClientRect().top + win.scrollY) : null,
+    hlTopAbs: hl ? Math.round(hl.getBoundingClientRect().top + win.scrollY) : null,
+    lmScrollW: lm ? lm.scrollWidth : null, lmClientW: lm ? lm.clientWidth : null,
+    rows: doc.querySelectorAll('#lmList .lm-row').length,
+    state: lm ? lm.getAttribute('data-lm') : null,
+    hlText: hl ? hl.innerText.replace(/\s+/g, ' ').slice(0, 110) : null,
+    viewOpacity: view ? win.getComputedStyle(view).opacity : null
+  };
   document.getElementById('out').textContent = JSON.stringify(results, null, 1);
-  try{
-    var lmEl = doc.getElementById('lmPanel');
-    if(lmEl){ lmEl.scrollIntoView({block: 'start', behavior: 'instant'}); }
-  }catch(e2){}
+  try{ if(lm){ lm.scrollIntoView({block: 'start', behavior: 'instant'}); } }catch(e){}
 }
 
-function hubProbe(id){
-  var f = document.getElementById(id);
-  var doc = f.contentDocument, win = f.contentWindow, de = doc.documentElement;
-  var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview');
-  var live = doc.getElementById('gmLive');
+function hubMeasure(){
+  var doc = f.contentDocument, de = doc.documentElement;
+  var pv = doc.querySelector('.panel[data-name="GAMING"] .p-preview'), live = doc.getElementById('gmLive');
   var panel = doc.querySelector('.panel[data-name="GAMING"]');
-  results[id + '_hub'] = {
+  results.hub = {
     overflowX: de.scrollWidth - de.clientWidth,
     preview: pv ? {sw: pv.scrollWidth, cw: pv.clientWidth, h: Math.round(pv.getBoundingClientRect().height)} : null,
     panelH: panel ? Math.round(panel.getBoundingClientRect().height) : null,
@@ -90,28 +72,20 @@ function hubProbe(id){
   };
 }
 
-function boot(id){
-  var f = document.getElementById(id), doc = f.contentDocument;
-  var btn = doc.getElementById('enterBtn');
-  if(btn){ btn.click(); }
-  setTimeout(function(){
-    try{ hubProbe(id); }catch(e){ results[id + '_hub'] = {error:String(e)}; }
-    var head = doc.querySelector('.panel[data-name="GAMING"] .p-head');
-    if(head){ head.click(); }
-    setTimeout(function(){ probe(id); }, 1500);
-  }, 900);
-}
-
 fetch('index.html', {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(html){
-  var page = html.replace('<head>', '<head>' + HOOK);
-  ['f1440', 'f390'].forEach(function(id){
-    var f = document.getElementById(id);
-    f.srcdoc = page;
-    f.onload = function(){ boot(id); };
-  });
-}).catch(function(e){
-  document.getElementById('out').textContent = 'fetch failed: ' + e;
-});
+  f.srcdoc = html.replace('<head>', '<head>' + HOOK);
+  f.onload = function(){
+    var doc = f.contentDocument;
+    var btn = doc.getElementById('enterBtn');
+    if(btn){ btn.click(); }
+    setTimeout(function(){
+      try{ hubMeasure(); }catch(e){ results.hub = {error: String(e)}; }
+      var head = doc.querySelector('.panel[data-name="GAMING"] .p-head');
+      if(head){ head.click(); }
+      setTimeout(measure, 1600);
+    }, 1000);
+  };
+}).catch(function(e){ document.getElementById('out').textContent = 'fetch failed: ' + e; });
 </script>
 </body>
 </html>
