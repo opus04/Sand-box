@@ -9,7 +9,8 @@
   html,body{margin:0;background:#0a0a0c;color:#ddd;font:12px/1.4 monospace}
   .row{display:flex;gap:8px;align-items:flex-start}
   iframe{border:0;background:#000;display:block}
-  #out{position:fixed;left:0;bottom:0;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.85);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
+  body{overflow-x:hidden}
+  #out{margin:8px 0 0;padding:6px 8px;background:rgba(0,0,0,.85);color:#b6ffd9;white-space:pre-wrap;max-width:100%;font-size:11px}
 </style>
 </head>
 <body>
@@ -61,9 +62,18 @@ function probe(id){
     res.rows = doc.querySelectorAll('#lmList .lm-row').length;
     res.state = lm ? lm.getAttribute('data-lm') : null;
     res.hlText = hl ? hl.innerText.replace(/\s+/g, ' ').slice(0, 120) : null;
+    res.time = de.getAttribute('data-time');
+    var tile = doc.querySelector('.tile');
+    res.tileStyle = tile ? (function(){ var cs = win.getComputedStyle(tile); return {opacity: cs.opacity, bg: cs.backgroundColor, filter: cs.filter}; })() : null;
+    var view = doc.getElementById('v02');
+    res.viewStyle = view ? (function(){ var cs = win.getComputedStyle(view); return {opacity: cs.opacity, transform: cs.transform, overflowY: cs.overflowY}; })() : null;
   }catch(e){ res.error = String(e); }
   results[id] = res;
   document.getElementById('out').textContent = JSON.stringify(results, null, 1);
+  try{
+    var lmEl = doc.getElementById('lmPanel');
+    if(lmEl){ lmEl.scrollIntoView({block: 'start', behavior: 'instant'}); }
+  }catch(e2){}
 }
 
 function hubProbe(id){
