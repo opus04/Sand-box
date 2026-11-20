@@ -5,6 +5,12 @@
 ## 섹션
 01 MEDIA · 02 GAMING · 03 CAMPUS & SCHEDULE(달력·시간표) · 04 D-DAY & TASKS · 05 AI & TOOLS(ChatGPT · Claude)
 
+## 02 GAMING 전적 패널 (RECENT MATCHES)
+- 닭인데요#꼬꼬댁꼬꼬(KR, League of Legends)의 최근 전적·솔로랭크 요약을 `02 GAMING` 화면 안에 표시합니다. 게임 바로가기 카드 7개는 그대로입니다.
+- 데이터는 같은 폴더의 `matches.json`입니다. 화면은 5분(300,000ms)마다 `fetch('matches.json?t=' + Date.now(), {cache:'no-store'})`로 다시 불러오고, 새로고침 버튼·남은 시간 카운트다운을 함께 보여 줍니다. 갱신에 실패하면 1분 뒤 재시도하고, 이미 받아 둔 전적은 그대로 유지합니다.
+- `🎮 닭인데요 게임 전적 알림` 스케줄(5분 주기)이 새 판을 감지하면 `matches.json`을 갱신해 푸시합니다. 판에 `feedback` 문자열이 있으면 AI 한줄평으로 함께 표시합니다.
+- 판을 누르면 아이템·룬·스펠·지표(OP 스코어·시야·골드·받은 피해·팀 킬)가 펼쳐집니다.
+
 ## 섹션별 도시 배경
 - 01 MEDIA — 강변 불빛 다리(현수교 야경·수면 반사) + 루프탑 테라스
 - 02 GAMING — 랜드마크 타워 + 고가 모노레일·젖은 거리 반사

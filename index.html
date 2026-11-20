@@ -1722,6 +1722,203 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
 @media (max-width:620px){.panel.is-nav{padding:14px 15px 13px}}
 
 /* ============================================================
+   RECENT MATCHES — 02 GAMING · 닭인데요#꼬꼬댁꼬꼬 전적 패널
+   (matches.json · 5분=300,000ms 자동 갱신)
+   ============================================================ */
+.lm{
+  --lm-ac:#B49BE6;
+  --lm-tc:#3BF0C4;
+  --lm-win:#63A6FF;
+  --lm-lose:#FF7C6B;
+  --row:var(--lm-ac);
+  position:relative;margin:12px 0 0;padding:14px 15px 13px;
+  border-radius:var(--r-sm);
+  border:1px solid rgba(180,155,230,.20);
+  background:
+    radial-gradient(120% 140% at 4% 0%, rgba(180,155,230,.15), transparent 56%),
+    radial-gradient(90% 120% at 98% 0%, rgba(59,240,196,.08), transparent 60%),
+    linear-gradient(158deg, rgba(52,40,76,.38), rgba(20,15,33,.52) 58%, rgba(14,10,24,.60));
+  box-shadow:inset 0 1px 0 rgba(255,232,204,.07), 0 22px 46px -42px rgba(0,0,0,.95);
+  overflow:hidden;
+}
+html.lite .lm{background:linear-gradient(158deg,rgba(46,36,68,.66),rgba(16,12,27,.76))}
+
+/* ---------- 머리: 소환사 · 랭크 · 갱신 제어 ---------- */
+.lm-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 9px}
+.lm-who{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 230px}
+.lm-icon{
+  position:relative;flex:0 0 auto;width:40px;height:40px;border-radius:11px;overflow:hidden;
+  display:grid;place-items:center;
+  border:1px solid rgba(180,155,230,.32);
+  background:linear-gradient(150deg,rgba(180,155,230,.34),rgba(59,240,196,.18));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 18px -6px rgba(180,155,230,.6);
+}
+.lm-icon img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.lm-icon b{font-family:var(--font-sans);font-size:15px;font-weight:700;line-height:1;color:#FFF6EC}
+.lm-who-txt{min-width:0;display:flex;flex-direction:column;gap:1px}
+.lm-kicker{margin:0;font-family:var(--font-latin);font-size:8.5px;font-weight:700;letter-spacing:.22em;color:color-mix(in srgb,var(--lm-ac) 72%,#fff);opacity:.9}
+.lm-name{margin:1px 0 0;font:inherit;font-size:14.5px;font-weight:700;letter-spacing:.01em;color:#FFF4E8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lm-rank{margin:2px 0 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:10.5px;line-height:1.5;color:rgba(240,224,214,.6);font-variant-numeric:tabular-nums}
+.lm-tier{
+  display:inline-flex;align-items:center;gap:4px;padding:1px 7px 2px;border-radius:999px;
+  font-size:10px;font-weight:600;color:#FFF3DC;
+  border:1px solid rgba(255,209,153,.34);
+  background:linear-gradient(135deg,rgba(255,209,153,.20),rgba(239,138,98,.12));
+}
+.lm-tier.is-unranked{color:rgba(255,240,228,.7);border-color:var(--line-soft);background:rgba(255,255,255,.04)}
+.lm-wr{color:rgba(59,240,196,.9)}
+.lm-side{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:0 0 auto;margin-left:auto}
+.lm-upd{margin:0;font-family:var(--font-latin);font-size:9.5px;letter-spacing:.03em;color:rgba(240,224,214,.52);font-variant-numeric:tabular-nums}
+.lm-ctl{display:flex;align-items:center;gap:6px}
+.lm-refresh{
+  display:inline-flex;align-items:center;gap:5px;height:27px;padding:0 11px;border-radius:999px;
+  border:1px solid rgba(180,155,230,.34);background:rgba(180,155,230,.12);
+  color:#F3E9FF;font-size:11px;letter-spacing:.02em;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.lm-refresh:hover{background:rgba(180,155,230,.22);border-color:rgba(180,155,230,.6)}
+.lm-refresh svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lm-refresh[data-busy="1"]{opacity:.7;pointer-events:none}
+.lm-refresh[data-busy="1"] svg{animation:lmSpin .9s linear infinite}
+@keyframes lmSpin{to{transform:rotate(360deg)}}
+.lm-auto{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;
+  border:1px solid var(--line-soft);background:rgba(255,255,255,.03);
+  font-family:var(--font-latin);font-size:9.5px;letter-spacing:0;color:rgba(240,224,214,.5);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.lm-auto i{width:5px;height:5px;border-radius:50%;background:var(--lm-tc);box-shadow:0 0 8px rgba(59,240,196,.75)}
+.lm-auto b{font-weight:600;letter-spacing:.02em;color:rgba(236,255,250,.82)}
+.lm[data-lm="stale"] .lm-auto i{background:var(--lm-lose);box-shadow:0 0 8px rgba(255,124,107,.7)}
+.lm-prog{position:relative;height:2px;margin:0 0 10px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden}
+.lm-prog i{display:block;width:0;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--lm-ac),var(--lm-tc));transition:width 1s linear}
+
+/* ---------- 요약: 최근 흐름 + 평균 지표 ---------- */
+.lm-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 9px;min-height:16px}
+.lm-form{display:inline-flex;align-items:center;gap:3px;flex:0 0 auto}
+.lm-form i{display:block;width:15px;height:6px;border-radius:2px;background:rgba(255,255,255,.1)}
+.lm-form i.w{background:var(--lm-win);box-shadow:0 0 7px rgba(99,166,255,.55)}
+.lm-form i.l{background:var(--lm-lose);box-shadow:0 0 7px rgba(255,124,107,.45)}
+.lm-chips{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-left:auto}
+.lm-chip{
+  padding:2px 8px 3px;border-radius:999px;border:1px solid var(--line-soft);background:rgba(255,255,255,.035);
+  font-size:9.5px;letter-spacing:.01em;color:rgba(240,224,214,.55);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.lm-chip b{font-weight:600;color:#FFEFE2}
+
+/* ---------- 전적 목록 ---------- */
+.lm-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.lm-row{
+  position:relative;border-radius:10px;border:1px solid rgba(255,255,255,.055);background:rgba(255,255,255,.026);
+  transition:border-color .2s ease,background .2s ease;
+}
+.lm-row.is-win{--row:var(--lm-win);border-color:rgba(99,166,255,.22);background:linear-gradient(90deg,rgba(99,166,255,.11),rgba(255,255,255,.022) 42%)}
+.lm-row.is-lose{--row:var(--lm-lose);border-color:rgba(255,124,107,.20);background:linear-gradient(90deg,rgba(255,124,107,.10),rgba(255,255,255,.022) 42%)}
+.lm-row:hover{border-color:color-mix(in srgb,var(--row) 44%,transparent)}
+.lm-row-main{
+  display:grid;align-items:center;width:100%;gap:9px;padding:8px 10px;
+  grid-template-columns:26px minmax(0,1.05fr) repeat(4,minmax(0,.8fr)) auto 12px;
+  border:0;border-radius:inherit;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;
+}
+.lm-row-main:focus-visible{outline:2px solid rgba(255,209,153,.66);outline-offset:-2px}
+.lm-res{
+  display:grid;place-items:center;width:26px;height:24px;border-radius:7px;
+  font-family:var(--font-latin);font-size:10px;font-weight:700;letter-spacing:.02em;
+  color:color-mix(in srgb,var(--row) 26%,#fff);
+  border:1px solid color-mix(in srgb,var(--row) 52%,transparent);
+  background:color-mix(in srgb,var(--row) 20%,transparent);
+}
+.lm-champ{display:flex;flex-direction:column;gap:1px;min-width:0}
+.lm-champ b{font-size:12.5px;font-weight:600;color:#FFF3E6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lm-champ em{font-style:normal;font-size:9.5px;color:rgba(236,216,206,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lm-stats{display:contents}
+.lm-st{display:flex;flex-direction:column;gap:0;min-width:0}
+.lm-st b{font-family:var(--font-latin);font-size:11.5px;font-weight:600;color:#FFF1E4;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lm-st em{font-style:normal;font-size:8.5px;letter-spacing:.04em;color:rgba(236,216,206,.42);white-space:nowrap}
+.lm-st.is-na b{color:rgba(236,216,206,.32)}
+.lmt{align-items:flex-end;text-align:right}
+.lm-caret{font-size:8px;line-height:1;color:rgba(240,224,214,.4);text-align:right;transition:transform .3s ease}
+.lm-row-main[aria-expanded="true"] .lm-caret{transform:rotate(180deg)}
+.lm-fb{display:flex;align-items:flex-start;gap:6px;margin:0;padding:0 10px 8px 45px;font-size:10.5px;line-height:1.55;color:rgba(255,240,228,.74)}
+.lm-fb b{
+  flex:0 0 auto;margin-top:1px;padding:1px 4px;border-radius:4px;
+  font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+  color:#D8FFF5;border:1px solid rgba(59,240,196,.3);background:rgba(59,240,196,.1);
+}
+.lm-detail{padding:8px 10px 10px 45px;border-top:1px solid rgba(255,255,255,.05)}
+.lm-detail[hidden]{display:none}
+.lm-dl{display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px 8px;margin:0;align-items:start}
+.lm-dl dt{font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.12em;color:rgba(236,216,206,.38);padding-top:3px}
+.lm-dl dd{margin:0;display:flex;flex-wrap:wrap;gap:4px}
+.lm-tag{
+  display:inline-flex;align-items:center;padding:2px 7px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.045);
+  font-size:9.5px;color:rgba(255,240,228,.78);font-variant-numeric:tabular-nums;
+}
+.lm-tag.k{color:rgba(255,214,176,.9);border-color:rgba(255,209,153,.18);background:rgba(255,209,153,.07)}
+.lm-na{margin:0;font-size:9.5px;line-height:1.6;color:rgba(236,216,206,.4)}
+.lm-link{display:inline-flex;align-items:center;gap:3px;margin-top:6px;font-size:9.5px;letter-spacing:.02em;color:rgba(240,224,214,.5)}
+.lm-link:hover{color:#FFE9CF}
+
+/* ---------- 로딩 · 오류 · 더 보기 ---------- */
+.lm-skel{
+  height:38px;border-radius:10px;
+  background:linear-gradient(100deg,rgba(255,255,255,.045),rgba(255,255,255,.10),rgba(255,255,255,.045));
+  background-size:240% 100%;animation:lmSweep 1.6s linear infinite;
+}
+@keyframes lmSweep{from{background-position:120% 0}to{background-position:-40% 0}}
+html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
+.lm-note{
+  margin:0;padding:16px 12px;border-radius:10px;text-align:center;
+  border:1px dashed rgba(255,209,153,.22);background:rgba(255,209,153,.05);
+  font-size:11px;line-height:1.6;color:rgba(255,236,220,.66);
+}
+.lm-note b{display:block;margin-bottom:2px;font-weight:600;color:#FFEBD8}
+.lm-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.lm-more{
+  height:26px;padding:0 12px;border-radius:999px;
+  border:1px solid rgba(180,155,230,.3);background:rgba(180,155,230,.1);
+  color:#F2E9FF;font-size:10.5px;letter-spacing:.01em;
+  transition:background .2s,border-color .2s;
+}
+.lm-more:hover{background:rgba(180,155,230,.2);border-color:rgba(180,155,230,.55)}
+.lm-src{margin-left:auto;font-size:9.5px;letter-spacing:.05em;color:rgba(240,224,214,.45)}
+.lm-src:hover{color:#FFE9CF}
+.lm-status{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+@media (prefers-reduced-motion:reduce){
+  .lm-skel{animation:none}
+  .lm-caret,.lm-prog i{transition:none}
+  .lm-refresh[data-busy="1"] svg{animation:none}
+}
+
+/* ---------- 좁은 화면 ---------- */
+@media (max-width:860px){
+  .lm-row-main{grid-template-columns:24px minmax(0,1.2fr) repeat(4,minmax(0,.7fr)) auto;gap:7px}
+  .lm-caret{display:none}
+}
+@media (max-width:620px){
+  .lm{padding:12px 11px 11px;margin-top:10px}
+  .lm-who{flex:1 1 100%}
+  .lm-side{flex-direction:row;align-items:center;justify-content:space-between;width:100%;margin-left:0;gap:8px;flex-wrap:wrap}
+  .lm-ctl{order:1}
+  .lm-upd{order:2}
+  .lm-chips{margin-left:0;width:100%}
+  .lm-row-main{grid-template-columns:24px minmax(0,1fr) auto;gap:5px 8px;padding:8px 9px}
+  .lm-res{grid-row:1;grid-column:1}
+  .lm-champ{grid-row:1;grid-column:2}
+  .lmt{grid-row:1;grid-column:3}
+  .lm-stats{display:flex;grid-row:2;grid-column:1/-1;gap:8px;justify-content:space-between;margin-top:1px}
+  .lm-stats .lm-st{flex:1 1 0}
+  .lm-stats .lm-st em{font-size:8px}
+  .lm-fb{padding:0 9px 8px}
+  .lm-detail{padding:8px 9px 10px}
+  .lm-dl{grid-template-columns:40px minmax(0,1fr)}
+  .lm-name{font-size:13.5px}
+}
+
+/* ============================================================
    MINI CALENDAR (허브) — 메인에서도 일정이 바로 보인다
    ============================================================ */
 .mcal{
@@ -2285,6 +2482,44 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
             <div class="t-body"><b>OP.GG</b><span>롤 · 발로란트 전적 검색</span></div>
           </a>
         </div>
+
+        <!-- RECENT MATCHES · 닭인데요#꼬꼬댁꼬꼬 (matches.json · 5분 자동 갱신) -->
+        <section class="lm" id="lmPanel" data-lm="loading" aria-labelledby="lmTitle">
+          <div class="lm-head">
+            <div class="lm-who">
+              <span class="lm-icon" aria-hidden="true"><b>닭</b><img id="lmIcon" alt="" width="40" height="40" hidden></span>
+              <div class="lm-who-txt">
+                <p class="lm-kicker">RECENT MATCHES</p>
+                <h3 class="lm-name" id="lmTitle">닭인데요#꼬꼬댁꼬꼬</h3>
+                <p class="lm-rank" id="lmRank"><span class="lm-tier is-unranked">솔로랭크 불러오는 중</span></p>
+              </div>
+            </div>
+            <div class="lm-side">
+              <p class="lm-upd" id="lmUpd">최근 갱신 확인 중</p>
+              <div class="lm-ctl">
+                <button class="lm-refresh" id="lmRefresh" type="button" aria-label="전적 새로고침">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 12a8.4 8.4 0 1 1-2.5-6"/><path d="M20.4 4.2v4.4h-4.4"/></svg>
+                  <span>새로고침</span>
+                </button>
+                <span class="lm-auto" id="lmAuto" title="5분(300,000ms)마다 자동으로 최신 전적을 다시 불러옵니다">
+                  <i aria-hidden="true"></i><span id="lmAutoTxt">5분 자동 · </span><b id="lmCount">05:00</b>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="lm-prog" aria-hidden="true"><i id="lmProg"></i></div>
+          <div class="lm-strip" id="lmStrip"></div>
+          <ol class="lm-list" id="lmList">
+            <li class="lm-skel" aria-hidden="true"></li>
+            <li class="lm-skel" aria-hidden="true"></li>
+            <li class="lm-skel" aria-hidden="true"></li>
+          </ol>
+          <div class="lm-foot">
+            <button class="lm-more" id="lmMore" type="button" hidden>전체 전적 보기</button>
+            <a class="lm-src" id="lmSrc" href="https://www.op.gg" target="_blank" rel="noopener noreferrer">OP.GG 원본 ↗</a>
+            <p class="lm-status" id="lmStatus" role="status" aria-live="polite"></p>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -4265,6 +4500,405 @@ html.lite .view-body{background:linear-gradient(158deg,rgba(24,18,34,.97),rgba(1
       navigator.serviceWorker.register('sw.js').catch(function(){});
     });
   }
+
+  /* ============================================================
+     RECENT MATCHES — 02 GAMING 전적 판넴 (닭인데요#꼬꼬댁꼬꼬)
+     matches.json 을 5분(300,000ms)마다 다시 불러와 그립니다.
+     ============================================================ */
+  (function recentMatches(){
+    'use strict';
+    var panel = document.getElementById('lmPanel');
+    if(!panel){ return; }
+
+    var SRC = 'matches.json';
+    var INTERVAL = 300000;   /* 5분 자동 갱신 */
+    var RETRY = 60000;       /* 실패하면 1분 뒤 다시 시도 */
+    var FIRST = 5;           /* 기본으로 보여 줄 판 수 */
+    var MAX = 9;             /* 최근 9판까지 */
+
+    var el = {
+      icon: document.getElementById('lmIcon'),
+      title: document.getElementById('lmTitle'),
+      rank: document.getElementById('lmRank'),
+      upd: document.getElementById('lmUpd'),
+      count: document.getElementById('lmCount'),
+      autoTxt: document.getElementById('lmAutoTxt'),
+      prog: document.getElementById('lmProg'),
+      refresh: document.getElementById('lmRefresh'),
+      strip: document.getElementById('lmStrip'),
+      list: document.getElementById('lmList'),
+      more: document.getElementById('lmMore'),
+      src: document.getElementById('lmSrc'),
+      status: document.getElementById('lmStatus')
+    };
+    if(!el.list){ return; }
+
+    var data = null;
+    var busy = false;
+    var failed = false;
+    var nextAt = Date.now() + INTERVAL;
+    var showAll = false;
+    var openIds = {};
+
+    var QUEUE = {
+      SOLORANKED:'솔로랭크', RANKED_SOLO_5X5:'솔로랭크', RANKED_SOLO:'솔로랭크',
+      FLEX:'자유랭크', RANKED_FLEX_SR:'자유랭크', RANKED_FLEX:'자유랭크',
+      ARAM:'칼바람 나락', ARAM_5X5:'칼바람 나락',
+      NORMAL:'일반', NORMAL_DRAFT:'일반', NORMAL_BLIND:'일반', DRAFT:'일반',
+      CLASH:'격돌', URF:'URF'
+    };
+    var POS = { TOP:'탑', JUNGLE:'정글', MID:'미드', MIDDLE:'미드', ADC:'원거리', BOTTOM:'원거리', SUPPORT:'서포터', UTILITY:'서포터' };
+    var TIER = { iron:'아이언', bronze:'브론즈', silver:'실버', gold:'골드', platinum:'플래티넘', emerald:'에메랄드', diamond:'다이아몬드', master:'마스터', grandmaster:'그랜드마스터', challenger:'챌린저' };
+
+    /* ---------------- helpers ---------------- */
+    function esc(v){
+      return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+    function pad2(n){ return (n < 10 ? '0' : '') + n; }
+    function mmss(ms){
+      var s = Math.ceil(Math.max(0, ms) / 1000);
+      return pad2(Math.floor(s / 60)) + ':' + pad2(s % 60);
+    }
+    function kfmt(v){
+      if(v == null || v === '' || isNaN(v)){ return null; }
+      var n = Number(v);
+      if(n >= 1000){ return (n / 1000).toFixed(1) + 'k'; }
+      return String(Math.round(n));
+    }
+    function durSec(m){
+      if(typeof m.durationSeconds === 'number' && m.durationSeconds > 0){ return m.durationSeconds; }
+      var s = m.durationLabel;
+      if(typeof s === 'string' && /^\d{1,3}:\d{2}$/.test(s)){
+        var p = s.split(':');
+        return (Number(p[0]) * 60) + Number(p[1]);
+      }
+      return null;
+    }
+    function meOf(m){
+      var list = m.participants || [], i, p, me = (data && data.riotId) || '';
+      for(i = 0; i < list.length; i++){
+        p = list[i] || {};
+        if(me && p.summoner === me){ return p; }
+      }
+      for(i = 0; i < list.length; i++){
+        p = list[i] || {};
+        if(p.team === m.team && p.champion === m.champion){ return p; }
+      }
+      return null;
+    }
+    function kpOf(m){
+      if(typeof m.killParticipation === 'number'){ return Math.round(m.killParticipation); }
+      var tk = m.teamKills;
+      if(tk && (m.team === 'RED' || m.team === 'BLUE')){
+        var total = Number(m.team === 'RED' ? tk.red : tk.blue);
+        var k = (Number(m.kills) || 0) + (Number(m.assists) || 0);
+        if(total > 0){ return Math.round(k / total * 100); }
+      }
+      return null;
+    }
+    function queueTxt(m){
+      var q = String(m.queue || '').toUpperCase();
+      if(QUEUE[q]){ return QUEUE[q]; }
+      if(m.queueName){ return String(m.queueName); }
+      return q;
+    }
+    function relTime(iso){
+      var t = Date.parse(iso);
+      if(isNaN(t)){ return '—'; }
+      var diff = Date.now() - t;
+      if(diff < 0){ diff = 0; }
+      var min = Math.floor(diff / 60000);
+      if(min < 1){ return '방금 전'; }
+      if(min < 60){ return min + '분 전'; }
+      var h = Math.floor(min / 60);
+      if(h < 24){ return h + '시간 전'; }
+      var d = Math.floor(h / 24);
+      if(d < 7){ return d + '일 전'; }
+      if(d < 30){ return Math.floor(d / 7) + '주 전'; }
+      return Math.floor(d / 30) + '개월 전';
+    }
+    function stampOf(iso){
+      if(typeof iso === 'string' && iso.length >= 16 && iso.charAt(4) === '-'){
+        return iso.slice(5, 7) + '.' + iso.slice(8, 10) + ' ' + iso.slice(11, 16);
+      }
+      var t = Date.parse(iso);
+      if(isNaN(t)){ return ''; }
+      var d = new Date(t);
+      return pad2(d.getMonth() + 1) + '.' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+    }
+    function feedbackOf(m){
+      var f = m.feedback;
+      if(Array.isArray(f)){ f = f.join(' '); }
+      if(typeof f !== 'string'){ return ''; }
+      return f.replace(/\s+/g, ' ').trim();
+    }
+    function announce(msg){
+      if(el.status){ el.status.textContent = msg; }
+    }
+
+    /* ---------------- 렌더 ---------------- */
+    function renderHead(){
+      var p = (data && data.profile) || {};
+      var r = p.soloRank || {};
+      var tierName = TIER[String(r.tier || '').toLowerCase()] || (r.tier ? String(r.tier) : '');
+      var html = '';
+      if(tierName){
+        var div = (r.division && !/^(master|grandmaster|challenger)$/i.test(String(r.tier))) ? ' ' + r.division : '';
+        var lp = (typeof r.lp === 'number') ? ' · ' + r.lp + ' LP' : '';
+        html += '<span class="lm-tier">솔로랭크 ' + esc(tierName + div + lp) + '</span>';
+        if(r.wins != null && r.losses != null){ html += '<span>' + esc(r.wins + '승 ' + r.losses + '패') + '</span>'; }
+        if(typeof r.winRate === 'number'){ html += '<span class="lm-wr">승률 ' + esc(r.winRate) + '%</span>'; }
+      }else{
+        html += '<span class="lm-tier is-unranked">솔로랭크 기록 없음</span>';
+      }
+      el.rank.innerHTML = html;
+
+      if(el.title && data && data.riotId){ el.title.textContent = data.riotId; }
+      if(el.src && data && data.sourceUrl){ el.src.href = data.sourceUrl; }
+      if(el.icon && p.profileIcon && el.icon.getAttribute('src') !== p.profileIcon){
+        el.icon.onload = function(){ el.icon.hidden = false; };
+        el.icon.onerror = function(){ el.icon.hidden = true; };
+        el.icon.src = p.profileIcon;
+      }
+    }
+
+    function renderStrip(list){
+      if(!list.length){ el.strip.innerHTML = ''; return; }
+      var w = 0, l = 0, kd = 0, kdn = 0, kpSum = 0, kpN = 0, csSum = 0, csN = 0;
+      var form = '';
+      list.forEach(function(m){
+        var win = String(m.result || '').toUpperCase() === 'WIN';
+        if(win){ w++; } else { l++; }
+        form += '<i class="' + (win ? 'w' : 'l') + '"></i>';
+        var k = Number(m.kills) || 0, d = Number(m.deaths) || 0, a = Number(m.assists) || 0;
+        kd += (d === 0) ? (k + a) : (k + a) / d;
+        kdn++;
+        var kp = kpOf(m);
+        if(kp != null){ kpSum += kp; kpN++; }
+        var sec = durSec(m);
+        if(sec && typeof m.cs === 'number'){ csSum += m.cs / (sec / 60); csN++; }
+      });
+      var total = list.length;
+      var wr = total ? Math.round(w / total * 100) : 0;
+      var chips = [];
+      chips.push('<span class="lm-chip">최근 ' + total + '판 <b>' + w + '승 ' + l + '패</b></span>');
+      chips.push('<span class="lm-chip">승률 <b>' + wr + '%</b></span>');
+      if(kdn){ chips.push('<span class="lm-chip">평균 KDA <b>' + (kd / kdn).toFixed(2) + '</b></span>'); }
+      if(kpN){ chips.push('<span class="lm-chip">평균 킬관여 <b>' + Math.round(kpSum / kpN) + '%</b></span>'); }
+      if(csN){ chips.push('<span class="lm-chip">분당 CS <b>' + (csSum / csN).toFixed(1) + '</b></span>'); }
+      el.strip.innerHTML = '<span class="lm-form" role="img" aria-label="최근 ' + total + '판 ' + w + '승 ' + l + '패">' + form + '</span>' +
+        '<span class="lm-chips">' + chips.join('') + '</span>';
+    }
+
+    function rowHTML(m, i){
+      var win = String(m.result || '').toUpperCase() === 'WIN';
+      var mid = String(m.matchId || '');
+      var open = !!openIds[mid];
+      var sec = durSec(m);
+      var me = meOf(m);
+      var kp = kpOf(m);
+      var k = m.kills, d = m.deaths, a = m.assists;
+      var kdaTxt = (k == null ? '—' : k) + '/' + (d == null ? '—' : d) + '/' + (a == null ? '—' : a);
+      var ratio = m.kda;
+      if(!ratio && k != null && a != null && d != null){
+        ratio = (d > 0) ? ((k + a) / d).toFixed(2) + ':1' : 'Perfect';
+      }
+      var cs = (typeof m.cs === 'number') ? m.cs : null;
+      var cspm = (cs != null && sec) ? (cs / (sec / 60)).toFixed(1) : null;
+      var dmg = (me && me.damageToChampions != null) ? kfmt(me.damageToChampions) : null;
+      var sub = [queueTxt(m), POS[String(m.position || '').toUpperCase()] || ''].filter(Boolean).join(' · ');
+      var dur = (typeof m.durationLabel === 'string' && m.durationLabel) ? m.durationLabel : (sec ? mmss(sec * 1000) : '—');
+      var fb = feedbackOf(m);
+
+      var h = '<li class="lm-row ' + (win ? 'is-win' : 'is-lose') + '">';
+      h += '<button class="lm-row-main" type="button" data-mid="' + esc(mid) + '" aria-controls="lmD' + i + '" aria-expanded="' + (open ? 'true' : 'false') + '">';
+      h += '<span class="lm-res">' + (win ? '승' : '패') + '</span>';
+      h += '<span class="lm-champ"><b>' + esc(m.champion || '알 수 없음') + '</b><em>' + esc(sub || '일반 게임') + '</em></span>';
+      h += '<span class="lm-stats">';
+      h += '<span class="lm-st"><b>' + esc(kdaTxt) + '</b><em>' + esc(ratio ? ratio + ' KDA' : 'KDA') + '</em></span>';
+      h += '<span class="lm-st' + (kp == null ? ' is-na' : '') + '"><b>' + (kp == null ? '—' : kp + '%') + '</b><em>킬관여</em></span>';
+      h += '<span class="lm-st' + (cs == null ? ' is-na' : '') + '"><b>' + (cs == null ? '—' : cs) + '</b><em>' + (cspm ? cspm + ' CS/분' : 'CS') + '</em></span>';
+      h += '<span class="lm-st' + (dmg == null ? ' is-na' : '') + '"><b>' + (dmg || '—') + '</b><em>딜량</em></span>';
+      h += '</span>';
+      h += '<span class="lm-st lmt"><b>' + esc(relTime(m.startedAt)) + '</b><em>' + esc(dur) + '</em></span>';
+      h += '<span class="lm-caret" aria-hidden="true">▼</span>';
+      h += '</button>';
+      if(fb){ h += '<p class="lm-fb"><b>AI</b><span>' + esc(fb) + '</span></p>'; }
+      h += detailHTML(m, i, me, open);
+      h += '</li>';
+      return h;
+    }
+
+    function detailHTML(m, i, me, open){
+      var b = m.build || {};
+      function tags(arr){
+        var out = [], j, x, n;
+        if(!Array.isArray(arr)){ return ''; }
+        for(j = 0; j < arr.length; j++){
+          x = arr[j];
+          n = (x && typeof x === 'object') ? String(x.name || '') : String(x == null ? '' : x);
+          if(!n){ continue; }
+          out.push('<span class="lm-tag">' + esc(n) + '</span>');
+        }
+        return out.join('');
+      }
+      var items = tags(b.items), runes = tags(b.runes), spells = tags(b.spells);
+      var met = [];
+      if(m.opScore != null){
+        met.push('<span class="lm-tag k">OP ' + Number(m.opScore).toFixed(2) + (m.opScoreRank ? ' · 팀 ' + m.opScoreRank + '위' : '') + '</span>');
+      }
+      if(me && me.visionScore != null){ met.push('<span class="lm-tag">시야 ' + esc(me.visionScore) + '</span>'); }
+      if(me && me.gold != null){ met.push('<span class="lm-tag">골드 ' + (kfmt(me.gold) || '—') + '</span>'); }
+      if(me && me.damageTaken != null){ met.push('<span class="lm-tag">받은 피해 ' + (kfmt(me.damageTaken) || '—') + '</span>'); }
+      if(m.teamKills){
+        var mine = (m.team === 'RED') ? m.teamKills.red : m.teamKills.blue;
+        var theirs = (m.team === 'RED') ? m.teamKills.blue : m.teamKills.red;
+        if(mine != null && theirs != null){ met.push('<span class="lm-tag">팀 킬 ' + esc(mine) + ' : ' + esc(theirs) + '</span>'); }
+      }
+      var h = '<div class="lm-detail" id="lmD' + i + '"' + (open ? '' : ' hidden') + '>';
+      if(items || runes || spells || met.length){
+        h += '<dl class="lm-dl">';
+        if(items){ h += '<dt>ITEMS</dt><dd>' + items + '</dd>'; }
+        if(runes){ h += '<dt>RUNES</dt><dd>' + runes + '</dd>'; }
+        if(spells){ h += '<dt>SPELLS</dt><dd>' + spells + '</dd>'; }
+        if(met.length){ h += '<dt>STATS</dt><dd>' + met.join('') + '</dd>'; }
+        h += '</dl>';
+      }else{
+        h += '<p class="lm-na">이 판은 요약 전적만 수집되어 아이템·룬 같은 상세 지표가 없습니다.</p>';
+      }
+      if(m.url){ h += '<a class="lm-link" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">OP.GG에서 이 판 보기 ↗</a>'; }
+      h += '</div>';
+      return h;
+    }
+
+    function renderList(){
+      var all = ((data && data.matches) || []).slice(0, MAX);
+      if(!all.length){
+        el.list.innerHTML = '<li class="lm-note"><b>최근 전적이 없습니다</b>새 판이 끝나면 여기에 표시됩니다.</li>';
+        if(el.more){ el.more.hidden = true; }
+        return;
+      }
+      var list = showAll ? all : all.slice(0, FIRST);
+      var html = '', i;
+      for(i = 0; i < list.length; i++){ html += rowHTML(list[i], i); }
+      el.list.innerHTML = html;
+      if(el.more){
+        el.more.hidden = all.length <= FIRST;
+        el.more.textContent = showAll ? ('최근 ' + FIRST + '판만 보기') : ('전체 ' + all.length + '판 보기');
+        el.more.setAttribute('aria-expanded', showAll ? 'true' : 'false');
+      }
+    }
+
+    function renderAll(){
+      renderHead();
+      renderStrip(((data && data.matches) || []).slice(0, MAX));
+      renderList();
+      panel.setAttribute('data-lm', failed ? 'stale' : 'ready');
+    }
+
+    function renderError(){
+      el.list.innerHTML = '<li class="lm-note"><b>전적을 불러오지 못했어요</b>matches.json 응답을 받지 못했습니다. ‘새로고침’을 눌러 다시 시도해 주세요.</li>';
+      el.strip.innerHTML = '';
+      if(el.more){ el.more.hidden = true; }
+      el.rank.innerHTML = '<span class="lm-tier is-unranked">솔로랭크 확인 불가</span>';
+    }
+
+    function updText(){
+      if(!data){ return failed ? '전적을 불러오지 못했습니다' : '최근 갱신 확인 중'; }
+      var s = '업데이트 ' + stampOf(data.updatedAt);
+      var rel = relTime(data.updatedAt);
+      if(rel && rel !== '—'){ s += ' · ' + rel; }
+      if(failed){ s += ' · 갱신 실패'; }
+      return s;
+    }
+
+    /* ---------------- 5분 자동 갱신 · 카운트다운 ---------------- */
+    function tick(){
+      var now = Date.now();
+      var left = Math.max(0, nextAt - now);
+      var tx = mmss(left);
+      if(el.count && el.count.textContent !== tx){ el.count.textContent = tx; }
+      if(el.prog){
+        var span = failed ? RETRY : INTERVAL;
+        var pct = Math.max(0, Math.min(100, 100 * (1 - left / span)));
+        el.prog.style.width = pct.toFixed(1) + '%';
+      }
+      var u = updText();
+      if(el.upd && el.upd.textContent !== u){ el.upd.textContent = u; }
+      if(el.autoTxt){
+        var at = failed ? '1분 뒤 재시도 · ' : '5분 자동 · ';
+        if(el.autoTxt.textContent !== at){ el.autoTxt.textContent = at; }
+      }
+      if(now >= nextAt && !busy){ load(false); }
+    }
+
+    function load(manual){
+      if(busy){ return; }
+      busy = true;
+      if(el.refresh){ el.refresh.setAttribute('data-busy', '1'); }
+      if(manual){ announce('전적을 새로 불러오는 중입니다.'); }
+      fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(res){
+          if(!res.ok){ throw new Error('HTTP ' + res.status); }
+          return res.json();
+        })
+        .then(function(json){
+          if(!json || !Array.isArray(json.matches)){ throw new Error('matches 없음'); }
+          data = json;
+          failed = false;
+          renderAll();
+          nextAt = Date.now() + INTERVAL;
+          var n = Math.min(json.matches.length, MAX), wins = 0;
+          json.matches.slice(0, MAX).forEach(function(m){
+            if(String(m.result || '').toUpperCase() === 'WIN'){ wins++; }
+          });
+          announce('최근 ' + n + '판 전적을 불러왔습니다. ' + wins + '승 ' + (n - wins) + '패.');
+        })
+        .catch(function(){
+          failed = true;
+          panel.setAttribute('data-lm', data ? 'stale' : 'error');
+          if(!data){ renderError(); }
+          nextAt = Date.now() + RETRY;
+          announce('전적을 불러오지 못했습니다. 잠시 후 다시 시도합니다.');
+        })
+        .then(function(){
+          busy = false;
+          if(el.refresh){ el.refresh.removeAttribute('data-busy'); }
+          tick();
+        });
+    }
+
+    if(el.refresh){
+      el.refresh.addEventListener('click', function(){ load(true); });
+    }
+    if(el.more){
+      el.more.addEventListener('click', function(){
+        showAll = !showAll;
+        renderList();
+        announce(showAll ? '최근 전적을 모두 펼쳤습니다.' : '최근 ' + FIRST + '판만 표시합니다.');
+      });
+    }
+    el.list.addEventListener('click', function(e){
+      var btn = (e.target && e.target.closest) ? e.target.closest('.lm-row-main') : null;
+      if(!btn){ return; }
+      var box = document.getElementById(btn.getAttribute('aria-controls') || '');
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      if(box){ box.hidden = isOpen; }
+      var mid = btn.getAttribute('data-mid') || '';
+      if(mid){ if(isOpen){ delete openIds[mid]; } else { openIds[mid] = true; } }
+    });
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState === 'visible' && Date.now() >= nextAt){ load(false); }
+      else { tick(); }
+    });
+
+    window.setInterval(tick, 1000);
+    load(false);
+    tick();
+  })();
 
 </script>
 </body>
