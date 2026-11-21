@@ -10,10 +10,112 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T19:15:00+09:00",
-  "latestMatchId": "dbd-20261121-1904",
-  "latestFeedback": "노미더·거미 기원·음유시인·공구통 세팅으로 다양하게 실험한 4판! 특히 18:56 라쿤 시티 동쪽은 공구통·증명·데자뷰 발전기 러시로 5분 만에 4인 전원 탈출을 뽑았어요.",
+  "updatedAt": "2026-11-21T19:43:00+09:00",
+  "latestMatchId": "dbd-20261121-1927",
+  "latestFeedback": "학지운의 망상에서 블라이트(34,425점) 상대로 화염지뢰·정면승부·기만·칼찌 어그로 세팅으로 이타심·빛의 인도자 무지개 2관왕을 찍으며 팀원 3명 전원 탈출을 만든 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1927",
+      "playedAt": "2026-11-21T19:27:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 27123,
+      "map": "Trickster's Delusion",
+      "durationLabel": "10:01",
+      "killer": {
+        "name": "The Blight",
+        "score": 34425,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 3인 탈출",
+      "perks": [
+        "Blast Mine",
+        "Decisive Strike",
+        "Deception",
+        "Head On"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        }
+      ],
+      "feedback": "학지운의 망상에서 블라이트(34,425점) 상대로 화염지뢰·정면승부·기만·칼찌 어그로 세팅으로 이타심·빛의 인도자 무지개 2관왕을 찍으며 팀원 3명 전원 탈출을 만든 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1915",
+      "playedAt": "2026-11-21T19:15:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 19449,
+      "map": "Mount Ormond Resort",
+      "durationLabel": "7:39",
+      "killer": {
+        "name": "The Blight",
+        "score": 34481,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
+      },
+      "note": "발전기·버프 세팅",
+      "perks": [
+        "Bardic Inspiration",
+        "Deja Vu",
+        "Prove Thyself",
+        "Blast Mine"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        }
+      ],
+      "feedback": "오르몬드 리조트에서 무자비한 블라이트(34,481점) 상대로 음유시인·데자뷰·증명·화염지뢰 + 새 부품 공구통으로 이타심·빛의 인도자 골드를 챙기며 7분 39초간 활약한 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1904",
       "playedAt": "2026-11-21T19:04:00+09:00",
@@ -22,13 +124,15 @@
       "result": "SACRIFICED",
       "resultLabel": "희생",
       "score": 3450,
-      "map": "Unknown",
+      "map": "Forgotten Ruins",
       "durationLabel": "4:54",
       "killer": {
-        "name": "Unknown",
-        "score": 0
+        "name": "The Trickster",
+        "score": 34802,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
       },
-      "note": "조기 종료 · 4:54",
+      "note": "조기 희생 · 4:54",
       "perks": [
         "Bardic Inspiration",
         "Deja Vu",
@@ -61,7 +165,7 @@
           "gradeKo": "브론즈"
         }
       ],
-      "feedback": "발전기·버프(음유시인·데자뷰·증명·화염지뢰) 세팅에 새 부품 공구통을 들고 들어갔지만 4분 54초 만에 빠르게 끝난 판이에요."
+      "feedback": "잊혀진 폐허에서 무자비한 트릭스터(34,802점) 상대로 발전기·버프 세팅을 들었으나 초반에 집중 견제를 받아 4분 54초 만에 희생된 판이에요."
     },
     {
       "matchId": "dbd-20261121-1856",
@@ -673,105 +777,6 @@
         }
       ],
       "feedback": "구울(32,933점) 상대로 10분 넘게 어그로(도주자 골드)와 발전기(빛의 인도자 골드)를 모두 챙겨 24,021점을 올렸지만 마지막에 아쉽게 희생된 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1621",
-      "playedAt": "2026-11-21T16:21:00+09:00",
-      "role": "survivor",
-      "character": "Dwight Fairfield",
-      "result": "DEAD",
-      "resultLabel": "사망",
-      "score": 7912,
-      "map": "Badham Preschool I",
-      "durationLabel": "5:26",
-      "killer": {
-        "name": "The Doctor",
-        "score": 9394,
-        "rating": "Brutal Killer",
-        "ratingKo": "잔혹한 살인마"
-      },
-      "note": "팀 3인 탈출",
-      "perks": [
-        "Flashbang",
-        "Blast Mine",
-        "Decisive Strike",
-        "Head On"
-      ],
-      "emblems": [
-        {
-          "name": "Benevolent",
-          "nameKo": "이타심",
-          "grade": "Bronze",
-          "gradeKo": "브론즈"
-        },
-        {
-          "name": "Evader",
-          "nameKo": "도주자",
-          "grade": "Silver",
-          "gradeKo": "실버"
-        },
-        {
-          "name": "Lightbringer",
-          "nameKo": "빛의 인도자",
-          "grade": "Silver",
-          "gradeKo": "실버"
-        },
-        {
-          "name": "Unbroken",
-          "nameKo": "불굴",
-          "grade": "Bronze",
-          "gradeKo": "브론즈"
-        }
-      ],
-      "feedback": "닥터(9,394점)가 5분대 빠른 템포로 압박한 판에서 발전기·추격(빛의 인도자·도주자 실버)으로 시간을 벌어 팀원 3명 전원 탈출을 만들어 준 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1439",
-      "playedAt": "2026-11-21T14:39:00+09:00",
-      "role": "survivor",
-      "character": "Claudette Morel",
-      "result": "ESCAPED",
-      "resultLabel": "탈출",
-      "score": 30017,
-      "map": "Torment Creek",
-      "durationLabel": "9:31",
-      "killer": {
-        "name": "The Trapper",
-        "score": 29060
-      },
-      "perks": [
-        "Decisive Strike",
-        "Head On",
-        "Blast Mine",
-        "Mirrored Illusion"
-      ],
-      "emblems": [
-        {
-          "name": "Benevolent",
-          "nameKo": "이타심",
-          "grade": "Iridescent",
-          "gradeKo": "무지개"
-        },
-        {
-          "name": "Unbroken",
-          "nameKo": "불굴",
-          "grade": "Gold",
-          "gradeKo": "골드"
-        },
-        {
-          "name": "Lightbringer",
-          "nameKo": "빛의 인도자",
-          "grade": "Silver",
-          "gradeKo": "실버"
-        },
-        {
-          "name": "Evader",
-          "nameKo": "도주자",
-          "grade": "Bronze",
-          "gradeKo": "브론즈"
-        }
-      ],
-      "feedback": "정면충돌·화염지뢰·거울환영 세팅에 구출·치료(이타심 무지개)와 생존(골드)을 꽉 챙겨 팀 내 1등 점수로 탈출한 판이에요."
     }
   ]
 }
