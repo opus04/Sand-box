@@ -23,8 +23,10 @@ async function measure(id, label){
   var f = document.getElementById(id);
   var w = f.contentWindow, d = f.contentDocument;
   try{
-    for(var i = 0; i < 40; i++){ if(d.getElementById('enterBtn')) break; await wait(150); }
-    d.getElementById('enterBtn').click();
+    var eb = null;
+    for(var i = 0; i < 120; i++){ eb = d.getElementById('enterBtn'); if(eb) break; await wait(200); }
+    if(!eb) throw new Error('no enterBtn after 24s');
+    eb.click();
     await wait(900);
     var head = d.querySelector('.panel[data-name="GAMING"] .p-head');
     if(!head) throw new Error('no gaming head');
@@ -39,7 +41,7 @@ async function measure(id, label){
     var sw = d.documentElement.scrollWidth, iw = w.innerWidth;
     var body = d.body.scrollWidth;
     var panel = d.getElementById('dbdPanel');
-    var wrap = d.querySelector('.view-body');
+    var wrap = d.querySelector('#v02 .view-body');
     var hl = d.getElementById('dbdHl');
     var active = d.activeElement ? (d.activeElement.id || d.activeElement.tagName) : '';
     say('[' + label + '] inner=' + iw + ' docScroll=' + sw + ' bodyScroll=' + body +
@@ -74,6 +76,8 @@ async function measure(id, label){
         ' count=' + d.getElementById('dbdCount').textContent +
         ' auto="' + d.getElementById('dbdAutoTxt').textContent.trim() + '"' +
         ' upd="' + d.getElementById('dbdUpd').textContent + '"');
+    d.getElementById('dbdPanel').scrollIntoView({ block: 'start' });
+    d.querySelector('.view-bar').scrollIntoView({ block: 'start' });
   }catch(e){
     say('[' + label + '] ERROR ' + e.message);
   }
