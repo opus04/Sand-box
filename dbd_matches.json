@@ -10,10 +10,61 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T20:13:00+09:00",
-  "latestMatchId": "dbd-20261121-2002",
-  "latestFeedback": "은신·이탈(가벼운 발걸음·철의 의지·전력 질주·도시의 회피술) 세팅으로 갈아탄 클로뎃 2연전! 19:49 쉘터 우즈에선 이타심·도주자 무지개 2관왕에 빛의 인도자·불굴 골드로 22,427점을 올렸고, 20:02 판도 4분 22초 만에 10,611점(팀 내 1등)으로 불굴 골드를 챙겼어요.",
+  "updatedAt": "2026-11-21T20:43:00+09:00",
+  "latestMatchId": "dbd-20261121-2010",
+  "latestFeedback": "아자로프의 쉼터에서 무자비한 기사(39,100점) 상대로 메그 토마스(기만·정면승부·나와 함께 춤을·반전 세팅)로 빛의 인도자 무지개에 이타심·불굴 골드로 26,944점(팀 내 1등)을 기록한 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-2010",
+      "playedAt": "2026-11-21T20:10:00+09:00",
+      "role": "survivor",
+      "character": "Meg Thomas",
+      "result": "FINISHED",
+      "resultLabel": "종료",
+      "score": 26944,
+      "map": "Azarov’s Resting Place",
+      "durationLabel": "13:18",
+      "killer": {
+        "name": "The Knight",
+        "score": 39100,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
+      },
+      "note": "팀 내 1등 점수 · 유이·비 희생",
+      "perks": [
+        "Deception",
+        "Head On",
+        "Dance With Me",
+        "Plot Twist"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "아자로프의 쉼터에서 무자비한 기사(39,100점) 상대로 기만·정면승부·나와 함께 춤을·반전 세팅으로 빛의 인도자 무지개에 이타심·불굴 골드를 챙기며 13분 18초간 팀 내 1등 점수(26,944점)를 올린 판이에요."
+    },
     {
       "matchId": "dbd-20261121-2002",
       "playedAt": "2026-11-21T20:02:00+09:00",
@@ -22,11 +73,13 @@
       "result": "FINISHED",
       "resultLabel": "종료",
       "score": 10611,
-      "map": "Unknown",
+      "map": "Treatment Theater",
       "durationLabel": "4:22",
       "killer": {
-        "name": "Unknown",
-        "score": 0
+        "name": "The Twins",
+        "score": 29024,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
       },
       "note": "팀 내 1등 점수 · 은신 세팅",
       "perks": [
@@ -61,7 +114,7 @@
           "gradeKo": "골드"
         }
       ],
-      "feedback": "가벼운 발걸음·철의 의지·전력 질주·도시의 회피술 은신 세팅에 윌 오 위스프 손전등을 들고 들어가 4분 22초 만에 팀 내 1등 점수(10,611점)와 불굴 골드를 챙긴 판이에요."
+      "feedback": "레리 연구소에서 무자비한 쌍둥이(29,024점) 상대로 은신 세팅을 들고 들어가 4분 22초 만에 팀 내 1등 점수(10,611점)와 불굴 골드를 챙긴 판이에요."
     },
     {
       "matchId": "dbd-20261121-1949",
@@ -775,57 +828,6 @@
         }
       ],
       "feedback": "더 퍼스트(16,113점) 상대로 7분 3초 만에 도주자·빛의 인도자·불굴 골드 3관왕을 챙기며 팀 전원 4인 탈출로 깔끔하게 끝낸 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1704",
-      "playedAt": "2026-11-21T17:04:00+09:00",
-      "role": "survivor",
-      "character": "Yui Kimura",
-      "result": "ESCAPED",
-      "resultLabel": "탈출",
-      "score": 33580,
-      "map": "Nostromo Wreckage",
-      "durationLabel": "15:26",
-      "killer": {
-        "name": "The Deathslinger",
-        "score": 37100,
-        "rating": "The Entity Hungers...",
-        "ratingKo": "엔티티가 굶주립니다..."
-      },
-      "note": "팀 전원 4인 탈출 · 1등",
-      "perks": [
-        "Head On",
-        "Decisive Strike",
-        "Deception",
-        "Blast Mine"
-      ],
-      "emblems": [
-        {
-          "name": "Benevolent",
-          "nameKo": "이타심",
-          "grade": "Iridescent",
-          "gradeKo": "무지개"
-        },
-        {
-          "name": "Evader",
-          "nameKo": "도주자",
-          "grade": "Gold",
-          "gradeKo": "골드"
-        },
-        {
-          "name": "Lightbringer",
-          "nameKo": "빛의 인도자",
-          "grade": "Iridescent",
-          "gradeKo": "무지개"
-        },
-        {
-          "name": "Unbroken",
-          "nameKo": "불굴",
-          "grade": "Gold",
-          "gradeKo": "골드"
-        }
-      ],
-      "feedback": "총잡이(37,100점)와의 15분 26초 혈투에서 이타심·빛의 인도자 무지개 2개에 도주자·불굴 골드로 33,580점(팀 내 1등)을 찍고 4인 전원 탈출을 이끈 판이에요."
     }
   ]
 }
