@@ -10,10 +10,212 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T18:45:00+09:00",
-  "latestMatchId": "dbd-20261121-1824",
-  "latestFeedback": "노스트로모 잔해에서 직구(14,937점) 상대로 치료·기원 세팅을 들고 5분 18초 만에 불굴 무지개와 21,769점(팀 내 1등)으로 요나와 2인 탈출을 만든 판이에요.",
+  "updatedAt": "2026-11-21T19:15:00+09:00",
+  "latestMatchId": "dbd-20261121-1904",
+  "latestFeedback": "노미더·거미 기원·음유시인·공구통 세팅으로 다양하게 실험한 4판! 특히 18:56 라쿤 시티 동쪽은 공구통·증명·데자뷰 발전기 러시로 5분 만에 4인 전원 탈출을 뽑았어요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1904",
+      "playedAt": "2026-11-21T19:04:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 3450,
+      "map": "Unknown",
+      "durationLabel": "4:54",
+      "killer": {
+        "name": "Unknown",
+        "score": 0
+      },
+      "note": "조기 종료 · 4:54",
+      "perks": [
+        "Bardic Inspiration",
+        "Deja Vu",
+        "Prove Thyself",
+        "Blast Mine"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "None",
+          "gradeKo": "없음"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "None",
+          "gradeKo": "없음"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        }
+      ],
+      "feedback": "발전기·버프(음유시인·데자뷰·증명·화염지뢰) 세팅에 새 부품 공구통을 들고 들어갔지만 4분 54초 만에 빠르게 끝난 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1856",
+      "playedAt": "2026-11-21T18:56:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 19398,
+      "map": "Raccoon City Police Station East Wing",
+      "durationLabel": "5:00",
+      "killer": {
+        "name": "The Wraith",
+        "score": 9034,
+        "rating": "The Entity Hungers...",
+        "ratingKo": "엔티티가 굶주립니다..."
+      },
+      "note": "팀 전원 4인 탈출",
+      "perks": [
+        "Bardic Inspiration",
+        "Deja Vu",
+        "Prove Thyself",
+        "Blast Mine"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        }
+      ],
+      "feedback": "라쿤 시티 동쪽에서 종구(9,034점) 상대로 음유시인·데자뷰·증명 + 새 부품 공구통 발전기 러시로 5분 컷 4인 전원 탈출을 만든 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1845",
+      "playedAt": "2026-11-21T18:45:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 20502,
+      "map": "Badham Preschool I",
+      "durationLabel": "9:38",
+      "killer": {
+        "name": "The Wraith",
+        "score": 34949,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
+      },
+      "note": "노미더·거미 기원 세팅",
+      "perks": [
+        "No Mither",
+        "Invocation: Weaving Spiders",
+        "Resilience",
+        "Calm Spirit"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        }
+      ],
+      "feedback": "배드햄 1에서 무자비한 종구(34,949점) 상대로 노미더·거미 기원·회복력 하이리스크 세팅을 들고 빛의 인도자 무지개·이타심 골드를 챙기며 9분 38초를 버틴 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1832",
+      "playedAt": "2026-11-21T18:32:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "FINISHED",
+      "resultLabel": "종료",
+      "score": 25572,
+      "map": "Trickster's Delusion",
+      "durationLabel": "10:33",
+      "killer": {
+        "name": "The Doctor",
+        "score": 35297,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
+      },
+      "note": "팀 내 1등 · 노미더 세팅",
+      "perks": [
+        "No Mither",
+        "Invocation: Weaving Spiders",
+        "Resilience",
+        "Plot Twist"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "학지운의 망상에서 무자비한 닥터(35,297점) 상대로 노미더·거미 기원·회복력·대반전 조합으로 이타심 무지개와 빛의 인도자·불굴 골드를 따내며 25,572점(팀 내 1등)을 기록한 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1824",
       "playedAt": "2026-11-21T18:24:00+09:00",
@@ -570,96 +772,6 @@
         }
       ],
       "feedback": "정면충돌·화염지뢰·거울환영 세팅에 구출·치료(이타심 무지개)와 생존(골드)을 꽉 챙겨 팀 내 1등 점수로 탈출한 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1425",
-      "playedAt": "2026-11-21T14:25:00+09:00",
-      "role": "survivor",
-      "character": "Lara Croft",
-      "result": "ESCAPED",
-      "resultLabel": "탈출",
-      "score": 25960,
-      "map": "Raccoon City Police Station West Wing",
-      "durationLabel": "10:34",
-      "killer": {
-        "name": "The Clown",
-        "score": 24651
-      },
-      "note": "팀 3인 탈출",
-      "perks": [
-        "Flashbang",
-        "Head On",
-        "Blast Mine",
-        "Mirrored Illusion"
-      ],
-      "feedback": "섬광탄·정면충돌·화염지뢰 조합으로 방구(클라운) 상대로 팀 3인 탈출을 이끈 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1415",
-      "playedAt": "2026-11-21T14:15:00+09:00",
-      "role": "survivor",
-      "character": "Lara Croft",
-      "result": "FINISHED",
-      "resultLabel": "종료",
-      "score": 21572,
-      "map": "The Game",
-      "durationLabel": "9:58",
-      "killer": {
-        "name": "The Dredge",
-        "score": 33317,
-        "rating": "Merciless Killer",
-        "ratingKo": "무자비한 살인마"
-      },
-      "perks": [
-        "Decisive Strike",
-        "Head On",
-        "Blast Mine",
-        "Deception"
-      ],
-      "feedback": "더 게임 맵에서 드레지(무자비한 살인마) 상대로 꾸준히 점수를 챙긴 판이에요."
-    },
-    {
-      "matchId": "dbd-20261121-1404",
-      "playedAt": "2026-11-21T14:04:00+09:00",
-      "role": "survivor",
-      "character": "Lara Croft",
-      "result": "SACRIFICED",
-      "resultLabel": "제물",
-      "score": 23592,
-      "map": "Mount Ormond Resort",
-      "durationLabel": "9:40",
-      "killer": {
-        "name": "The Houndmaster"
-      },
-      "perks": [
-        "Decisive Strike",
-        "Head On",
-        "Blast Mine",
-        "Mirrored Illusion"
-      ],
-      "feedback": "희생당했지만 점수(23,592)를 잘 챙기며 팀원 2명 탈출에 기여했어요."
-    },
-    {
-      "matchId": "dbd-20261119-1954",
-      "playedAt": "2026-11-19T19:54:00+09:00",
-      "role": "survivor",
-      "character": "Yui Kimura",
-      "result": "SACRIFICED",
-      "resultLabel": "제물",
-      "score": 19126,
-      "map": "Disturbed Ward",
-      "durationLabel": "8:16",
-      "killer": {
-        "name": "The Pig",
-        "score": 21577
-      },
-      "perks": [
-        "Head On",
-        "Decisive Strike",
-        "Deception",
-        "Blast Mine"
-      ],
-      "feedback": "돼지(The Pig) 상대로 정면충돌·기만(Deception)으로 시간을 벌며 19,126점을 챙긴 판이에요."
     }
   ]
 }
