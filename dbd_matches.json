@@ -1,0 +1,178 @@
+{
+  "account": "RIOT",
+  "game": "Dead by Daylight",
+  "platform": "Steam",
+  "steamAccount": "project0614",
+  "steamId": "76561199436665656",
+  "source": "Behaviour 공식 트래커 (stats.deadbydaylight.com)",
+  "sourceUrl": "https://stats.deadbydaylight.com/match-history/",
+  "totalHours": 323.9,
+  "totalMatches": 1954,
+  "survivorMatches": 1758,
+  "killerMatches": 196,
+  "updatedAt": "2026-11-21T16:11:52+09:00",
+  "latestMatchId": "dbd-20261121-1439",
+  "latestFeedback": "정면충돌·화염지뢰·거울환영 세팅에 구출·치료(이타심 무지개)와 생존(골드)을 꽉 챙겨 팀 내 1등 점수로 탈출한 판이에요.",
+  "matches": [
+    {
+      "matchId": "dbd-20261121-1439",
+      "playedAt": "2026-11-21T14:39:00+09:00",
+      "role": "survivor",
+      "character": "Claudette Morel",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 30017,
+      "map": "Torment Creek",
+      "durationLabel": "9:31",
+      "killer": {
+        "name": "The Trapper",
+        "score": 29060
+      },
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        }
+      ],
+      "feedback": "정면충돌·화염지뢰·거울환영 세팅에 구출·치료(이타심 무지개)와 생존(골드)을 꽉 챙겨 팀 내 1등 점수로 탈출한 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1425",
+      "playedAt": "2026-11-21T14:25:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 25960,
+      "map": "Raccoon City Police Station West Wing",
+      "durationLabel": "10:34",
+      "killer": {
+        "name": "The Clown",
+        "score": 24651
+      },
+      "note": "팀 3인 탈출",
+      "perks": [
+        "Flashbang",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "feedback": "섬광탄·정면충돌·화염지뢰 조합으로 방구(클라운) 상대로 팀 3인 탈출을 이끈 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1415",
+      "playedAt": "2026-11-21T14:15:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "FINISHED",
+      "resultLabel": "종료",
+      "score": 21572,
+      "map": "The Game",
+      "durationLabel": "9:58",
+      "killer": {
+        "name": "The Dredge",
+        "score": 33317,
+        "rating": "Merciless Killer",
+        "ratingKo": "무자비한 살인마"
+      },
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Deception"
+      ],
+      "feedback": "더 게임 맵에서 드레지(무자비한 살인마) 상대로 꾸준히 점수를 챙긴 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1404",
+      "playedAt": "2026-11-21T14:04:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "SACRIFICED",
+      "resultLabel": "제물",
+      "score": 23592,
+      "map": "Mount Ormond Resort",
+      "durationLabel": "9:40",
+      "killer": {
+        "name": "The Houndmaster"
+      },
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "feedback": "희생당했지만 점수(23,592)를 잘 챙기며 팀원 2명 탈출에 기여했어요."
+    },
+    {
+      "matchId": "dbd-20261119-1954",
+      "playedAt": "2026-11-19T19:54:00+09:00",
+      "role": "survivor",
+      "character": "Yui Kimura",
+      "result": "SACRIFICED",
+      "resultLabel": "제물",
+      "score": 19126,
+      "map": "Disturbed Ward",
+      "durationLabel": "8:16",
+      "killer": {
+        "name": "The Pig",
+        "score": 21577
+      },
+      "perks": [
+        "Head On",
+        "Decisive Strike",
+        "Deception",
+        "Blast Mine"
+      ],
+      "feedback": "돼지(The Pig) 상대로 정면충돌·기만(Deception)으로 시간을 벌며 19,126점을 챙긴 판이에요."
+    },
+    {
+      "matchId": "dbd-20261119-1942",
+      "playedAt": "2026-11-19T19:42:00+09:00",
+      "role": "survivor",
+      "character": "Claudette Morel",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 26159,
+      "map": "Mother's Dwelling",
+      "durationLabel": "9:03",
+      "killer": {
+        "name": "The Singularity",
+        "score": 23865
+      },
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Deception"
+      ],
+      "feedback": "싱귤래리티 상대로 퍽 네 개를 활용해 26,159점으로 9분 만에 탈출한 판이에요."
+    }
+  ]
+}

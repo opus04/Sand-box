@@ -2081,6 +2081,245 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
 }
 
 /* ============================================================
+   GAME SWITCH — 02 GAMING · LoL / DBD 전적 전환 탭
+   ============================================================ */
+.gm-switch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;margin:14px 0 0}
+.gm-tab{
+  display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:100%;height:33px;padding:0 13px;
+  border-radius:999px;border:1px solid var(--line-soft);background:rgba(255,255,255,.035);
+  font:inherit;font-size:11.5px;letter-spacing:.01em;color:rgba(240,224,214,.66);
+  transition:color .2s,border-color .2s,background .2s,box-shadow .2s;
+}
+.gm-tab b{font-family:var(--font-latin);font-size:9.5px;font-weight:700;letter-spacing:.14em;color:rgba(255,236,220,.5);transition:color .2s}
+.gm-tab span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gm-tab:hover{color:#FFF4E8;border-color:rgba(255,209,153,.28);background:rgba(255,209,153,.07)}
+.gm-tab.is-on{
+  color:#2B1510;font-weight:600;border-color:transparent;
+  background:linear-gradient(135deg,#F8CB9F,#E8915F);
+  box-shadow:0 12px 26px -18px rgba(239,138,98,.95);
+}
+.gm-tab.is-on b{color:rgba(43,21,16,.6)}
+.gm-tab[data-gm="dbd"].is-on{background:linear-gradient(135deg,#FFBFA2,#DA5F42);box-shadow:0 12px 26px -18px rgba(218,95,66,.95)}
+.gm-hint{margin-left:auto;font-size:10px;letter-spacing:.02em;color:rgba(255,236,220,.4);white-space:nowrap}
+@media (max-width:620px){.gm-hint{display:none}.gm-switch{gap:5px;margin-top:12px}.gm-tab{height:31px;padding:0 11px}.gm-tab span{font-size:10.5px}}
+
+/* ============================================================
+   DBD MATCHES — 02 GAMING · RIOT (dbd_matches.json · 5분 자동 갱신)
+   ============================================================ */
+.dbd{
+  --d-ac:#E2603F;
+  --d-esc:#6FE3B0;
+  --d-sac:#FF7C6B;
+  --d-mid:#C9B6EC;
+  position:relative;margin:12px 0 0;padding:14px 15px 13px;border-radius:var(--r-sm);
+  border:1px solid rgba(226,96,63,.24);
+  background:
+    radial-gradient(120% 140% at 2% 0%, rgba(226,96,63,.16), transparent 58%),
+    radial-gradient(90% 120% at 100% 0%, rgba(111,227,176,.07), transparent 62%),
+    linear-gradient(158deg, rgba(58,34,40,.40), rgba(24,16,26,.55) 58%, rgba(15,10,20,.62));
+  box-shadow:inset 0 1px 0 rgba(255,232,204,.07), 0 22px 46px -42px rgba(0,0,0,.95);
+  overflow:hidden;
+}
+html.lite .dbd{background:linear-gradient(158deg,rgba(52,32,36,.7),rgba(18,12,22,.78))}
+
+/* ---------- 머리: 계정 · 총 플레이 · 갱신 제어 ---------- */
+.dbd-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin:0 0 9px}
+.dbd-who{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 230px}
+.dbd-mark{
+  flex:0 0 auto;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+  border:1px solid rgba(226,96,63,.34);
+  background:linear-gradient(150deg,rgba(226,96,63,.32),rgba(255,194,77,.16));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 18px -6px rgba(226,96,63,.7);
+}
+.dbd-mark svg{width:20px;height:20px;stroke:#FFE9D2;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.dbd-who-txt{min-width:0;display:flex;flex-direction:column;gap:1px}
+.dbd-kicker{margin:0;font-family:var(--font-latin);font-size:8.5px;font-weight:700;letter-spacing:.2em;color:#FFB79B;opacity:.92}
+.dbd-name{margin:1px 0 0;font:inherit;font-size:14.5px;font-weight:700;letter-spacing:.01em;color:#FFF4E8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbd-meta{margin:2px 0 0;display:flex;align-items:center;gap:3px 6px;flex-wrap:wrap;font-size:10.5px;line-height:1.55;color:rgba(240,224,214,.6);font-variant-numeric:tabular-nums}
+.dbd-meta b{font-weight:600;color:#FFEBD8}
+.dbd-meta .d-sep{color:rgba(255,236,220,.24)}
+.dbd-side{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:0 0 auto;margin-left:auto}
+.dbd-upd{margin:0;font-family:var(--font-latin);font-size:9.5px;letter-spacing:.03em;color:rgba(240,224,214,.52);font-variant-numeric:tabular-nums}
+.dbd-ctl{display:flex;align-items:center;gap:6px}
+.dbd-refresh{
+  display:inline-flex;align-items:center;gap:5px;height:27px;padding:0 11px;border-radius:999px;
+  border:1px solid rgba(226,96,63,.36);background:rgba(226,96,63,.13);
+  color:#FFE6D8;font-size:11px;letter-spacing:.02em;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.dbd-refresh:hover{background:rgba(226,96,63,.24);border-color:rgba(226,96,63,.62)}
+.dbd-refresh svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dbd-refresh[data-busy="1"]{opacity:.7;pointer-events:none}
+.dbd-refresh[data-busy="1"] svg{animation:lmSpin .9s linear infinite}
+.dbd-auto{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;
+  border:1px solid var(--line-soft);background:rgba(255,255,255,.03);
+  font-family:var(--font-latin);font-size:9.5px;color:rgba(240,224,214,.5);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.dbd-auto i{width:5px;height:5px;border-radius:50%;background:var(--d-esc);box-shadow:0 0 8px rgba(111,227,176,.72)}
+.dbd-auto b{font-weight:600;letter-spacing:.02em;color:rgba(236,255,250,.82)}
+.dbd[data-dbd="stale"] .dbd-auto i{background:var(--d-sac);box-shadow:0 0 8px rgba(255,124,107,.7)}
+.dbd-prog{position:relative;height:2px;margin:0 0 10px;border-radius:2px;background:rgba(255,255,255,.10);overflow:hidden}
+.dbd-prog i{display:block;width:0;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--d-ac),var(--d-esc));transition:width 1s linear}
+
+/* ---------- 요약 ---------- */
+.dbd-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 9px;min-height:16px}
+.dbd-form{display:inline-flex;align-items:center;gap:3px;flex:0 0 auto}
+.dbd-form i{display:block;width:15px;height:6px;border-radius:2px;background:rgba(255,255,255,.1)}
+.dbd-form i.e{background:var(--d-esc);box-shadow:0 0 7px rgba(111,227,176,.5)}
+.dbd-form i.s{background:var(--d-sac);box-shadow:0 0 7px rgba(255,124,107,.4)}
+.dbd-form i.f{background:var(--d-mid);opacity:.6}
+.dbd-chips{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-left:auto}
+.dbd-chip{
+  padding:2px 8px 3px;border-radius:999px;border:1px solid var(--line-soft);background:rgba(255,255,255,.035);
+  font-size:9.5px;letter-spacing:.01em;color:rgba(240,224,214,.55);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.dbd-chip b{font-weight:600;color:#FFEFE2}
+
+/* ---------- 하이라이트: 방금 끝난 판 AI 분석 ---------- */
+.dbd-hl{
+  --hl:var(--d-esc);
+  position:relative;margin:0 0 10px;padding:12px 13px 11px;border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--hl) 32%,transparent);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb,var(--hl) 16%,transparent), transparent 64%),
+    linear-gradient(150deg, color-mix(in srgb,var(--hl) 8%,rgba(255,255,255,.03)), rgba(255,255,255,.02));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 18px 40px -34px rgba(0,0,0,.95);
+  overflow:hidden;
+}
+.dbd-hl::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,var(--hl),color-mix(in srgb,var(--hl) 16%,transparent) 88%);
+}
+.dbd-hl[data-res="SACRIFICED"],.dbd-hl[data-res="KILLED"]{--hl:var(--d-sac)}
+.dbd-hl[data-res="FINISHED"]{--hl:var(--d-mid)}
+.dbd-hl-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.dbd-hl-badge{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 8px 3px;border-radius:999px;
+  font-size:9.5px;font-weight:600;letter-spacing:.06em;color:#FFF3E4;
+  border:1px solid rgba(255,209,153,.36);
+  background:linear-gradient(135deg,rgba(255,209,153,.22),rgba(239,138,98,.11));
+  white-space:nowrap;
+}
+.dbd-hl-badge i{font-style:normal;font-size:9px;line-height:1;color:rgba(255,226,180,.95)}
+.dbd-hl-res{
+  display:inline-flex;align-items:center;padding:2px 7px 3px;border-radius:6px;
+  font-size:10px;font-weight:700;letter-spacing:.02em;
+  color:color-mix(in srgb,var(--hl) 28%,#fff);
+  border:1px solid color-mix(in srgb,var(--hl) 55%,transparent);
+  background:color-mix(in srgb,var(--hl) 20%,transparent);
+}
+.dbd-hl-when{margin-left:auto;font-family:var(--font-latin);font-size:9px;letter-spacing:.02em;color:rgba(240,224,214,.46);font-variant-numeric:tabular-nums;white-space:nowrap}
+.dbd-hl-main{display:flex;align-items:flex-end;gap:6px 10px;flex-wrap:wrap;margin:7px 0 0;min-width:0}
+.dbd-hl-champ{display:flex;flex-direction:column;gap:1px;min-width:0;max-width:100%;font-size:15.5px;font-weight:700;line-height:1.2;letter-spacing:.01em;color:#FFF6EC}
+.dbd-hl-champ em{font-style:normal;font-size:9.5px;font-weight:500;letter-spacing:.02em;color:rgba(236,216,206,.56);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbd-hl-stats{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-left:auto;min-width:0}
+.dbd-hl-st{
+  display:inline-flex;align-items:baseline;gap:4px;padding:2px 8px 3px;border-radius:7px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.dbd-hl-st b{font-family:var(--font-latin);font-size:11.5px;font-weight:600;color:#FFF3E6}
+.dbd-hl-st em{font-style:normal;font-size:8.5px;letter-spacing:.04em;color:rgba(236,216,206,.46)}
+.dbd-emblems{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:8px 0 0}
+.dbd-em{
+  display:inline-flex;align-items:center;gap:4px;padding:2px 7px 3px;border-radius:6px;
+  font-size:9.5px;letter-spacing:.01em;color:rgba(255,244,236,.86);
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);
+}
+.dbd-em i{width:5px;height:5px;border-radius:50%;flex:0 0 auto;background:currentColor}
+.dbd-em[data-g="Iridescent"]{color:#FFB1C4;border-color:rgba(255,107,138,.4);background:rgba(255,107,138,.12)}
+.dbd-em[data-g="Gold"]{color:#FFD98A;border-color:rgba(255,194,77,.34);background:rgba(255,194,77,.1)}
+.dbd-em[data-g="Silver"]{color:#DCE5EF;border-color:rgba(207,216,227,.28);background:rgba(207,216,227,.08)}
+.dbd-em[data-g="Bronze"]{color:#E0A57A;border-color:rgba(201,138,90,.32);background:rgba(201,138,90,.1)}
+.dbd-hl-fb{display:flex;align-items:flex-start;gap:6px;margin:8px 0 0;font-size:11px;line-height:1.62;color:rgba(255,242,232,.82)}
+.dbd-hl-fb b{
+  flex:0 0 auto;margin-top:2px;padding:1px 4px;border-radius:4px;
+  font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+  color:#D8FFF5;border:1px solid rgba(59,240,196,.3);background:rgba(59,240,196,.1);
+}
+.dbd-hl-fb span{min-width:0;overflow-wrap:anywhere}
+.dbd-hl-na{color:rgba(236,216,206,.5)}
+
+/* ---------- 최근 매치 카드 ---------- */
+.dbd-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.dbd-row{
+  --row:var(--d-mid);
+  position:relative;padding:9px 11px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.055);background:rgba(255,255,255,.026);
+  transition:border-color .2s ease,background .2s ease;
+}
+.dbd-row[data-res="ESCAPED"]{--row:var(--d-esc);border-color:rgba(111,227,176,.22);background:linear-gradient(90deg,rgba(111,227,176,.10),rgba(255,255,255,.022) 46%)}
+.dbd-row[data-res="SACRIFICED"]{--row:var(--d-sac);border-color:rgba(255,124,107,.20);background:linear-gradient(90deg,rgba(255,124,107,.09),rgba(255,255,255,.022) 46%)}
+.dbd-row[data-res="FINISHED"]{--row:var(--d-mid);border-color:rgba(201,182,236,.20);background:linear-gradient(90deg,rgba(201,182,236,.09),rgba(255,255,255,.022) 46%)}
+.dbd-row:hover{border-color:color-mix(in srgb,var(--row) 44%,transparent)}
+.dbd-top{display:flex;align-items:center;gap:7px;min-width:0}
+.dbd-res{
+  flex:0 0 auto;display:grid;place-items:center;height:21px;padding:0 7px;border-radius:6px;
+  font-size:9.5px;font-weight:700;letter-spacing:.02em;
+  color:color-mix(in srgb,var(--row) 26%,#fff);
+  border:1px solid color-mix(in srgb,var(--row) 50%,transparent);
+  background:color-mix(in srgb,var(--row) 18%,transparent);white-space:nowrap;
+}
+.dbd-ch{min-width:0;font-size:12.5px;font-weight:600;color:#FFF3E6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbd-sc{margin-left:auto;flex:0 0 auto;font-family:var(--font-latin);font-size:12.5px;font-weight:600;color:#FFF1E4;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dbd-sc em{font-style:normal;margin-left:3px;font-size:8.5px;letter-spacing:.04em;color:rgba(236,216,206,.44)}
+.dbd-sub{display:flex;align-items:center;gap:3px 7px;flex-wrap:wrap;margin:3px 0 0;font-size:10px;line-height:1.5;color:rgba(236,216,206,.56)}
+.dbd-sub .d-k{color:rgba(255,214,176,.82);font-variant-numeric:tabular-nums}
+.dbd-sub .d-sep{color:rgba(255,236,220,.26)}
+.dbd-perks{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 0}
+.dbd-perk{
+  padding:2px 7px;border-radius:6px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.045);
+  font-size:9.5px;letter-spacing:.01em;color:rgba(255,240,228,.76);white-space:nowrap;
+}
+.dbd-fb{display:flex;align-items:flex-start;gap:6px;margin:7px 0 0;font-size:10.5px;line-height:1.55;color:rgba(255,240,228,.74)}
+.dbd-fb b{
+  flex:0 0 auto;margin-top:1px;padding:1px 4px;border-radius:4px;
+  font-family:var(--font-latin);font-size:7.5px;font-weight:700;letter-spacing:.1em;
+  color:#D8FFF5;border:1px solid rgba(59,240,196,.3);background:rgba(59,240,196,.1);
+}
+.dbd-fb span{min-width:0;overflow-wrap:anywhere}
+
+/* ---------- 로딩 · 오류 · 더 보기 ---------- */
+.dbd-skel{height:52px;border-radius:10px;background:linear-gradient(100deg,rgba(255,255,255,.045),rgba(255,255,255,.10),rgba(255,255,255,.045));background-size:240% 100%;animation:lmSweep 1.6s linear infinite}
+html.lite .dbd-skel{animation:none;background:rgba(255,255,255,.06)}
+.dbd-note{
+  margin:0;padding:16px 12px;border-radius:10px;text-align:center;
+  border:1px dashed rgba(255,209,153,.22);background:rgba(255,209,153,.05);
+  font-size:11px;line-height:1.6;color:rgba(255,236,220,.66);
+}
+.dbd-note b{display:block;margin-bottom:2px;font-weight:600;color:#FFEBD8}
+.dbd-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.dbd-more{
+  height:26px;padding:0 12px;border-radius:999px;
+  border:1px solid rgba(226,96,63,.32);background:rgba(226,96,63,.11);
+  color:#FFE6D8;font-size:10.5px;letter-spacing:.01em;
+  transition:background .2s,border-color .2s;
+}
+.dbd-more:hover{background:rgba(226,96,63,.22);border-color:rgba(226,96,63,.58)}
+.dbd-src{margin-left:auto;font-size:9.5px;letter-spacing:.05em;color:rgba(240,224,214,.45)}
+.dbd-src:hover{color:#FFE9CF}
+.dbd-status{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){.dbd-skel{animation:none}.dbd-prog i{transition:none}.dbd-refresh[data-busy="1"] svg{animation:none}}
+@media (max-width:620px){
+  .dbd{padding:12px 11px 11px;margin-top:10px}
+  .dbd-who{flex:1 1 100%}
+  .dbd-side{flex-direction:row;align-items:center;justify-content:space-between;width:100%;margin-left:0;gap:8px;flex-wrap:wrap}
+  .dbd-ctl{order:1}
+  .dbd-upd{order:2}
+  .dbd-chips{margin-left:0;width:100%}
+  .dbd-name{font-size:13.5px}
+  .dbd-hl{padding:11px 11px 10px}
+  .dbd-hl-champ{font-size:14.5px}
+  .dbd-hl-stats{margin-left:0;width:100%}
+  .dbd-hl-fb{font-size:10.5px}
+  .dbd-row{padding:8px 9px}
+  .dbd-sc{font-size:12px}
+}
+
+/* ============================================================
    MINI CALENDAR (허브) — 메인에서도 일정이 바로 보인다
    ============================================================ */
 .mcal{
@@ -2614,6 +2853,13 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
         </button>
       </h2>
       <div class="p-body" id="body-gaming" role="region" aria-labelledby="h-gaming" aria-hidden="true" inert>
+        <!-- GAME SWITCH · LoL / DBD 전적 전환 -->
+        <div class="gm-switch" id="gmSwitch" role="tablist" aria-label="게임 전적 선택">
+          <button class="gm-tab is-on" id="gmTabLol" type="button" role="tab" aria-selected="true" aria-controls="lmPanel" data-gm="lol"><b>LoL</b><span>닭인데요#꼬꼬댁꼬꼬</span></button>
+          <button class="gm-tab" id="gmTabDbd" type="button" role="tab" aria-selected="false" aria-controls="dbdPanel" data-gm="dbd" tabindex="-1"><b>DBD</b><span>RIOT</span></button>
+          <span class="gm-hint">게임별 최근 전적 · AI 분석</span>
+        </div>
+
         <div class="tiles tiles-gaming">
           <a class="tile" href="https://deadbydaylight.com" target="_blank" rel="noopener noreferrer" style="--ac:var(--lavender)">
             <svg class="ti" aria-hidden="true"><use href="#i-hook"/></svg>
@@ -2688,6 +2934,45 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
             <button class="lm-more" id="lmMore" type="button" hidden>전체 전적 보기</button>
             <a class="lm-src" id="lmSrc" href="https://www.op.gg" target="_blank" rel="noopener noreferrer">OP.GG 원본 ↗</a>
             <p class="lm-status" id="lmStatus" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <!-- RECENT MATCHES · RIOT (데바데 · dbd_matches.json · 5분 자동 갱신) -->
+        <section class="dbd" id="dbdPanel" data-dbd="loading" aria-labelledby="dbdTitle" hidden>
+          <div class="dbd-head">
+            <div class="dbd-who">
+              <span class="dbd-mark" aria-hidden="true"><svg><use href="#i-hook"/></svg></span>
+              <div class="dbd-who-txt">
+                <p class="dbd-kicker">RECENT MATCHES · DEAD BY DAYLIGHT</p>
+                <h3 class="dbd-name" id="dbdTitle">RIOT</h3>
+                <p class="dbd-meta" id="dbdMeta">총 플레이 확인 중</p>
+              </div>
+            </div>
+            <div class="dbd-side">
+              <p class="dbd-upd" id="dbdUpd">최근 갱신 확인 중</p>
+              <div class="dbd-ctl">
+                <button class="dbd-refresh" id="dbdRefresh" type="button" aria-label="데바데 전적 새로고침">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 12a8.4 8.4 0 1 1-2.5-6"/><path d="M20.4 4.2v4.4h-4.4"/></svg>
+                  <span>새로고침</span>
+                </button>
+                <span class="dbd-auto" id="dbdAuto" title="5분(300,000ms)마다 자동으로 최신 데바데 전적을 다시 불러옵니다">
+                  <i aria-hidden="true"></i><span id="dbdAutoTxt">5분 자동 · </span><b id="dbdCount">05:00</b>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="dbd-prog" aria-hidden="true"><i id="dbdProg"></i></div>
+          <div class="dbd-strip" id="dbdStrip"></div>
+          <article class="dbd-hl" id="dbdHl" data-res="ESCAPED" hidden></article>
+          <ol class="dbd-list" id="dbdList">
+            <li class="dbd-skel" aria-hidden="true"></li>
+            <li class="dbd-skel" aria-hidden="true"></li>
+            <li class="dbd-skel" aria-hidden="true"></li>
+          </ol>
+          <div class="dbd-foot">
+            <button class="dbd-more" id="dbdMore" type="button" hidden>전체 판 보기</button>
+            <a class="dbd-src" id="dbdSrc" href="https://stats.deadbydaylight.com/match-history/" target="_blank" rel="noopener noreferrer">공식 트래커 ↗</a>
+            <p class="dbd-status" id="dbdStatus" role="status" aria-live="polite"></p>
           </div>
         </section>
       </div>
@@ -5146,6 +5431,406 @@ html.lite .lm-skel{animation:none;background:rgba(255,255,255,.06)}
     window.setInterval(tick, 1000);
     load(false);
     tick();
+  })();
+
+  /* ============================================================
+     DBD MATCHES — 02 GAMING 데바데 전적 (RIOT · dbd_matches.json)
+     dbd_matches.json 을 5분(300,000ms)마다 다시 불러와 그립니다.
+     ============================================================ */
+  (function dbdMatches(){
+    'use strict';
+    var panel = document.getElementById('dbdPanel');
+    if(!panel){ return; }
+
+    var SRC = 'dbd_matches.json';
+    var INTERVAL = 300000;   /* 5분 자동 갱신 */
+    var RETRY = 60000;       /* 실패하면 1분 뒤 다시 시도 */
+    var FIRST = 4;           /* 기본으로 보여 줄 판 수 */
+    var MAX = 8;             /* 최근 8판까지 */
+
+    var el = {
+      name: document.getElementById('dbdTitle'),
+      meta: document.getElementById('dbdMeta'),
+      upd: document.getElementById('dbdUpd'),
+      count: document.getElementById('dbdCount'),
+      autoTxt: document.getElementById('dbdAutoTxt'),
+      prog: document.getElementById('dbdProg'),
+      refresh: document.getElementById('dbdRefresh'),
+      strip: document.getElementById('dbdStrip'),
+      hl: document.getElementById('dbdHl'),
+      list: document.getElementById('dbdList'),
+      more: document.getElementById('dbdMore'),
+      src: document.getElementById('dbdSrc'),
+      status: document.getElementById('dbdStatus')
+    };
+    if(!el.list){ return; }
+
+    var data = null;
+    var busy = false;
+    var failed = false;
+    var started = false;
+    var nextAt = Date.now() + INTERVAL;
+    var showAll = false;
+
+    var RES = { ESCAPED:'탈출', SACRIFICED:'제물', KILLED:'처치', FINISHED:'종료', DISCONNECTED:'종료' };
+    var ROLE = { survivor:'생존자', killer:'살인마' };
+
+    /* ---------------- helpers ---------------- */
+    function esc(v){
+      return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+    function pad2(n){ return (n < 10 ? '0' : '') + n; }
+    function comma(v){
+      if(v == null || v === '' || isNaN(v)){ return '—'; }
+      return String(Math.round(Number(v))).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+    function mmss(ms){
+      var s = Math.ceil(Math.max(0, ms) / 1000);
+      return pad2(Math.floor(s / 60)) + ':' + pad2(s % 60);
+    }
+    function secOf(m){
+      if(typeof m.durationSeconds === 'number' && m.durationSeconds > 0){ return m.durationSeconds; }
+      var s = m.durationLabel;
+      if(typeof s === 'string' && /^\d{1,3}:\d{2}$/.test(s)){
+        var p = s.split(':');
+        return (Number(p[0]) * 60) + Number(p[1]);
+      }
+      return null;
+    }
+    function durTxt(sec){ return sec ? (Math.floor(sec / 60) + ':' + pad2(sec % 60)) : '—'; }
+    function stampOf(iso){
+      if(typeof iso === 'string' && iso.length >= 16 && iso.charAt(4) === '-'){
+        return iso.slice(5, 7) + '.' + iso.slice(8, 10) + ' ' + iso.slice(11, 16);
+      }
+      var t = Date.parse(iso);
+      if(isNaN(t)){ return ''; }
+      var d = new Date(t);
+      return pad2(d.getMonth() + 1) + '.' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+    }
+    function relTime(iso){
+      var t = Date.parse(iso);
+      if(isNaN(t)){ return '—'; }
+      var diff = Date.now() - t;
+      if(diff < 0){ diff = 0; }
+      var min = Math.floor(diff / 60000);
+      if(min < 1){ return '방금 전'; }
+      if(min < 60){ return min + '분 전'; }
+      var h = Math.floor(min / 60);
+      if(h < 24){ return h + '시간 전'; }
+      var d = Math.floor(h / 24);
+      if(d < 7){ return d + '일 전'; }
+      if(d < 30){ return Math.floor(d / 7) + '주 전'; }
+      return Math.floor(d / 30) + '개월 전';
+    }
+    function feedbackOf(m){
+      var f = m.feedback;
+      if(Array.isArray(f)){ f = f.join(' '); }
+      if(typeof f !== 'string'){ return ''; }
+      return f.replace(/\s+/g, ' ').trim();
+    }
+    function resOf(m){ return String(m.result || '').toUpperCase(); }
+    function resTxt(m){ return m.resultLabel || RES[resOf(m)] || resOf(m) || '—'; }
+    function announce(msg){ if(el.status){ el.status.textContent = msg; } }
+    function latest(){
+      return (data && data.matches && data.matches.length) ? data.matches[0] : null;
+    }
+
+    /* ---------------- 방금 끝난 판 AI 분석 하이라이트 ---------------- */
+    function renderHighlight(){
+      var m = latest();
+      if(!el.hl){ return; }
+      if(!m){ el.hl.hidden = true; el.hl.innerHTML = ''; return; }
+
+      var sub = [ROLE[String(m.role || '').toLowerCase()] || '', m.map || ''].filter(Boolean).join(' · ');
+      var when = [stampOf(m.playedAt), m.durationLabel].filter(Boolean).join(' · ');
+      var k = m.killer || {};
+      var h = '<div class="dbd-hl-top">';
+      h += '<span class="dbd-hl-badge"><i aria-hidden="true">✦</i>방금 끝난 판 AI 분석</span>';
+      h += '<span class="dbd-hl-res">' + esc(resTxt(m)) + '</span>';
+      if(when){ h += '<span class="dbd-hl-when">' + esc(when) + '</span>'; }
+      h += '</div>';
+      h += '<div class="dbd-hl-main">';
+      h += '<span class="dbd-hl-champ">' + esc(m.character || '알 수 없음') + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</span>';
+      h += '<span class="dbd-hl-stats">';
+      if(m.score != null){ h += '<span class="dbd-hl-st"><b>' + esc(comma(m.score)) + '</b><em>점수</em></span>'; }
+      if(k.name){ h += '<span class="dbd-hl-st"><b>' + esc(k.name) + '</b><em>' + (k.score != null ? '살인마 ' + esc(comma(k.score)) : '살인마') + '</em></span>'; }
+      h += '</span></div>';
+      if(Array.isArray(m.emblems) && m.emblems.length){
+        h += '<div class="dbd-emblems">';
+        m.emblems.forEach(function(em){
+          var label = [em.nameKo || em.name || '', em.gradeKo || em.grade || ''].filter(Boolean).join(' ');
+          if(!label){ return; }
+          h += '<span class="dbd-em" data-g="' + esc(em.grade || '') + '"><i aria-hidden="true"></i>' + esc(label) + '</span>';
+        });
+        h += '</div>';
+      }
+      var fb = feedbackOf(m);
+      if(fb){
+        h += '<p class="dbd-hl-fb"><b>AI</b><span>' + esc(fb) + '</span></p>';
+      }else{
+        h += '<p class="dbd-hl-fb dbd-hl-na"><b>AI</b><span>이 판은 아직 AI 분석이 없습니다. 새 판이 마무리되면 여기에 정리됩니다.</span></p>';
+      }
+      el.hl.setAttribute('data-res', resOf(m));
+      el.hl.innerHTML = h;
+      el.hl.hidden = false;
+    }
+
+    /* ---------------- 렌더 ---------------- */
+    function renderHead(){
+      var d = data || {};
+      if(el.name && d.account){ el.name.textContent = d.account; }
+      var bits = [];
+      if(d.totalHours != null){ bits.push('총 플레이 <b>' + esc(String(d.totalHours)) + '시간</b>'); }
+      if(d.totalMatches != null){ bits.push('<b>' + esc(comma(d.totalMatches)) + '판</b>'); }
+      if(d.survivorMatches != null){ bits.push('생존자 <b>' + esc(comma(d.survivorMatches)) + '</b>'); }
+      if(d.killerMatches != null){ bits.push('살인마 <b>' + esc(comma(d.killerMatches)) + '</b>'); }
+      if(bits.length){
+        el.meta.innerHTML = bits.map(function(x){ return '<span>' + x + '</span>'; }).join('<span class="d-sep">·</span>');
+      }else{
+        el.meta.textContent = '총 플레이 확인 중';
+      }
+      if(el.src && d.sourceUrl){ el.src.href = d.sourceUrl; }
+    }
+
+    function renderStrip(list){
+      if(!list.length){ el.strip.innerHTML = ''; return; }
+      var escN = 0, sacN = 0, midN = 0, scoreSum = 0, scoreN = 0, secSum = 0, secN = 0, form = '';
+      list.forEach(function(m){
+        var r = resOf(m);
+        if(r === 'ESCAPED'){ escN++; form += '<i class="e"></i>'; }
+        else if(r === 'SACRIFICED' || r === 'KILLED'){ sacN++; form += '<i class="s"></i>'; }
+        else { midN++; form += '<i class="f"></i>'; }
+        if(m.score != null && !isNaN(m.score)){ scoreSum += Number(m.score); scoreN++; }
+        var s = secOf(m);
+        if(s){ secSum += s; secN++; }
+      });
+      var total = list.length;
+      var chips = [];
+      chips.push('<span class="dbd-chip">최근 ' + total + '판 <b>탈출 ' + escN + '</b></span>');
+      if(sacN){ chips.push('<span class="dbd-chip">제물 <b>' + sacN + '</b></span>'); }
+      if(midN){ chips.push('<span class="dbd-chip">종료 <b>' + midN + '</b></span>'); }
+      if(scoreN){ chips.push('<span class="dbd-chip">평균 점수 <b>' + esc(comma(scoreSum / scoreN)) + '</b></span>'); }
+      if(secN){ chips.push('<span class="dbd-chip">평균 생존 <b>' + durTxt(Math.round(secSum / secN)) + '</b></span>'); }
+      el.strip.innerHTML = '<span class="dbd-form" role="img" aria-label="최근 ' + total + '판 결과 흐름">' + form + '</span>' +
+        '<span class="dbd-chips">' + chips.join('') + '</span>';
+    }
+
+    function rowHTML(m, i){
+      var r = resOf(m);
+      var sub = [];
+      if(m.map){ sub.push('<span>' + esc(m.map) + '</span>'); }
+      if(m.durationLabel){ sub.push('<span>' + esc(m.durationLabel) + '</span>'); }
+      if(m.note){ sub.push('<span>' + esc(m.note) + '</span>'); }
+      var k = m.killer || {};
+      if(k.name){ sub.push('<span class="d-k">살인마 ' + esc(k.name) + (k.score != null ? ' ' + esc(comma(k.score)) : '') + '</span>'); }
+      var fb = feedbackOf(m);
+      var h = '<li class="dbd-row" data-res="' + esc(r) + '">';
+      h += '<div class="dbd-top">';
+      h += '<span class="dbd-res">' + esc(resTxt(m)) + '</span>';
+      h += '<span class="dbd-ch">' + esc(m.character || '알 수 없음') + '</span>';
+      if(m.score != null){ h += '<span class="dbd-sc">' + esc(comma(m.score)) + '<em>점</em></span>'; }
+      h += '</div>';
+      if(sub.length){
+        h += '<p class="dbd-sub">' + sub.join('<span class="d-sep">·</span>') + '</p>';
+      }
+      if(Array.isArray(m.perks) && m.perks.length){
+        h += '<div class="dbd-perks">';
+        m.perks.forEach(function(p){
+          if(p){ h += '<span class="dbd-perk">' + esc(p) + '</span>'; }
+        });
+        h += '</div>';
+      }
+      if(fb){ h += '<p class="dbd-fb"><b>AI</b><span>' + esc(fb) + '</span></p>'; }
+      h += '</li>';
+      return h;
+    }
+
+    function renderList(){
+      var all = ((data && data.matches) || []).slice(0, MAX);
+      if(!all.length){
+        el.list.innerHTML = '<li class="dbd-note"><b>최근 전적이 없습니다</b>새 판이 끝나면 여기에 표시됩니다.</li>';
+        if(el.more){ el.more.hidden = true; }
+        return;
+      }
+      var list = showAll ? all : all.slice(0, FIRST);
+      var html = '', i;
+      for(i = 0; i < list.length; i++){ html += rowHTML(list[i], i); }
+      el.list.innerHTML = html;
+      if(el.more){
+        el.more.hidden = all.length <= FIRST;
+        el.more.textContent = showAll ? ('최근 ' + FIRST + '판만 보기') : ('전체 ' + all.length + '판 보기');
+        el.more.setAttribute('aria-expanded', showAll ? 'true' : 'false');
+      }
+    }
+
+    function renderAll(){
+      renderHead();
+      renderStrip(((data && data.matches) || []).slice(0, MAX));
+      renderHighlight();
+      renderList();
+      panel.setAttribute('data-dbd', failed ? 'stale' : 'ready');
+    }
+
+    function renderError(){
+      el.list.innerHTML = '<li class="dbd-note"><b>데바데 전적을 불러오지 못했어요</b>dbd_matches.json 응답을 받지 못했습니다. ‘새로고침’을 눌러 다시 시도해 주세요.</li>';
+      el.strip.innerHTML = '';
+      if(el.hl){ el.hl.hidden = true; el.hl.innerHTML = ''; }
+      if(el.more){ el.more.hidden = true; }
+    }
+
+    function updText(){
+      if(!data){ return failed ? '전적을 불러오지 못했습니다' : '최근 갱신 확인 중'; }
+      var s = '업데이트 ' + stampOf(data.updatedAt);
+      var rel = relTime(data.updatedAt);
+      if(rel && rel !== '—'){ s += ' · ' + rel; }
+      if(failed){ s += ' · 갱신 실패'; }
+      return s;
+    }
+
+    /* ---------------- 5분 자동 갱신 · 카운트다운 ---------------- */
+    function tick(){
+      if(!started){ return; }
+      var now = Date.now();
+      var left = Math.max(0, nextAt - now);
+      var tx = mmss(left);
+      if(el.count && el.count.textContent !== tx){ el.count.textContent = tx; }
+      if(el.prog){
+        var span = failed ? RETRY : INTERVAL;
+        var pct = Math.max(0, Math.min(100, 100 * (1 - left / span)));
+        el.prog.style.width = pct.toFixed(1) + '%';
+      }
+      var u = updText();
+      if(el.upd && el.upd.textContent !== u){ el.upd.textContent = u; }
+      if(el.autoTxt){
+        var at = failed ? '1분 뒤 재시도 · ' : '5분 자동 · ';
+        if(el.autoTxt.textContent !== at){ el.autoTxt.textContent = at; }
+      }
+      if(now >= nextAt && !busy){ load(false); }
+    }
+
+    function load(manual){
+      if(busy){ return; }
+      busy = true;
+      if(el.refresh){ el.refresh.setAttribute('data-busy', '1'); }
+      if(manual){ announce('데바데 전적을 새로 불러오는 중입니다.'); }
+      fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' })
+        .then(function(res){
+          if(!res.ok){ throw new Error('HTTP ' + res.status); }
+          return res.json();
+        })
+        .then(function(json){
+          if(!json || !Array.isArray(json.matches)){ throw new Error('matches 없음'); }
+          data = json;
+          failed = false;
+          renderAll();
+          nextAt = Date.now() + INTERVAL;
+          var n = Math.min(json.matches.length, MAX), escN = 0, sacN = 0;
+          json.matches.slice(0, MAX).forEach(function(m){
+            var r = resOf(m);
+            if(r === 'ESCAPED'){ escN++; }
+            else if(r === 'SACRIFICED' || r === 'KILLED'){ sacN++; }
+          });
+          announce('데바데 최근 ' + n + '판을 불러왔습니다. 탈출 ' + escN + ' · 제물 ' + sacN + '.');
+        })
+        .catch(function(){
+          failed = true;
+          panel.setAttribute('data-dbd', data ? 'stale' : 'error');
+          if(!data){ renderError(); }
+          nextAt = Date.now() + RETRY;
+          announce('데바데 전적을 불러오지 못했습니다. 잠시 후 다시 시도합니다.');
+        })
+        .then(function(){
+          busy = false;
+          if(el.refresh){ el.refresh.removeAttribute('data-busy'); }
+          tick();
+        });
+    }
+
+    function activate(){
+      if(!started){
+        started = true;
+        nextAt = Date.now() + INTERVAL;
+        panel.setAttribute('data-dbd', 'loading');
+        load(false);
+      }else{
+        if(!data && !busy){ load(false); }else{ tick(); }
+        if(Date.now() >= nextAt && !busy){ load(false); }
+      }
+    }
+
+    if(el.refresh){ el.refresh.addEventListener('click', function(){ activate(); load(true); }); }
+    if(el.more){
+      el.more.addEventListener('click', function(){
+        showAll = !showAll;
+        renderList();
+        announce(showAll ? '최근 판을 모두 펼쳤습니다.' : '최근 ' + FIRST + '판만 표시합니다.');
+      });
+    }
+    document.addEventListener('visibilitychange', function(){
+      if(!started){ return; }
+      if(document.visibilityState === 'visible' && Date.now() >= nextAt){ load(false); }
+      else { tick(); }
+    });
+
+    window.setInterval(tick, 1000);
+    window.citiDbd = { activate: activate, refresh: function(){ activate(); load(true); } };
+  })();
+
+  /* ============================================================
+     02 GAMING — LoL · 닭인데요 / DBD · RIOT 전적 전환 탭
+     (선택은 localStorage 에 남겨 다음 방문에도 유지)
+     ============================================================ */
+  (function gameSwitch(){
+    var bar = document.getElementById('gmSwitch');
+    if(!bar){ return; }
+    var KEY = 'yshub.v1.gm.tab';
+    var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-gm]'));
+    var panes = {
+      lol: document.getElementById('lmPanel'),
+      dbd: document.getElementById('dbdPanel')
+    };
+
+    function pick(name, opts){
+      opts = opts || {};
+      if(!panes[name]){ name = 'lol'; }
+      tabs.forEach(function(t){
+        var on = t.getAttribute('data-gm') === name;
+        if(on){ t.classList.add('is-on'); } else { t.classList.remove('is-on'); }
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      Object.keys(panes).forEach(function(k){
+        if(panes[k]){ panes[k].hidden = (k !== name); }
+      });
+      try{ localStorage.setItem(KEY, name); }catch(e){}
+      if(name === 'dbd' && window.citiDbd){ window.citiDbd.activate(); }
+
+      if(!opts.silent){
+        var target = panes[name];
+        if(target && !target.hidden){
+          var tb = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tb'), 10) || 68;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - (tb + 64);
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
+      }
+    }
+
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ pick(t.getAttribute('data-gm')); });
+      t.addEventListener('keydown', function(e){
+        if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft'){ return; }
+        e.preventDefault();
+        var i = tabs.indexOf(t);
+        var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        if(n){ n.focus(); pick(n.getAttribute('data-gm')); }
+      });
+    });
+
+    var saved = 'lol';
+    try{ saved = localStorage.getItem(KEY) || 'lol'; }catch(e){}
+    pick(saved === 'dbd' ? 'dbd' : 'lol', { silent: true });
   })();
 
 </script>
