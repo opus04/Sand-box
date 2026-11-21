@@ -10,10 +10,61 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T16:11:52+09:00",
-  "latestMatchId": "dbd-20261121-1439",
-  "latestFeedback": "정면충돌·화염지뢰·거울환영 세팅에 구출·치료(이타심 무지개)와 생존(골드)을 꽉 챙겨 팀 내 1등 점수로 탈출한 판이에요.",
+  "updatedAt": "2026-11-21T16:41:30+09:00",
+  "latestMatchId": "dbd-20261121-1621",
+  "latestFeedback": "닥터(9,394점)가 5분대 빠른 템포로 압박한 판에서 발전기·추격(빛의 인도자·도주자 실버)으로 시간을 벌어 팀원 3명 전원 탈출을 만들어 준 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1621",
+      "playedAt": "2026-11-21T16:21:00+09:00",
+      "role": "survivor",
+      "character": "Dwight Fairfield",
+      "result": "DEAD",
+      "resultLabel": "사망",
+      "score": 7912,
+      "map": "Badham Preschool I",
+      "durationLabel": "5:26",
+      "killer": {
+        "name": "The Doctor",
+        "score": 9394,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 3인 탈출",
+      "perks": [
+        "Flashbang",
+        "Blast Mine",
+        "Decisive Strike",
+        "Head On"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        }
+      ],
+      "feedback": "닥터(9,394점)가 5분대 빠른 템포로 압박한 판에서 발전기·추격(빛의 인도자·도주자 실버)으로 시간을 벌어 팀원 3명 전원 탈출을 만들어 준 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1439",
       "playedAt": "2026-11-21T14:39:00+09:00",
