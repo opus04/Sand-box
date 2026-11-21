@@ -10,10 +10,162 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T17:45:00+09:00",
-  "latestMatchId": "dbd-20261121-1721",
-  "latestFeedback": "더 퍼스트(16,113점) 상대로 7분 3초 만에 도주자·빛의 인도자·불굴 골드 3관왕을 챙기며 팀 전원 4인 탈출로 깔끔하게 끝낸 판이에요.",
+  "updatedAt": "2026-11-21T18:13:00+09:00",
+  "latestMatchId": "dbd-20261121-1758",
+  "latestFeedback": "직구(The Pig) 상대로 정면승부·기만·신속하고 조용하게·기회의 창 조합으로 어그로를 끌다 7분 10초 만에 희생됐지만, 그 사이 데이비드·조나 포함 팀원 탈출 발판을 놓은 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1758",
+      "playedAt": "2026-11-21T17:58:00+09:00",
+      "role": "survivor",
+      "character": "Nea Karlsson",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 18760,
+      "map": "Sanctum of Wrath",
+      "durationLabel": "7:10",
+      "killer": {
+        "name": "The Pig",
+        "score": 26529,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 2인+ 탈출",
+      "perks": [
+        "Deception",
+        "Head On",
+        "Windows of Opportunity",
+        "Quick & Quiet"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        }
+      ],
+      "feedback": "직구(The Pig) 상대로 정면승부·기만·신속하고 조용하게·기회의 창 조합으로 어그로를 끌다 7분 10초 만에 희생됐지만, 그 사이 데이비드·조나 포함 팀원 탈출 발판을 놓은 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1747",
+      "playedAt": "2026-11-21T17:47:00+09:00",
+      "role": "survivor",
+      "character": "Ace Visconti",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 33400,
+      "map": "Eyrie of Crows",
+      "durationLabel": "8:49",
+      "killer": {
+        "name": "The Ghoul",
+        "score": 29908,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 3인 탈출 · 1등",
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Deception",
+        "Quick & Quiet"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "까마귀 둥지에서 구울(29,908점) 상대로 8분 49초 만에 도주자·빛의 인도자·불굴 골드 3관왕과 33,400점(팀 내 1등)을 찍으며 3인 탈출을 이끈 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1731",
+      "playedAt": "2026-11-21T17:31:00+09:00",
+      "role": "survivor",
+      "character": "Claudette Morel",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 27703,
+      "map": "Disturbed Ward",
+      "durationLabel": "13:56",
+      "killer": {
+        "name": "The First",
+        "score": 28000,
+        "rating": "The Entity Hungers...",
+        "ratingKo": "엔티티가 굶주립니다..."
+      },
+      "note": "팀 3인 탈출",
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "더 퍼스트(28,000점) 상대로 13분 56초 동안 이타심·도주자 무지개 2개에 빛의 인도자·불굴 골드 2개로 구출과 어그로를 모두 챙기며 3인 탈출에 성공한 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1721",
       "playedAt": "2026-11-21T17:21:00+09:00",
