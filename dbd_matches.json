@@ -10,10 +10,112 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T18:13:00+09:00",
-  "latestMatchId": "dbd-20261121-1758",
-  "latestFeedback": "직구(The Pig) 상대로 정면승부·기만·신속하고 조용하게·기회의 창 조합으로 어그로를 끌다 7분 10초 만에 희생됐지만, 그 사이 데이비드·조나 포함 팀원 탈출 발판을 놓은 판이에요.",
+  "updatedAt": "2026-11-21T18:45:00+09:00",
+  "latestMatchId": "dbd-20261121-1824",
+  "latestFeedback": "노스트로모 잔해에서 직구(14,937점) 상대로 치료·기원 세팅을 들고 5분 18초 만에 불굴 무지개와 21,769점(팀 내 1등)으로 요나와 2인 탈출을 만든 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1824",
+      "playedAt": "2026-11-21T18:24:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 21769,
+      "map": "Nostromo Wreckage",
+      "durationLabel": "5:18",
+      "killer": {
+        "name": "The Pig",
+        "score": 14937,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 2인 탈출 · 1등",
+      "perks": [
+        "Botany Knowledge",
+        "Self-Care",
+        "Resilience",
+        "Invocation: Treacherous Crows"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        }
+      ],
+      "feedback": "노스트로모 잔해에서 직구(14,937점) 상대로 치료·기원 세팅을 들고 5분 18초 만에 불굴 무지개와 21,769점(팀 내 1등)으로 요나와 2인 탈출을 만든 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1812",
+      "playedAt": "2026-11-21T18:12:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "ESCAPED",
+      "resultLabel": "탈출",
+      "score": 28738,
+      "map": "Mother's Dwelling",
+      "durationLabel": "10:07",
+      "killer": {
+        "name": "The Trapper",
+        "score": 26169,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 3인 탈출 · 1등",
+      "perks": [
+        "Botany Knowledge",
+        "Self-Care",
+        "Resilience",
+        "Calm Spirit"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "어머니의 집에서 덫구(26,169점) 상대로 식물학·자가치료·회복력·평온한 영혼 조합으로 이타심 무지개와 도주자·불굴 골드를 챙기며 28,738점(팀 내 1등) 3인 탈출을 이끈 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1758",
       "playedAt": "2026-11-21T17:58:00+09:00",
@@ -558,28 +660,6 @@
         "Blast Mine"
       ],
       "feedback": "돼지(The Pig) 상대로 정면충돌·기만(Deception)으로 시간을 벌며 19,126점을 챙긴 판이에요."
-    },
-    {
-      "matchId": "dbd-20261119-1942",
-      "playedAt": "2026-11-19T19:42:00+09:00",
-      "role": "survivor",
-      "character": "Claudette Morel",
-      "result": "ESCAPED",
-      "resultLabel": "탈출",
-      "score": 26159,
-      "map": "Mother's Dwelling",
-      "durationLabel": "9:03",
-      "killer": {
-        "name": "The Singularity",
-        "score": 23865
-      },
-      "perks": [
-        "Decisive Strike",
-        "Head On",
-        "Blast Mine",
-        "Deception"
-      ],
-      "feedback": "싱귤래리티 상대로 퍽 네 개를 활용해 26,159점으로 9분 만에 탈출한 판이에요."
     }
   ]
 }
