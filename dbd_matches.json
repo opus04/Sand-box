@@ -10,10 +10,112 @@
   "totalMatches": 1954,
   "survivorMatches": 1758,
   "killerMatches": 196,
-  "updatedAt": "2026-11-21T16:41:30+09:00",
-  "latestMatchId": "dbd-20261121-1621",
-  "latestFeedback": "닥터(9,394점)가 5분대 빠른 템포로 압박한 판에서 발전기·추격(빛의 인도자·도주자 실버)으로 시간을 벌어 팀원 3명 전원 탈출을 만들어 준 판이에요.",
+  "updatedAt": "2026-11-21T17:16:00+09:00",
+  "latestMatchId": "dbd-20261121-1645",
+  "latestFeedback": "블라이트(40,000점 만점) 상대로 14분 52초 동안 버티며 이타심·도주자·빛의 인도자 무지개 3개에 불굴 골드까지 4휘장을 꽉 채워 27,650점을 기록한 맹활약 판이에요.",
   "matches": [
+    {
+      "matchId": "dbd-20261121-1645",
+      "playedAt": "2026-11-21T16:45:00+09:00",
+      "role": "survivor",
+      "character": "Lara Croft",
+      "result": "FINISHED",
+      "resultLabel": "종료",
+      "score": 27650,
+      "map": "Coal Tower",
+      "durationLabel": "14:52",
+      "killer": {
+        "name": "The Blight",
+        "score": 40000,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "유이·이윤진 사망, 클로뎃 28,064",
+      "perks": [
+        "Flashbang",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Iridescent",
+          "gradeKo": "무지개"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        }
+      ],
+      "feedback": "블라이트(40,000점 만점) 상대로 14분 52초 동안 버티며 이타심·도주자·빛의 인도자 무지개 3개에 불굴 골드까지 4휘장을 꽉 채워 27,650점을 기록한 맹활약 판이에요."
+    },
+    {
+      "matchId": "dbd-20261121-1630",
+      "playedAt": "2026-11-21T16:30:00+09:00",
+      "role": "survivor",
+      "character": "Claudette Morel",
+      "result": "SACRIFICED",
+      "resultLabel": "희생",
+      "score": 24021,
+      "map": "Garden of Joy",
+      "durationLabel": "10:08",
+      "killer": {
+        "name": "The Ghoul",
+        "score": 32933,
+        "rating": "Brutal Killer",
+        "ratingKo": "잔혹한 살인마"
+      },
+      "note": "팀 클로뎃 1명 탈출, 1명 희생",
+      "perks": [
+        "Decisive Strike",
+        "Head On",
+        "Blast Mine",
+        "Mirrored Illusion"
+      ],
+      "emblems": [
+        {
+          "name": "Benevolent",
+          "nameKo": "이타심",
+          "grade": "Bronze",
+          "gradeKo": "브론즈"
+        },
+        {
+          "name": "Evader",
+          "nameKo": "도주자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Lightbringer",
+          "nameKo": "빛의 인도자",
+          "grade": "Gold",
+          "gradeKo": "골드"
+        },
+        {
+          "name": "Unbroken",
+          "nameKo": "불굴",
+          "grade": "Silver",
+          "gradeKo": "실버"
+        }
+      ],
+      "feedback": "구울(32,933점) 상대로 10분 넘게 어그로(도주자 골드)와 발전기(빛의 인도자 골드)를 모두 챙겨 24,021점을 올렸지만 마지막에 아쉽게 희생된 판이에요."
+    },
     {
       "matchId": "dbd-20261121-1621",
       "playedAt": "2026-11-21T16:21:00+09:00",
