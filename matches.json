@@ -4,7 +4,7 @@
   "platform": "League of Legends",
   "source": "OP.GG 공개 전적",
   "sourceUrl": "https://op.gg/lol/summoners/kr/%EB%8B%AD%EC%9D%B8%EB%8D%B0%EC%9A%94-%EA%BC%AC%EA%BC%AC%EB%8C%81%EA%BC%AC%EA%BC%AC",
-  "updatedAt": "2026-11-26T16:29:01+09:00",
+  "updatedAt": "2026-11-28T22:53:25+09:00",
   "profile": {
     "riotId": "닭인데요#꼬꼬댁꼬꼬",
     "puuid": "cM39xEhM9OuWE3DanwpmtstbTeSi4IcEYFTX4ctJSceWzNxLxjplHTbB39x35PHAQb0HppSHEBpuWQ",
@@ -23,6 +23,397 @@
   },
   "matches": [
     {
+      "matchId": "m_eaDVNbCj_XtUM2fRdtUYwijN2xEaBkH47vQBj7KOg=",
+      "startedAt": "2026-11-28T22:45:09+09:00",
+      "queue": "FLEXRANKED",
+      "champion": "Lux",
+      "result": "LOSE",
+      "kills": 1,
+      "deaths": 6,
+      "assists": 13,
+      "kda": "2.33:1",
+      "cs": 34,
+      "opScore": 4.571,
+      "opScoreRank": 7,
+      "startTimeMs": 1795873509000,
+      "queueName": "Ranked Flex",
+      "map": "SUMMONERS_RIFT",
+      "patch": "16.23",
+      "durationSeconds": 1552,
+      "position": "SUPPORT",
+      "url": "https://op.gg/lol/summoners/kr/%EB%8B%AD%EC%9D%B8%EB%8D%B0%EC%9A%94-%EA%BC%AC%EA%BC%AC%EB%8C%81%EA%BC%AC%EA%BC%AC/matches/m_eaDVNbCj_XtUM2fRdtUYwijN2xEaBkH47vQBj7KOg%3D/1795873509000",
+      "build": {
+        "items": [
+          {
+            "id": 3871,
+            "name": "Zaz'Zak's Realmspike"
+          },
+          {
+            "id": 3118,
+            "name": "Malignance"
+          },
+          {
+            "id": 3020,
+            "name": "Sorcerer's Shoes"
+          },
+          {
+            "id": 3916,
+            "name": "Oblivion Orb"
+          },
+          {
+            "id": 3145,
+            "name": "Hextech Alternator"
+          },
+          {
+            "id": 0,
+            "name": ""
+          },
+          {
+            "id": 3364,
+            "name": "Oracle Lens"
+          },
+          {
+            "id": 2055,
+            "name": "Control Ward"
+          }
+        ],
+        "runes": [
+          {
+            "id": 8229,
+            "name": "Arcane Comet"
+          },
+          {
+            "id": 8100,
+            "name": "Domination"
+          }
+        ],
+        "spells": [
+          {
+            "id": 7,
+            "name": "Heal"
+          },
+          {
+            "id": 4,
+            "name": "Flash"
+          }
+        ]
+      },
+      "team": "BLUE",
+      "participants": [
+        {
+          "team": "BLUE",
+          "position": "TOP",
+          "champion": "Yasuo",
+          "summoner": "꽃이피고지듯#내껀데요",
+          "level": 15,
+          "kills": 7,
+          "deaths": 11,
+          "assists": 4,
+          "cs": 184,
+          "gold": 10806,
+          "damageToChampions": 19354,
+          "damageTaken": 23977,
+          "visionScore": 21,
+          "wardsPlaced": 8,
+          "wardsKilled": 0,
+          "multiKill": 3,
+          "opScore": 2.841,
+          "opScoreRank": 10,
+          "result": "LOSE",
+          "items": [
+            1086,
+            3035,
+            3006,
+            3153,
+            6673,
+            6670
+          ],
+          "trinketItem": 3340
+        },
+        {
+          "team": "BLUE",
+          "position": "JUNGLE",
+          "champion": "Vi",
+          "summoner": "Destiny#KOR",
+          "level": 12,
+          "kills": 3,
+          "deaths": 4,
+          "assists": 5,
+          "cs": 130,
+          "gold": 8838,
+          "damageToChampions": 7620,
+          "damageTaken": 21176,
+          "visionScore": 42,
+          "wardsPlaced": 3,
+          "wardsKilled": 8,
+          "multiKill": 1,
+          "opScore": 3.087,
+          "opScoreRank": 9,
+          "result": "LOSE",
+          "items": [
+            1029,
+            1029,
+            0,
+            3078,
+            3047,
+            3071
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "BLUE",
+          "position": "MID",
+          "champion": "Zed",
+          "summoner": "EG Demon1#GOD",
+          "level": 15,
+          "kills": 10,
+          "deaths": 3,
+          "assists": 3,
+          "cs": 194,
+          "gold": 13877,
+          "damageToChampions": 24008,
+          "damageTaken": 16136,
+          "visionScore": 18,
+          "wardsPlaced": 9,
+          "wardsKilled": 1,
+          "multiKill": 2,
+          "opScore": 6.012,
+          "opScoreRank": 1,
+          "result": "LOSE",
+          "items": [
+            6699,
+            3036,
+            2520,
+            0,
+            6696,
+            3171
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "BLUE",
+          "position": "ADC",
+          "champion": "Lucian",
+          "summoner": "청 아#2004",
+          "level": 13,
+          "kills": 3,
+          "deaths": 3,
+          "assists": 11,
+          "cs": 186,
+          "gold": 11516,
+          "damageToChampions": 11675,
+          "damageTaken": 18535,
+          "visionScore": 17,
+          "wardsPlaced": 6,
+          "wardsKilled": 4,
+          "multiKill": 1,
+          "opScore": 5.385,
+          "opScoreRank": 4,
+          "result": "LOSE",
+          "items": [
+            3140,
+            3508,
+            6675,
+            1018,
+            1038,
+            1086
+          ],
+          "trinketItem": 3363
+        },
+        {
+          "team": "BLUE",
+          "position": "SUPPORT",
+          "champion": "Lux",
+          "summoner": "닭인데요#꼬꼬댁꼬꼬",
+          "level": 12,
+          "kills": 1,
+          "deaths": 6,
+          "assists": 13,
+          "cs": 34,
+          "gold": 7270,
+          "damageToChampions": 17726,
+          "damageTaken": 14229,
+          "visionScore": 74,
+          "wardsPlaced": 30,
+          "wardsKilled": 9,
+          "multiKill": 1,
+          "opScore": 4.571,
+          "opScoreRank": 7,
+          "result": "LOSE",
+          "items": [
+            3871,
+            3118,
+            3020,
+            3916,
+            3145,
+            0
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "RED",
+          "position": "TOP",
+          "champion": "Jax",
+          "summoner": "parj#KR1",
+          "level": 16,
+          "kills": 9,
+          "deaths": 2,
+          "assists": 4,
+          "cs": 201,
+          "gold": 13726,
+          "damageToChampions": 18701,
+          "damageTaken": 24719,
+          "visionScore": 20,
+          "wardsPlaced": 8,
+          "wardsKilled": 2,
+          "multiKill": 2,
+          "opScore": 5.905,
+          "opScoreRank": 2,
+          "result": "WIN",
+          "items": [
+            6333,
+            3073,
+            3044,
+            3078,
+            3047,
+            1055
+          ],
+          "trinketItem": 3340
+        },
+        {
+          "team": "RED",
+          "position": "JUNGLE",
+          "champion": "Skarner",
+          "summoner": "롤전차왕 엄복동#KR1",
+          "level": 13,
+          "kills": 2,
+          "deaths": 4,
+          "assists": 11,
+          "cs": 134,
+          "gold": 8955,
+          "damageToChampions": 8730,
+          "damageTaken": 26110,
+          "visionScore": 14,
+          "wardsPlaced": 0,
+          "wardsKilled": 5,
+          "multiKill": 1,
+          "opScore": 4.659,
+          "opScoreRank": 6,
+          "result": "WIN",
+          "items": [
+            2502,
+            3084,
+            3047,
+            3211,
+            2022,
+            0
+          ],
+          "trinketItem": 3364
+        },
+        {
+          "team": "RED",
+          "position": "MID",
+          "champion": "Ezreal",
+          "summoner": "이 호 주#KR1",
+          "level": 14,
+          "kills": 6,
+          "deaths": 6,
+          "assists": 2,
+          "cs": 165,
+          "gold": 10040,
+          "damageToChampions": 19668,
+          "damageTaken": 18116,
+          "visionScore": 18,
+          "wardsPlaced": 9,
+          "wardsKilled": 4,
+          "multiKill": 1,
+          "opScore": 3.224,
+          "opScoreRank": 8,
+          "result": "WIN",
+          "items": [
+            2420,
+            3146,
+            3175,
+            4646,
+            1055,
+            0
+          ],
+          "trinketItem": 3340
+        },
+        {
+          "team": "RED",
+          "position": "ADC",
+          "champion": "Xayah",
+          "summoner": "parj brother#KR1",
+          "level": 13,
+          "kills": 9,
+          "deaths": 6,
+          "assists": 7,
+          "cs": 183,
+          "gold": 12179,
+          "damageToChampions": 23529,
+          "damageTaken": 19013,
+          "visionScore": 5,
+          "wardsPlaced": 4,
+          "wardsKilled": 0,
+          "multiKill": 2,
+          "opScore": 5.772,
+          "opScoreRank": 3,
+          "result": "WIN",
+          "items": [
+            1055,
+            3036,
+            1037,
+            3508,
+            0,
+            6675
+          ],
+          "trinketItem": 3363
+        },
+        {
+          "team": "RED",
+          "position": "SUPPORT",
+          "champion": "Rakan",
+          "summoner": "분노타협우울수용#KR1",
+          "level": 12,
+          "kills": 1,
+          "deaths": 6,
+          "assists": 17,
+          "cs": 28,
+          "gold": 7949,
+          "damageToChampions": 5649,
+          "damageTaken": 21972,
+          "visionScore": 70,
+          "wardsPlaced": 35,
+          "wardsKilled": 6,
+          "multiKill": 1,
+          "opScore": 5.341,
+          "opScoreRank": 5,
+          "result": "WIN",
+          "items": [
+            3067,
+            3190,
+            3876,
+            1029,
+            3050,
+            3158
+          ],
+          "trinketItem": 3364
+        }
+      ],
+      "teamKills": {
+        "blue": 24,
+        "red": 27
+      },
+      "killParticipation": 58,
+      "teamGold": {
+        "blue": 52307,
+        "red": 52849
+      },
+      "durationLabel": "25:52",
+      "feedback": "시야 점수 74점(양 팀 1위)에 딜량 17,726으로 럭스 서폿 역할을 톡톡히 해냈지만, 상대 탑 잭스(9/2/4)의 성장을 막지 못해 골드 차 없는 접전 끝에 아쉽게 패배했습니다."
+    },
+    {
       "matchId": "m_eaDVNbCj9jqyUOoTL9bfIvW6PeT5pxogQ4Z8rfkvg=",
       "startedAt": "2026-11-25T23:22:02+09:00",
       "queue": "FLEXRANKED",
@@ -33,7 +424,7 @@
       "assists": 9,
       "kda": "0.83:1",
       "cs": 63,
-      "opScore": 1.662,
+      "opScore": 1.7,
       "opScoreRank": 10,
       "startTimeMs": 1795616522000,
       "queueName": "Ranked Flex",
@@ -1988,7 +2379,7 @@
       "assists": 11,
       "kda": "2.75:1",
       "cs": 21,
-      "opScore": 4.949,
+      "opScore": 4.9,
       "opScoreRank": 6,
       "startTimeMs": 1795606784000,
       "queueName": "Ranked Flex",
@@ -2378,7 +2769,7 @@
       "assists": 18,
       "kda": "4.00:1",
       "cs": 40,
-      "opScore": 5.359,
+      "opScore": 5.4,
       "opScoreRank": 5,
       "startTimeMs": 1795604703000,
       "queueName": "Ranked Flex",
@@ -7442,396 +7833,6 @@
         "red": 72807
       },
       "durationLabel": "37:05"
-    },
-    {
-      "matchId": "m_eaDVNbCj-oe_IN2pimNV7uCaouy5nVxQbQBMFaBhc=",
-      "startedAt": "2026-11-15T20:23:45+09:00",
-      "queue": "SOLORANKED",
-      "champion": "Lux",
-      "result": "LOSE",
-      "kills": 5,
-      "deaths": 9,
-      "assists": 13,
-      "kda": "2.00:1",
-      "cs": 30,
-      "opScore": 4.8,
-      "opScoreRank": 6,
-      "startTimeMs": 1794741825000,
-      "queueName": "Ranked Solo/Duo",
-      "map": "SUMMONERS_RIFT",
-      "patch": "16.22",
-      "durationSeconds": 1765,
-      "position": "SUPPORT",
-      "url": "https://op.gg/lol/summoners/kr/%EB%8B%AD%EC%9D%B8%EB%8D%B0%EC%9A%94-%EA%BC%AC%EA%BC%AC%EB%8C%81%EA%BC%AC%EA%BC%AC/matches/m_eaDVNbCj-oe_IN2pimNV7uCaouy5nVxQbQBMFaBhc%3D/1794741825000",
-      "build": {
-        "items": [
-          {
-            "id": 3871,
-            "name": "Zaz'Zak's Realmspike"
-          },
-          {
-            "id": 6655,
-            "name": "Luden's Echo"
-          },
-          {
-            "id": 3020,
-            "name": "Sorcerer's Shoes"
-          },
-          {
-            "id": 3916,
-            "name": "Oblivion Orb"
-          },
-          {
-            "id": 4646,
-            "name": "Stormsurge"
-          },
-          {
-            "id": 1026,
-            "name": "Blasting Wand"
-          },
-          {
-            "id": 3364,
-            "name": "Oracle Lens"
-          },
-          {
-            "id": 2055,
-            "name": "Control Ward"
-          }
-        ],
-        "runes": [
-          {
-            "id": 8229,
-            "name": "Arcane Comet"
-          },
-          {
-            "id": 8100,
-            "name": "Domination"
-          }
-        ],
-        "spells": [
-          {
-            "id": 7,
-            "name": "Heal"
-          },
-          {
-            "id": 4,
-            "name": "Flash"
-          }
-        ]
-      },
-      "team": "RED",
-      "participants": [
-        {
-          "team": "BLUE",
-          "position": "TOP",
-          "champion": "Yone",
-          "summoner": "읭 의#KR1",
-          "level": 19,
-          "kills": 12,
-          "deaths": 2,
-          "assists": 4,
-          "cs": 237,
-          "gold": 15508,
-          "damageToChampions": 23997,
-          "damageTaken": 29385,
-          "visionScore": 40,
-          "wardsPlaced": 15,
-          "wardsKilled": 5,
-          "multiKill": 2,
-          "opScore": 6.109,
-          "opScoreRank": 2,
-          "result": "WIN",
-          "items": [
-            1086,
-            3036,
-            3153,
-            1038,
-            3006,
-            3031
-          ],
-          "trinketItem": 3340
-        },
-        {
-          "team": "BLUE",
-          "position": "JUNGLE",
-          "champion": "Sejuani",
-          "summoner": "청역철회불가#KR1",
-          "level": 14,
-          "kills": 1,
-          "deaths": 7,
-          "assists": 10,
-          "cs": 141,
-          "gold": 9663,
-          "damageToChampions": 8342,
-          "damageTaken": 34698,
-          "visionScore": 18,
-          "wardsPlaced": 7,
-          "wardsKilled": 2,
-          "multiKill": 1,
-          "opScore": 3.164,
-          "opScoreRank": 10,
-          "result": "WIN",
-          "items": [
-            2502,
-            3047,
-            3084,
-            1029,
-            1029,
-            0
-          ],
-          "trinketItem": 3364
-        },
-        {
-          "team": "BLUE",
-          "position": "MID",
-          "champion": "Locke",
-          "summoner": "QWERTYU123IUY#KR1",
-          "level": 17,
-          "kills": 20,
-          "deaths": 5,
-          "assists": 3,
-          "cs": 199,
-          "gold": 16646,
-          "damageToChampions": 36865,
-          "damageTaken": 32580,
-          "visionScore": 37,
-          "wardsPlaced": 16,
-          "wardsKilled": 4,
-          "multiKill": 3,
-          "opScore": 7.65,
-          "opScoreRank": 1,
-          "result": "WIN",
-          "items": [
-            3100,
-            2420,
-            4646,
-            3174,
-            3089,
-            4645
-          ],
-          "trinketItem": 3340
-        },
-        {
-          "team": "BLUE",
-          "position": "ADC",
-          "champion": "Ezreal",
-          "summoner": "apink113#5382",
-          "level": 15,
-          "kills": 4,
-          "deaths": 4,
-          "assists": 12,
-          "cs": 190,
-          "gold": 12980,
-          "damageToChampions": 27798,
-          "damageTaken": 22368,
-          "visionScore": 26,
-          "wardsPlaced": 13,
-          "wardsKilled": 4,
-          "multiKill": 1,
-          "opScore": 5.737,
-          "opScoreRank": 3,
-          "result": "WIN",
-          "items": [
-            3161,
-            1036,
-            2055,
-            3078,
-            1086,
-            3042
-          ],
-          "trinketItem": 3363
-        },
-        {
-          "team": "BLUE",
-          "position": "SUPPORT",
-          "champion": "Alistar",
-          "summoner": "MaiZ#LOL",
-          "level": 13,
-          "kills": 4,
-          "deaths": 9,
-          "assists": 16,
-          "cs": 29,
-          "gold": 9226,
-          "damageToChampions": 8768,
-          "damageTaken": 37637,
-          "visionScore": 69,
-          "wardsPlaced": 32,
-          "wardsKilled": 7,
-          "multiKill": 1,
-          "opScore": 4.767,
-          "opScoreRank": 7,
-          "result": "WIN",
-          "items": [
-            3190,
-            3876,
-            1029,
-            3110,
-            3067,
-            3009
-          ],
-          "trinketItem": 3364
-        },
-        {
-          "team": "RED",
-          "position": "TOP",
-          "champion": "Jayce",
-          "summoner": "relax113#KR1",
-          "level": 17,
-          "kills": 6,
-          "deaths": 8,
-          "assists": 4,
-          "cs": 214,
-          "gold": 12108,
-          "damageToChampions": 32882,
-          "damageTaken": 23454,
-          "visionScore": 39,
-          "wardsPlaced": 12,
-          "wardsKilled": 4,
-          "multiKill": 1,
-          "opScore": 3.9,
-          "opScoreRank": 8,
-          "result": "LOSE",
-          "items": [
-            6694,
-            3042,
-            6692,
-            3158,
-            3134,
-            1037
-          ],
-          "trinketItem": 3340
-        },
-        {
-          "team": "RED",
-          "position": "JUNGLE",
-          "champion": "Jarvan IV",
-          "summoner": "극단적인 남자#KR2",
-          "level": 15,
-          "kills": 3,
-          "deaths": 5,
-          "assists": 14,
-          "cs": 175,
-          "gold": 11433,
-          "damageToChampions": 12037,
-          "damageTaken": 23229,
-          "visionScore": 34,
-          "wardsPlaced": 7,
-          "wardsKilled": 6,
-          "multiKill": 2,
-          "opScore": 5.185,
-          "opScoreRank": 5,
-          "result": "LOSE",
-          "items": [
-            6698,
-            3071,
-            2021,
-            3047,
-            3133,
-            0
-          ],
-          "trinketItem": 3364
-        },
-        {
-          "team": "RED",
-          "position": "MID",
-          "champion": "Lucian",
-          "summoner": "영로콩#KR1",
-          "level": 15,
-          "kills": 5,
-          "deaths": 12,
-          "assists": 8,
-          "cs": 213,
-          "gold": 12212,
-          "damageToChampions": 24945,
-          "damageTaken": 27748,
-          "visionScore": 13,
-          "wardsPlaced": 9,
-          "wardsKilled": 0,
-          "multiKill": 1,
-          "opScore": 3.282,
-          "opScoreRank": 9,
-          "result": "LOSE",
-          "items": [
-            3031,
-            3508,
-            3168,
-            6675,
-            3035,
-            0
-          ],
-          "trinketItem": 3363
-        },
-        {
-          "team": "RED",
-          "position": "ADC",
-          "champion": "Xayah",
-          "summoner": "진진 자라 찐#KR1",
-          "level": 14,
-          "kills": 7,
-          "deaths": 7,
-          "assists": 11,
-          "cs": 192,
-          "gold": 13150,
-          "damageToChampions": 31751,
-          "damageTaken": 25663,
-          "visionScore": 19,
-          "wardsPlaced": 10,
-          "wardsKilled": 4,
-          "multiKill": 2,
-          "opScore": 5.685,
-          "opScoreRank": 4,
-          "result": "LOSE",
-          "items": [
-            3508,
-            3031,
-            1086,
-            6675,
-            3035,
-            0
-          ],
-          "trinketItem": 3363
-        },
-        {
-          "team": "RED",
-          "position": "SUPPORT",
-          "champion": "Lux",
-          "summoner": "닭인데요#꼬꼬댁꼬꼬",
-          "level": 12,
-          "kills": 5,
-          "deaths": 9,
-          "assists": 13,
-          "cs": 30,
-          "gold": 10147,
-          "damageToChampions": 24314,
-          "damageTaken": 21116,
-          "visionScore": 95,
-          "wardsPlaced": 32,
-          "wardsKilled": 11,
-          "multiKill": 2,
-          "opScore": 4.815,
-          "opScoreRank": 6,
-          "result": "LOSE",
-          "items": [
-            3871,
-            6655,
-            3020,
-            3916,
-            4646,
-            1026
-          ],
-          "trinketItem": 3364
-        }
-      ],
-      "teamKills": {
-        "blue": 41,
-        "red": 26
-      },
-      "killParticipation": 69,
-      "teamGold": {
-        "blue": 64023,
-        "red": 59050
-      },
-      "durationLabel": "29:25"
     }
   ]
 }
